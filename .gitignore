@@ -44,7 +44,8 @@ app.*.map.json
 /android/app/release
 
 # freezed related
-/lib/logic/*.g.dart
-/lib/logic/*.freezed.dart
-/lib/model/*.g.dart
-/lib/model/*.freezed.dart
+*.g.dart 
+*.freezed.dart
+
+# env
+/lib/utils/env.dart
