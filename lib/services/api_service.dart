@@ -13,9 +13,9 @@ class ApiService {
 
   ApiService({Dio? dio}) : _dio = dio ?? Dio();
 
-  Future<List<WallpaperModel>> listWallpaper({int page = 1}) async {
+  Future<List<WallpaperModel>> listWallpaper() async {
     final response = await _dio.get(
-      '$_baseUrl${_curated}page=$page&per_page=20',
+      '$_baseUrl${_curated}page=1&per_page=20',
       options: Options(
         headers: {
           'Authorization': _apiKey,
@@ -44,6 +44,23 @@ class ApiService {
       return WallpaperModel.fromJson(data);
     } else {
       throw Exception('failed to load wallpaper');
+    }
+  }
+
+  Future<List<WallpaperModel>> searchWallpaper(String query) async {
+    final response = await _dio.get(
+      '$_baseUrl$_search$query',
+      options: Options(
+        headers: {
+          'Authorization': _apiKey,
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> data = response.data['photos'];
+      return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
+    } else {
+      throw Exception('failed to load wallpapers');
     }
   }
 }
