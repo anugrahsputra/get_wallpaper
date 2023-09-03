@@ -1,5 +1,6 @@
 import 'package:get_wallpaper/presentation/pages/detail_wallpaper.dart';
 import 'package:get_wallpaper/presentation/pages/homepage.dart';
+import 'package:get_wallpaper/presentation/pages/search_wallpaper.dart';
 import 'package:go_router/go_router.dart';
 
 final routes = GoRouter(
@@ -17,6 +18,11 @@ final routes = GoRouter(
         final id = int.parse(state.pathParameters['id'].toString());
         return DetailWallpaper(id: id);
       },
+    ),
+    GoRoute(
+      path: '/search',
+      name: 'search-wallpaper',
+      builder: (context, state) => const SearchWallpaper(),
     ),
   ],
 );

@@ -38,19 +38,24 @@ class _HomepageState extends State<Homepage> {
               decoration: const BoxDecoration(
                 color: Colors.blue,
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Get Wallpaper',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () {
+                      context.push('/search');
+                    },
+                    child: const Text(
+                      'Get Wallpaper',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'Get your favorite wallpaper here',
                     style: TextStyle(
                       color: Colors.white,

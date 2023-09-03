@@ -15,7 +15,7 @@ class ApiService {
 
   Future<List<WallpaperModel>> listWallpaper() async {
     final response = await _dio.get(
-      '$_baseUrl${_curated}page=1&per_page=20',
+      '$_baseUrl${_curated}per_page=20',
       options: Options(
         headers: {
           'Authorization': _apiKey,
@@ -24,7 +24,11 @@ class ApiService {
     );
     if (response.statusCode == 200) {
       final List<dynamic> data = response.data['photos'];
-      return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
+      return data
+          .map((photo) => WallpaperModel.fromJson(photo))
+          .toList()
+          .reversed
+          .toList();
     } else {
       throw Exception('failed to load wallpapers');
     }
