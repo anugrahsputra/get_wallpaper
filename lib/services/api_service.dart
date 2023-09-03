@@ -51,9 +51,10 @@ class ApiService {
     }
   }
 
-  Future<List<WallpaperModel>> searchWallpaper(String query) async {
+  Future<List<WallpaperModel>> searchWallpaper(String query,
+      {int page = 1}) async {
     final response = await _dio.get(
-      '$_baseUrl$_search$query',
+      '$_baseUrl$_search$query&page=$page',
       options: Options(
         headers: {
           'Authorization': _apiKey,
