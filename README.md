@@ -21,6 +21,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 - [x] Add a search bar to search for wallpapers
 - [x] Add a corousel to display the latest wallpapers
 - [ ] Add a admob
+- [ ] Add a favorites button to save wallpapers
 - [ ] Add a favorites page to view all the favorite wallpapers
 - [ ] Add a settings page to change the theme of the app
 - [ ] Add a settings page to change the language of the app
