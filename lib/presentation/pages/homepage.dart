@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_wallpaper/logic/list_wallpaper/list_wallpaper_cubit.dart';
+import 'package:get_wallpaper/presentation/widgets/default_shimmer.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -27,48 +29,107 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      context.push('/search');
-                    },
-                    child: const Text(
-                      'Get Wallpaper',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                  Container(
+                    height: 150.h,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Get your favorite wallpaper here',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
+                  Container(
+                    height: 120.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 50.h),
+                      child: Text(
+                        'Get Wallpaper',
+                        style: GoogleFonts.poppins(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 90.h,
+                    left: 20.w,
+                    right: 20.w,
+                    child: Container(
+                      height: 50.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: const InputDecoration(
+                                hintText: 'Search wallpaper',
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(left: 20),
+                              ),
+                              onTap: () {
+                                context.push('/search');
+                              },
+                              readOnly: true,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.search),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            Flexible(
-              child: buildCuratedWallpaper(),
-            )
-          ],
+              SizedBox(height: 10.h),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Curated Wallpaper',
+                  style: GoogleFonts.inter(
+                      fontSize: 20.sp, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Flexible(child: buildCuratedWallpaper()),
+            ],
+          ),
         ),
       ),
     );
@@ -78,8 +139,8 @@ class _HomepageState extends State<Homepage> {
     return BlocBuilder<ListWallpaperCubit, ListWallpaperState>(
       builder: (context, state) {
         return state.when(
-          initial: () => _buildLoading(),
-          loading: () => _buildLoading(),
+          initial: () => const DefaultShimmerHome(),
+          loading: () => const DefaultShimmerHome(),
           loaded: (wallpapers) {
             return GridView.builder(
               shrinkWrap: true,
@@ -87,9 +148,9 @@ class _HomepageState extends State<Homepage> {
               padding: const EdgeInsets.all(10),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.6,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+                childAspectRatio: 2 / 3,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
               ),
               itemCount: wallpapers.length,
               itemBuilder: (context, index) {
@@ -111,33 +172,6 @@ class _HomepageState extends State<Homepage> {
           },
           error: (message) => Center(
             child: Text(message),
-          ),
-        );
-      },
-    );
-  }
-
-  _buildLoading() {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(10),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.6,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-      ),
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Shimmer.fromColors(
-            baseColor: const Color.fromARGB(255, 196, 196, 196),
-            highlightColor: const Color.fromARGB(255, 241, 241, 241),
-            child: Container(
-              color: Colors.white,
-            ),
           ),
         );
       },

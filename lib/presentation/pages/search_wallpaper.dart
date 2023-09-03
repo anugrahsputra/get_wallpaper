@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_wallpaper/logic/search_wallpaper/search_wallpaper_cubit.dart';
+import 'package:get_wallpaper/presentation/widgets/default_shimmer.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
 class SearchWallpaper extends StatefulWidget {
   const SearchWallpaper({super.key});
@@ -62,6 +64,7 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
           Container(
             margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
                   onPressed: () {
@@ -102,59 +105,64 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
             ),
           ),
           SizedBox(height: 20.h),
-          Expanded(
-            child: BlocBuilder<SearchWallpaperCubit, SearchWallpaperState>(
-                builder: (context, state) {
-              return state.when(
-                initial: () => Container(),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                loaded: (result) => GridView.builder(
-                  padding: const EdgeInsets.all(8),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 2 / 3,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: result.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index < result.length) {
-                      final wallpaper = result[index];
-                      return GestureDetector(
-                        onTap: () {
-                          context.push('/detail/${wallpaper.id}');
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            wallpaper.src.portrait,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Center(
-                        child: TextButton(
-                          onPressed: () {
-                            // not ideal
-                            loadMore(_searchCtrl.text);
-                          },
-                          child: const Text('Load More'),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                error: (message) => Center(
-                  child: Text(message),
-                ),
-              );
-            }),
-          ),
+          buildSearchList(),
         ],
       ),
+    );
+  }
+
+  buildSearchList() {
+    return Expanded(
+      child: BlocBuilder<SearchWallpaperCubit, SearchWallpaperState>(
+          builder: (context, state) {
+        return state.when(
+          initial: () => Lottie.asset(
+            'assets/search_initials.json',
+            repeat: false,
+          ),
+          loading: () => const DefaultShimmerSearch(),
+          loaded: (result) => GridView.builder(
+            padding: const EdgeInsets.all(8),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 2 / 3,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+            ),
+            itemCount: result.length + 1,
+            itemBuilder: (context, index) {
+              if (index < result.length) {
+                final wallpaper = result[index];
+                return GestureDetector(
+                  onTap: () {
+                    context.push('/detail/${wallpaper.id}');
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      wallpaper.src.portrait,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              } else {
+                return Center(
+                  child: TextButton(
+                    onPressed: () {
+                      // not ideal
+                      loadMore(_searchCtrl.text);
+                    },
+                    child: const Text('Load More'),
+                  ),
+                );
+              }
+            },
+          ),
+          error: (message) => Center(
+            child: Text(message),
+          ),
+        );
+      }),
     );
   }
 }

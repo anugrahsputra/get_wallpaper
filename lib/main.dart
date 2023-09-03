@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_wallpaper/logic/detail_wallpaper/detail_wallpaper_cubit.dart';
@@ -8,13 +7,6 @@ import 'package:get_wallpaper/logic/search_wallpaper/search_wallpaper_cubit.dart
 import 'package:get_wallpaper/utils/routes.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      // statusBarIconBrightness: Brightness.dark,
-      // statusBarBrightness: Brightness.dark,
-    ),
-  );
   runApp(const MyApp());
 }
 
