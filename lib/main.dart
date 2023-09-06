@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_wallpaper/cubit/categorized_wallpaper/categorized_wallpaper_cubit.dart';
-import 'package:get_wallpaper/cubit/detail_wallpaper/detail_wallpaper_cubit.dart';
-import 'package:get_wallpaper/cubit/list_wallpaper/list_wallpaper_cubit.dart';
-import 'package:get_wallpaper/cubit/search_wallpaper/search_wallpaper_cubit.dart';
+import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:get_wallpaper/utils/routes.dart';
 
 void main() {

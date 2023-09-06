@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_wallpaper/cubit/detail_wallpaper/detail_wallpaper_cubit.dart';
 import 'package:get_wallpaper/models/wallpaper/wallpaper_model.dart';
+import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 

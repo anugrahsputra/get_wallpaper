@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_wallpaper/cubit/search_wallpaper/search_wallpaper_cubit.dart';
-import 'package:get_wallpaper/presentation/widgets/default_shimmer.dart';
+import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
