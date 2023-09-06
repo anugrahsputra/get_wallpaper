@@ -68,4 +68,25 @@ class ApiService {
       throw Exception('failed to load wallpapers');
     }
   }
+
+  Future<List<WallpaperModel>> categorizedWallpaper(String category) async {
+    try {
+      final response = await _dio.get(
+        '$_baseUrl$_search$category',
+        options: Options(
+          headers: {
+            'Authorization': _apiKey,
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data['photos'];
+        return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
+      } else {
+        throw Exception('failed to load wallpapers');
+      }
+    } catch (e) {
+      throw Exception('failed to load wallpapers');
+    }
+  }
 }

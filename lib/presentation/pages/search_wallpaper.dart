@@ -16,10 +16,14 @@ class SearchWallpaper extends StatefulWidget {
 class _SearchWallpaperState extends State<SearchWallpaper> {
   final TextEditingController _searchCtrl = TextEditingController();
   final FocusNode _searchFocus = FocusNode();
+  String query = '';
 
   @override
   void initState() {
     super.initState();
+    _searchCtrl.addListener(() {
+      setState(() {});
+    });
     clearSearch();
   }
 
@@ -77,7 +81,12 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
                   child: TextField(
                     controller: _searchCtrl,
                     focusNode: _searchFocus,
-                    onChanged: (value) => searchQuery(value),
+                    onChanged: (value) {
+                      setState(() {
+                        query = value;
+                      });
+                      searchQuery(value);
+                    },
                     decoration: InputDecoration(
                       hintText: 'Search wallpaper',
                       hintStyle: const TextStyle(
@@ -122,6 +131,7 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
           ),
           loading: () => const DefaultShimmerSearch(),
           loaded: (result) => GridView.builder(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.all(8),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
@@ -150,7 +160,7 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
                   child: TextButton(
                     onPressed: () {
                       // not ideal
-                      loadMore(_searchCtrl.text);
+                      context.read<SearchWallpaperCubit>().loadMore(query);
                     },
                     child: const Text('Load More'),
                   ),
