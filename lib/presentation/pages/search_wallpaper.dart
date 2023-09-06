@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +18,9 @@ class SearchWallpaper extends StatefulWidget {
 class _SearchWallpaperState extends State<SearchWallpaper> {
   final TextEditingController _searchCtrl = TextEditingController();
   final FocusNode _searchFocus = FocusNode();
-  String query = '';
+  String currentQuery = '';
+  bool isLoadMore = false;
+  Timer? debounce;
 
   @override
   void initState() {
@@ -27,20 +31,17 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
     clearSearch();
   }
 
+  void onSearchQuery(String query) {
+    if (debounce?.isActive ?? false) debounce!.cancel();
+    debounce = Timer(const Duration(milliseconds: 500), () {
+      context.read<SearchWallpaperCubit>().searchWallpaper(query);
+    });
+  }
+
   void searchQuery(String query) {
     if (_searchCtrl.text.isNotEmpty) {
       Future.delayed(const Duration(milliseconds: 500), () {
         context.read<SearchWallpaperCubit>().searchWallpaper(query);
-      });
-    } else {
-      context.read<SearchWallpaperCubit>().clearSearch();
-    }
-  }
-
-  void loadMore(String query) {
-    if (_searchCtrl.text.isNotEmpty) {
-      Future.delayed(const Duration(milliseconds: 500), () {
-        context.read<SearchWallpaperCubit>().loadMore(query);
       });
     } else {
       context.read<SearchWallpaperCubit>().clearSearch();
@@ -56,6 +57,8 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
 
   @override
   void dispose() {
+    debounce?.cancel();
+    _searchFocus.dispose();
     _searchCtrl.dispose();
     super.dispose();
   }
@@ -83,9 +86,9 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
                     focusNode: _searchFocus,
                     onChanged: (value) {
                       setState(() {
-                        query = value;
+                        currentQuery = value;
                       });
-                      searchQuery(value);
+                      onSearchQuery(currentQuery);
                     },
                     decoration: InputDecoration(
                       hintText: 'Search wallpaper',
@@ -157,12 +160,21 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
                 );
               } else {
                 return Center(
-                  child: TextButton(
-                    onPressed: () {
-                      // not ideal
-                      context.read<SearchWallpaperCubit>().loadMore(query);
-                    },
-                    child: const Text('Load More'),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.grey[200],
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          isLoadMore = true;
+                        });
+                        context
+                            .read<SearchWallpaperCubit>()
+                            .loadMore(currentQuery);
+                      },
+                      child: const Text('Load More'),
+                    ),
                   ),
                 );
               }

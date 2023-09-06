@@ -72,7 +72,7 @@ class ApiService {
   Future<List<WallpaperModel>> categorizedWallpaper(String category) async {
     try {
       final response = await _dio.get(
-        '$_baseUrl$_search$category',
+        '$_baseUrl$_search$category&per_page=20',
         options: Options(
           headers: {
             'Authorization': _apiKey,
