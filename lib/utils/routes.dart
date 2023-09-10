@@ -1,7 +1,6 @@
-import 'package:get_wallpaper/presentation/pages/detail_wallpaper.dart';
-import 'package:get_wallpaper/presentation/pages/homepage.dart';
-import 'package:get_wallpaper/presentation/pages/search_wallpaper.dart';
 import 'package:go_router/go_router.dart';
+
+import '../presentation/presentation.dart';
 
 final routes = GoRouter(
   initialLocation: '/',

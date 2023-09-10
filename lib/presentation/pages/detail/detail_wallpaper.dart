@@ -5,8 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_wallpaper/models/wallpaper/wallpaper_model.dart';
 import 'package:get_wallpaper/presentation/presentation.dart';
+import 'package:get_wallpaper/presentation/widgets/back_button.dart';
+import 'package:get_wallpaper/presentation/widgets/set_as_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+part 'detail_wallpaper.component.dart';
 
 class DetailWallpaper extends StatefulWidget {
   final int? id;
@@ -131,114 +135,45 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
   Widget build(BuildContext context) {
     context.read<DetailWallpaperCubit>().getWallpaperDetail(widget.id!);
     return Scaffold(
-        body: BlocBuilder<DetailWallpaperCubit, DetailWallpaperState>(
-      builder: (context, state) {
-        return state.when(
-          initial: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          loaded: (wallpaper) {
-            return Stack(
-              children: [
-                Image.network(
-                  wallpaper.src.portrait,
-                  fit: BoxFit.cover,
-                  height: double.infinity,
-                  width: double.infinity,
-                ),
-                Positioned(
-                  top: 40,
-                  left: 20,
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          context.pop();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        'Back',
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+      body: BlocBuilder<DetailWallpaperCubit, DetailWallpaperState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            loaded: (wallpaper) {
+              return Stack(
+                children: [
+                  _WallpaperImage(
+                    src: wallpaper.src.portrait,
                   ),
-                ),
-                Positioned(
-                  bottom: 10,
-                  left: 20,
-                  right: 20,
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 15.h),
-                    width: MediaQuery.of(context).size.width,
-                    // height: MediaQuery.of(context).size.height * 0.4,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          wallpaper.alt,
-                          style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          'Photo by ${wallpaper.photographer}',
-                          style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: double.infinity,
-                          child: FilledButton(
-                            style: FilledButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(0.3),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            onPressed: () => _dialogBuilder(context, wallpaper),
-                            child: Text(
-                              'Set As Wallpaper',
-                              style: GoogleFonts.inter(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  const Positioned(
+                    top: 40,
+                    left: 20,
+                    child: BackButtonWidget(),
                   ),
-                ),
-              ],
-            );
-          },
-          error: (message) => Center(
-            child: Text(message),
-          ),
-        );
-      },
-    ));
+                  Positioned(
+                      bottom: 10,
+                      left: 20,
+                      right: 20,
+                      child: _WallpaperDetails(
+                        alt: wallpaper.alt,
+                        photographerName: wallpaper.photographer,
+                        onPressed: () => _dialogBuilder(context, wallpaper),
+                      )),
+                ],
+              );
+            },
+            error: (message) => Center(
+              child: Text(message),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   Future<void> _dialogBuilder(BuildContext context, WallpaperModel? wallpaper) {
@@ -256,7 +191,7 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SetAsButton(
+              SetAsButtonWidget(
                 child: _wallpaperUrlHome == 'Loading'
                     ? const CircularProgressIndicator.adaptive()
                     : Text(
@@ -274,7 +209,7 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
                 },
               ),
               SizedBox(height: 5.h),
-              SetAsButton(
+              SetAsButtonWidget(
                 child: _wallpaperUrlLock == 'Loading'
                     ? const CircularProgressIndicator.adaptive()
                     : Text(
@@ -291,7 +226,7 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
                 },
               ),
               SizedBox(height: 5.h),
-              SetAsButton(
+              SetAsButtonWidget(
                 child: _wallpaperUrlBoth == 'Loading'
                     ? const CircularProgressIndicator.adaptive()
                     : Text(
@@ -311,34 +246,6 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
           ),
         );
       },
-    );
-  }
-}
-
-class SetAsButton extends StatelessWidget {
-  const SetAsButton({
-    super.key,
-    this.onPressed,
-    required this.child,
-  });
-
-  final VoidCallback? onPressed;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: FilledButton(
-        onPressed: onPressed,
-        style: FilledButton.styleFrom(
-          backgroundColor: Colors.white.withOpacity(0.3),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        child: child,
-      ),
     );
   }
 }
