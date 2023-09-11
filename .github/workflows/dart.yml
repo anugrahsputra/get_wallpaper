@@ -35,6 +35,17 @@ jobs:
 
       - name: Generate model and cubit
         run: dart run build_runner build --delete-conflicting-outputs
+
+      # Recreate env.dart
+      - name: Create env.dat
+        run: |
+            echo "class Env {" > lib/utils/env.dart
+            echo "  static const String baseUrl = '${{ secrets.BASE_URL }}';" >> lib/utils/env.dart
+            echo "  static const String apiKey = '${{ secrets.API_KEY }}';" >> lib/utils/env.dart
+            echo "  static const String curatedWallpaper = '${{ secrets.CURATED_WALLPAPER }}';" >> lib/utils/env.dart
+            echo "  static const String detailWallpaper = '${{ secrets.DETAIL_WALLPAPER }}';" >> lib/utils/env.dart
+            echo "  static const String searchWallpaper = '${{ secrets.SEARCH_WALLPAPER }}';" >> lib/utils/env.dart
+            echo "}" >> lib/utils/env.dart
       
       # Build an APK
       - name: Build APK
