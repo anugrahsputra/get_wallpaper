@@ -88,7 +88,7 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
                     setState(() {
                       currentQuery = value;
                     });
-                    onSearchQuery(currentQuery);
+                    onSearchQuery(value);
                   },
                 ),
                 if (_searchCtrl.text.isNotEmpty)
