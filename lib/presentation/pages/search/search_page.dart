@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../../data/models/model.dart';
+import '../../presentation.dart';
 
 part 'search_page.component.dart';
 
@@ -45,7 +47,7 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
         context.read<SearchWallpaperCubit>().searchWallpaper(query);
       });
     } else {
-      context.read<SearchWallpaperCubit>().clearSearch();
+      clearSearch();
     }
   }
 
@@ -100,13 +102,30 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
             ),
           ),
           SizedBox(height: 20.h),
-          _BuildSearchList(
-            onPressed: () {
-              setState(() {
-                isLoadMore = true;
-              });
-              context.read<SearchWallpaperCubit>().loadMore(currentQuery);
-            },
+          Expanded(
+            child: BlocBuilder<SearchWallpaperCubit, SearchWallpaperState>(
+                builder: (context, state) {
+              return state.when(
+                initial: () => Lottie.asset(
+                  'assets/search_initials.json',
+                  repeat: false,
+                ),
+                loading: () => const DefaultShimmerSearch(),
+                loaded: (result) => _BuildGridView(
+                    onPressed: () {
+                      setState(() {
+                        isLoadMore = true;
+                      });
+                      context
+                          .read<SearchWallpaperCubit>()
+                          .loadMore(currentQuery);
+                    },
+                    result: result),
+                error: (message) => Center(
+                  child: Text(message),
+                ),
+              );
+            }),
           )
         ],
       ),

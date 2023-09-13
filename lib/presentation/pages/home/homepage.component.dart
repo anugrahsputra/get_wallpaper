@@ -136,6 +136,80 @@ class _Category extends StatelessWidget {
   }
 }
 
+class _ListCategorizedWallpaper extends StatelessWidget {
+  const _ListCategorizedWallpaper(this.wallpaper);
+
+  final List<WallpaperModel> wallpaper;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(10),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 2 / 3,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+      ),
+      itemCount: wallpaper.length,
+      itemBuilder: (context, index) {
+        final wallpapers = wallpaper[index];
+        return GestureDetector(
+          onTap: () {
+            context.push('/detail/${wallpapers.id}');
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              wallpapers.src.portrait,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ListCuratedWallpaper extends StatelessWidget {
+  final List<WallpaperModel> wallpaper;
+  const _ListCuratedWallpaper(this.wallpaper);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(10),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 2 / 3,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+      ),
+      itemCount: wallpaper.length,
+      itemBuilder: (context, index) {
+        final wallpapers = wallpaper[index];
+        return GestureDetector(
+          onTap: () {
+            context.push('/detail/${wallpapers.id}');
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              wallpapers.src.portrait,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/* unused
 class _BuildListWallpaper extends StatelessWidget {
   const _BuildListWallpaper({Key? key}) : super(key: key);
 
@@ -183,7 +257,10 @@ class _BuildListWallpaper extends StatelessWidget {
     );
   }
 }
+*/
 
+
+/* unused
 class _BuildCuratedWallpaper extends StatefulWidget {
   const _BuildCuratedWallpaper({Key? key}) : super(key: key);
 
@@ -236,3 +313,4 @@ class __BuildCuratedWallpaperState extends State<_BuildCuratedWallpaper> {
     );
   }
 }
+*/

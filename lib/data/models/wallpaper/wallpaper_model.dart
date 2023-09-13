@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_wallpaper/models/image_source/image_source.dart';
+
+import '../model.dart';
 
 part 'wallpaper_model.freezed.dart';
 part 'wallpaper_model.g.dart';

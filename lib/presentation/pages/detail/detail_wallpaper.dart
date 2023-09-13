@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_wallpaper/models/wallpaper/wallpaper_model.dart';
 import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:get_wallpaper/presentation/widgets/back_button.dart';
 import 'package:get_wallpaper/presentation/widgets/set_as_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../data/models/model.dart';
 
 part 'detail_wallpaper.component.dart';
 

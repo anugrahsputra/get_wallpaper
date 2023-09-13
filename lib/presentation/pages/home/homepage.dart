@@ -6,6 +6,8 @@ import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../data/models/model.dart';
+
 part 'homepage.component.dart';
 
 class Homepage extends StatefulWidget {
@@ -78,8 +80,34 @@ class _HomepageState extends State<Homepage> {
               ),
               Flexible(
                 child: userTapped
-                    ? const _BuildListWallpaper()
-                    : const _BuildCuratedWallpaper(),
+                    ? BlocBuilder<CategorizedWallpaperCubit,
+                        CategorizedWallpaperState>(
+                        builder: (context, state) {
+                          return state.when(
+                            initial: () => const DefaultShimmerHome(),
+                            loading: () => const DefaultShimmerHome(),
+                            loaded: (wallpapers) =>
+                                _ListCategorizedWallpaper(wallpapers),
+                            error: (message) => Center(
+                              child: Text(message),
+                            ),
+                          );
+                        },
+                      )
+                    : BlocBuilder<ListWallpaperCubit, ListWallpaperState>(
+                        builder: (context, state) {
+                          return state.when(
+                            initial: () => const DefaultShimmerHome(),
+                            loading: () => const DefaultShimmerHome(),
+                            loaded: (wallpapers) => _ListCuratedWallpaper(
+                              wallpapers,
+                            ),
+                            error: (message) => Center(
+                              child: Text(message),
+                            ),
+                          );
+                        },
+                      ),
               ),
             ],
           ),

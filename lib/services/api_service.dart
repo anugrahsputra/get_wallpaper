@@ -1,8 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:get_wallpaper/models/wallpaper/wallpaper_model.dart';
-import 'package:get_wallpaper/utils/env.dart';
 
-class ApiService {
+import '../data/models/model.dart';
+import '../utils/env.dart';
+
+abstract class ApiService {
+  Future<List<WallpaperModel>> listWallpaper();
+  Future<WallpaperModel> detailWallpaper(int id);
+  Future<List<WallpaperModel>> searchWallpaper(String query, {int page = 1});
+  Future<List<WallpaperModel>> categorizedWallpaper(String category);
+}
+
+class ApiServiceImpl implements ApiService {
   static const String _baseUrl = Env.baseUrl;
   static const String _apiKey = Env.apiKey;
   static const String _curated = Env.curatedWallpaper;
@@ -11,8 +19,9 @@ class ApiService {
 
   final Dio _dio;
 
-  ApiService({Dio? dio}) : _dio = dio ?? Dio();
+  ApiServiceImpl(this._dio);
 
+  @override
   Future<List<WallpaperModel>> listWallpaper() async {
     final response = await _dio.get(
       '$_baseUrl${_curated}per_page=20',
@@ -34,6 +43,7 @@ class ApiService {
     }
   }
 
+  @override
   Future<WallpaperModel> detailWallpaper(int id) async {
     final response = await _dio.get(
       '$_baseUrl$_detail$id',
@@ -51,6 +61,7 @@ class ApiService {
     }
   }
 
+  @override
   Future<List<WallpaperModel>> searchWallpaper(String query,
       {int page = 1}) async {
     final response = await _dio.get(
@@ -69,6 +80,7 @@ class ApiService {
     }
   }
 
+  @override
   Future<List<WallpaperModel>> categorizedWallpaper(String category) async {
     try {
       final response = await _dio.get(

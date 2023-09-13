@@ -55,51 +55,67 @@ class _BuildSearchList extends StatelessWidget {
             repeat: false,
           ),
           loading: () => const DefaultShimmerSearch(),
-          loaded: (result) => GridView.builder(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: const EdgeInsets.all(8),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 2 / 3,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-            ),
-            itemCount: result.length + 1,
-            itemBuilder: (context, index) {
-              if (index < result.length) {
-                final wallpaper = result[index];
-                return GestureDetector(
-                  onTap: () {
-                    context.push('/detail/${wallpaper.id}');
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      wallpaper.src.portrait,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              } else {
-                return Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.grey[200],
-                    child: TextButton(
-                      onPressed: onPressed,
-                      child: const Text('Load More'),
-                    ),
-                  ),
-                );
-              }
-            },
-          ),
+          loaded: (result) =>
+              _BuildGridView(onPressed: onPressed, result: result),
           error: (message) => Center(
             child: Text(message),
           ),
         );
       }),
+    );
+  }
+}
+
+class _BuildGridView extends StatelessWidget {
+  const _BuildGridView({
+    required this.onPressed,
+    required this.result,
+  });
+
+  final VoidCallback? onPressed;
+  final List<WallpaperModel> result;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      padding: const EdgeInsets.all(8),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 2 / 3,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+      ),
+      itemCount: result.length + 1,
+      itemBuilder: (context, index) {
+        if (index < result.length) {
+          final wallpaper = result[index];
+          return GestureDetector(
+            onTap: () {
+              context.push('/detail/${wallpaper.id}');
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                wallpaper.src.portrait,
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        } else {
+          return Center(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.grey[200],
+              child: TextButton(
+                onPressed: onPressed,
+                child: const Text('Load More'),
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

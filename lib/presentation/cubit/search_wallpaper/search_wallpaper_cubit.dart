@@ -1,19 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_wallpaper/models/wallpaper/wallpaper_model.dart';
-import 'package:get_wallpaper/services/api_service.dart';
+
+import '../../../data/models/model.dart';
+import '../../../data/repository/repository.dart';
 
 part 'search_wallpaper_cubit.freezed.dart';
 part 'search_wallpaper_state.dart';
 
 class SearchWallpaperCubit extends Cubit<SearchWallpaperState> {
   int currentPage = 1;
-  SearchWallpaperCubit() : super(const SearchWallpaperState.initial());
+  final SearchWallpaperRepository _repository;
+  SearchWallpaperCubit(this._repository)
+      : super(const SearchWallpaperState.initial());
 
   void searchWallpaper(String query) async {
     try {
       emit(const SearchWallpaperState.loading());
-      final wallpaper = await ApiService().searchWallpaper(query);
+      final wallpaper = await _repository.searchWallpaper(query);
       emit(SearchWallpaperState.loaded(wallpaper));
     } catch (e) {
       emit(SearchWallpaperState.error(e.toString()));
@@ -22,8 +25,7 @@ class SearchWallpaperCubit extends Cubit<SearchWallpaperState> {
 
   void loadMore(String query) async {
     try {
-      final wallpaper =
-          await ApiService().searchWallpaper(query, page: currentPage);
+      final wallpaper = await _repository.loadMore(query, currentPage);
       currentPage++;
       final currentWallpaper = state.maybeWhen(
         loaded: (wallpapers) => wallpapers,
