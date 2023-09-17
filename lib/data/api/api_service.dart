@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 
-import '../data/models/model.dart';
-import '../utils/env.dart';
+import '../../core/core.dart';
+import '../../domain/domain.dart';
 
 abstract class ApiService {
-  Future<List<WallpaperModel>> listWallpaper();
-  Future<WallpaperModel> detailWallpaper(int id);
-  Future<List<WallpaperModel>> searchWallpaper(String query, {int page = 1});
-  Future<List<WallpaperModel>> categorizedWallpaper(String category);
+  Future<List<Wallpaper>> listWallpaper();
+  Future<Wallpaper> detailWallpaper(int id);
+  Future<List<Wallpaper>> searchWallpaper(String query, {int page = 1});
+  Future<List<Wallpaper>> categorizedWallpaper(String category);
 }
 
 class ApiServiceImpl implements ApiService {
@@ -22,7 +22,7 @@ class ApiServiceImpl implements ApiService {
   ApiServiceImpl(this._dio);
 
   @override
-  Future<List<WallpaperModel>> listWallpaper() async {
+  Future<List<Wallpaper>> listWallpaper() async {
     final response = await _dio.get(
       '$_baseUrl${_curated}per_page=20',
       options: Options(
@@ -34,7 +34,7 @@ class ApiServiceImpl implements ApiService {
     if (response.statusCode == 200) {
       final List<dynamic> data = response.data['photos'];
       return data
-          .map((photo) => WallpaperModel.fromJson(photo))
+          .map((photo) => Wallpaper.fromJson(photo))
           .toList()
           .reversed
           .toList();
@@ -44,7 +44,7 @@ class ApiServiceImpl implements ApiService {
   }
 
   @override
-  Future<WallpaperModel> detailWallpaper(int id) async {
+  Future<Wallpaper> detailWallpaper(int id) async {
     final response = await _dio.get(
       '$_baseUrl$_detail$id',
       options: Options(
@@ -55,15 +55,14 @@ class ApiServiceImpl implements ApiService {
     );
     if (response.statusCode == 200) {
       final data = response.data;
-      return WallpaperModel.fromJson(data);
+      return Wallpaper.fromJson(data);
     } else {
       throw Exception('failed to load wallpaper');
     }
   }
 
   @override
-  Future<List<WallpaperModel>> searchWallpaper(String query,
-      {int page = 1}) async {
+  Future<List<Wallpaper>> searchWallpaper(String query, {int page = 1}) async {
     final response = await _dio.get(
       '$_baseUrl$_search$query&page=$page',
       options: Options(
@@ -74,14 +73,14 @@ class ApiServiceImpl implements ApiService {
     );
     if (response.statusCode == 200) {
       final List<dynamic> data = response.data['photos'];
-      return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
+      return data.map((photo) => Wallpaper.fromJson(photo)).toList();
     } else {
       throw Exception('failed to load wallpapers');
     }
   }
 
   @override
-  Future<List<WallpaperModel>> categorizedWallpaper(String category) async {
+  Future<List<Wallpaper>> categorizedWallpaper(String category) async {
     try {
       final response = await _dio.get(
         '$_baseUrl$_search$category&per_page=20',
@@ -93,7 +92,7 @@ class ApiServiceImpl implements ApiService {
       );
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data['photos'];
-        return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
+        return data.map((photo) => Wallpaper.fromJson(photo)).toList();
       } else {
         throw Exception('failed to load wallpapers');
       }

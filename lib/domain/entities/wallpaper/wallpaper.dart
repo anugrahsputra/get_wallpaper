@@ -1,13 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../model.dart';
+import '../entities.dart';
 
-part 'wallpaper_model.freezed.dart';
-part 'wallpaper_model.g.dart';
+part 'wallpaper.freezed.dart';
+part 'wallpaper.g.dart';
 
 @freezed
-class WallpaperModel with _$WallpaperModel {
-  const factory WallpaperModel({
+class Wallpaper with _$Wallpaper {
+  const factory Wallpaper({
     required int id,
     required int width,
     required int height,
@@ -19,8 +19,8 @@ class WallpaperModel with _$WallpaperModel {
     required ImageSource src,
     required bool liked,
     required String alt,
-  }) = _WallpaperModel;
+  }) = _Wallpaper;
 
-  factory WallpaperModel.fromJson(Map<String, dynamic> json) =>
-      _$WallpaperModelFromJson(json);
+  factory Wallpaper.fromJson(Map<String, dynamic> json) =>
+      _$WallpaperFromJson(json);
 }

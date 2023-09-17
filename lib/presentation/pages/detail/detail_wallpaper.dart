@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_wallpaper/presentation/presentation.dart';
-import 'package:get_wallpaper/presentation/widgets/back_button.dart';
-import 'package:get_wallpaper/presentation/widgets/set_as_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../data/models/model.dart';
+import '../../../domain/domain.dart';
+import '../../presentation.dart';
 
 part 'detail_wallpaper.component.dart';
 
@@ -151,7 +149,7 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
                   _WallpaperImage(
                     src: wallpaper.src.portrait,
                   ),
-                  const Positioned(
+                  Positioned(
                     top: 40,
                     left: 20,
                     child: BackButtonWidget(),
@@ -177,7 +175,7 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
     );
   }
 
-  Future<void> _dialogBuilder(BuildContext context, WallpaperModel? wallpaper) {
+  Future<void> _dialogBuilder(BuildContext context, Wallpaper? wallpaper) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {

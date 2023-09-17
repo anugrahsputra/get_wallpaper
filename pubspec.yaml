@@ -44,6 +44,7 @@ dependencies:
   google_fonts: ^5.1.0
   json_annotation: ^4.8.1
   lottie: ^2.6.0
+  rxdart: ^0.27.7
   shared_preferences: ^2.2.1
   shimmer: ^3.0.0
 

@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../data/models/model.dart';
+import '../../../domain/domain.dart';
 import '../../presentation.dart';
 
 part 'search_page.component.dart';

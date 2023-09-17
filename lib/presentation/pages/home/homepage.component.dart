@@ -139,7 +139,7 @@ class _Category extends StatelessWidget {
 class _ListCategorizedWallpaper extends StatelessWidget {
   const _ListCategorizedWallpaper(this.wallpaper);
 
-  final List<WallpaperModel> wallpaper;
+  final List<Wallpaper> wallpaper;
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +174,7 @@ class _ListCategorizedWallpaper extends StatelessWidget {
 }
 
 class _ListCuratedWallpaper extends StatelessWidget {
-  final List<WallpaperModel> wallpaper;
+  final List<Wallpaper> wallpaper;
   const _ListCuratedWallpaper(this.wallpaper);
 
   @override

@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:get_wallpaper/presentation/presentation.dart';
-import 'package:get_wallpaper/services/api_service.dart';
 
+import 'core/core.dart';
+import 'data/api/api.dart';
 import 'data/repository/repository.dart';
-import 'data/usecase/usecase.dart';
-import 'utils/env.dart';
+import 'domain/domain.dart';
+import 'presentation/presentation.dart';
 
 final locator = GetIt.instance;
 
@@ -22,24 +22,19 @@ Future<void> init() async {
 
   locator.registerLazySingleton<ApiService>(() => ApiServiceImpl(locator()));
 
-  /* =============> Repository <============= */
-  locator.registerLazySingleton<CategorizedRepository>(
-      () => CategorizedRepositoryImpl(locator()));
-  locator.registerLazySingleton<ListWallpaperRepository>(
-      () => ListWallpaperRepositoryImpl(locator()));
-  locator.registerLazySingleton<DetailWallpaperRepository>(
-      () => DetailWallpaperRepositoryImpl(locator()));
-  locator.registerLazySingleton<SearchWallpaperRepository>(
-      () => SearchwallpaperRepositoryImpl(locator()));
-
-  /* =============> Usecase <============= */
-  locator.registerLazySingleton(() => GetCategorizedWallpaper(locator()));
-  locator.registerLazySingleton(() => GetListWallpaper(locator()));
-  locator.registerLazySingleton(() => GetDetailWallpaper(locator()));
-
   /* =============> Cubit <============= */
   locator.registerFactory(() => CategorizedWallpaperCubit(locator()));
   locator.registerFactory(() => ListWallpaperCubit(locator()));
   locator.registerFactory(() => DetailWallpaperCubit(locator()));
   locator.registerFactory(() => SearchWallpaperCubit(locator()));
+
+  /* =============> Usecase <============= */
+  locator.registerLazySingleton(() => GetCategorizedWallpaper(locator()));
+  locator.registerLazySingleton(() => GetListWallpaper(locator()));
+  locator.registerLazySingleton(() => GetDetailWallpaper(locator()));
+  locator.registerLazySingleton(() => GetSearchWallpaper(locator()));
+
+  /* =============> Repository <============= */
+  locator.registerLazySingleton<WallpaperRepository>(
+      () => WallpaperRepositoryImpl(locator()));
 }

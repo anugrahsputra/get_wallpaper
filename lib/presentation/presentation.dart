@@ -5,5 +5,4 @@ export 'cubit/search_wallpaper/search_wallpaper_cubit.dart';
 export 'pages/detail/detail.dart';
 export 'pages/home/home.dart';
 export 'pages/search/search.dart';
-export 'widgets/default_search_box.dart';
-export 'widgets/default_shimmer.dart';
+export 'widgets/widget.dart';

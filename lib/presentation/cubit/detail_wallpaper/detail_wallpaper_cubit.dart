@@ -1,14 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/models/model.dart';
-import '../../../data/repository/repository.dart';
+import '../../../domain/domain.dart';
 
 part 'detail_wallpaper_cubit.freezed.dart';
 part 'detail_wallpaper_state.dart';
 
 class DetailWallpaperCubit extends Cubit<DetailWallpaperState> {
-  final DetailWallpaperRepository _repository;
+  final GetDetailWallpaper _repository;
 
   DetailWallpaperCubit(this._repository)
       : super(const DetailWallpaperState.initial());
@@ -16,8 +15,10 @@ class DetailWallpaperCubit extends Cubit<DetailWallpaperState> {
   void getWallpaperDetail(int id) async {
     try {
       emit(const DetailWallpaperState.loading());
-      final wallpaper = await _repository.detailWallpaper(id);
-      emit(DetailWallpaperState.loaded(wallpaper));
+      final wallpaper = await _repository.execute(id);
+      wallpaper.fold(
+          (failure) => emit(DetailWallpaperState.error(failure.message)),
+          (success) => emit(DetailWallpaperState.loaded(success)));
     } catch (e) {
       emit(DetailWallpaperState.error(e.toString()));
     }

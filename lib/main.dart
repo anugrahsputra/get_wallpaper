@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_wallpaper/bloc_observer.dart';
+import 'package:get_wallpaper/core/utils/routes.dart';
 import 'package:get_wallpaper/injection.dart' as di;
 import 'package:get_wallpaper/presentation/presentation.dart';
-import 'package:get_wallpaper/utils/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

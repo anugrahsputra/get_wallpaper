@@ -1,14 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/models/model.dart';
-import '../../../data/repository/repository.dart';
+import '../../../domain/domain.dart';
 
 part 'list_wallpaper_cubit.freezed.dart';
 part 'list_wallpaper_state.dart';
 
 class ListWallpaperCubit extends Cubit<ListWallpaperState> {
-  final ListWallpaperRepository listWallpaperRepo;
+  final GetListWallpaper listWallpaperRepo;
 
   ListWallpaperCubit(this.listWallpaperRepo)
       : super(const ListWallpaperState.initial()) {
@@ -16,13 +15,12 @@ class ListWallpaperCubit extends Cubit<ListWallpaperState> {
   }
 
   void getWallpaper() async {
-    try {
-      emit(const ListWallpaperState.loading());
-      final wallpaper = await listWallpaperRepo.listWallpaper();
-      emit(ListWallpaperState.loaded(wallpaper));
-    } catch (e) {
-      emit(ListWallpaperState.error(e.toString()));
-    }
+    emit(const ListWallpaperState.loading());
+    final wallpaper = await listWallpaperRepo.call();
+    wallpaper.fold(
+      (failure) => emit(ListWallpaperState.error(failure.message)),
+      (wallpaperList) => emit(ListWallpaperState.loaded(wallpaperList)),
+    );
   }
 
   // void loadMore() async {

@@ -39,6 +39,7 @@ class _BuildSearchBar extends StatelessWidget {
   }
 }
 
+/* 
 class _BuildSearchList extends StatelessWidget {
   const _BuildSearchList({required this.onPressed});
 
@@ -65,6 +66,7 @@ class _BuildSearchList extends StatelessWidget {
     );
   }
 }
+*/
 
 class _BuildGridView extends StatelessWidget {
   const _BuildGridView({
@@ -73,7 +75,7 @@ class _BuildGridView extends StatelessWidget {
   });
 
   final VoidCallback? onPressed;
-  final List<WallpaperModel> result;
+  final List<Wallpaper> result;
 
   @override
   Widget build(BuildContext context) {

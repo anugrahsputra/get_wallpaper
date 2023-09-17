@@ -4,7 +4,6 @@ part of 'list_wallpaper_cubit.dart';
 class ListWallpaperState with _$ListWallpaperState {
   const factory ListWallpaperState.initial() = _Initial;
   const factory ListWallpaperState.loading() = _loading;
-  const factory ListWallpaperState.loaded(List<WallpaperModel> wallpapers) =
-      _Loaded;
+  const factory ListWallpaperState.loaded(List<Wallpaper> wallpapers) = _Loaded;
   const factory ListWallpaperState.error(String message) = _Error;
 }
