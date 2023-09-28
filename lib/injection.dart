@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/core.dart';
-import 'data/api/api.dart';
+import 'data/datasource/api.dart';
 import 'data/repository/repository.dart';
 import 'domain/domain.dart';
 import 'presentation/presentation.dart';

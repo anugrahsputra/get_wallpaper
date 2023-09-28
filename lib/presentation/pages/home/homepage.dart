@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../data/categories_data.dart';
-import '../../../domain/domain.dart';
+import '../../../data/data.dart';
 import '../../presentation.dart';
 
 part 'homepage.component.dart';

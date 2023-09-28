@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../core/core.dart';
-import '../domain.dart';
+import '../../data/data.dart';
 
 abstract class WallpaperRepository {
   Future<Either<Failure, List<Wallpaper>>> categorizedWallpaper(

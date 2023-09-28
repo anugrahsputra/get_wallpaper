@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../entities.dart';
+import '../model.dart';
 
 part 'wallpaper.freezed.dart';
 part 'wallpaper.g.dart';

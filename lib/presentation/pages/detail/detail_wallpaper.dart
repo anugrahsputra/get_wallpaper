@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../domain/domain.dart';
+import '../../../data/data.dart';
 import '../../presentation.dart';
 
 part 'detail_wallpaper.component.dart';
@@ -149,7 +149,7 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
                   _WallpaperImage(
                     src: wallpaper.src.portrait,
                   ),
-                  Positioned(
+                  const Positioned(
                     top: 40,
                     left: 20,
                     child: BackButtonWidget(),

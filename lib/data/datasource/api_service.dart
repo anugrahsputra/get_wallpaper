@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../core/core.dart';
-import '../../domain/domain.dart';
+import '../data.dart';
 
 abstract class ApiService {
   Future<List<Wallpaper>> listWallpaper();
