@@ -103,9 +103,20 @@ class _FakeResponse_6<T1> extends _i1.SmartFake implements _i4.Response<T1> {
         );
 }
 
-class _FakeGetListWallpaper_7 extends _i1.SmartFake
+class _FakeWallpaperRepository_7 extends _i1.SmartFake
+    implements _i5.WallpaperRepository {
+  _FakeWallpaperRepository_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGetListWallpaper_8 extends _i1.SmartFake
     implements _i5.GetListWallpaper {
-  _FakeGetListWallpaper_7(
+  _FakeGetListWallpaper_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -114,9 +125,9 @@ class _FakeGetListWallpaper_7 extends _i1.SmartFake
         );
 }
 
-class _FakeListWallpaperState_8 extends _i1.SmartFake
+class _FakeListWallpaperState_9 extends _i1.SmartFake
     implements _i6.ListWallpaperState {
-  _FakeListWallpaperState_8(
+  _FakeListWallpaperState_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -125,9 +136,9 @@ class _FakeListWallpaperState_8 extends _i1.SmartFake
         );
 }
 
-class _FakeGetCategorizedWallpaper_9 extends _i1.SmartFake
+class _FakeGetCategorizedWallpaper_10 extends _i1.SmartFake
     implements _i5.GetCategorizedWallpaper {
-  _FakeGetCategorizedWallpaper_9(
+  _FakeGetCategorizedWallpaper_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -136,9 +147,9 @@ class _FakeGetCategorizedWallpaper_9 extends _i1.SmartFake
         );
 }
 
-class _FakeCategorizedWallpaperState_10 extends _i1.SmartFake
+class _FakeCategorizedWallpaperState_11 extends _i1.SmartFake
     implements _i7.CategorizedWallpaperState {
-  _FakeCategorizedWallpaperState_10(
+  _FakeCategorizedWallpaperState_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -147,9 +158,9 @@ class _FakeCategorizedWallpaperState_10 extends _i1.SmartFake
         );
 }
 
-class _FakeDetailWallpaperState_11 extends _i1.SmartFake
+class _FakeDetailWallpaperState_12 extends _i1.SmartFake
     implements _i8.DetailWallpaperState {
-  _FakeDetailWallpaperState_11(
+  _FakeDetailWallpaperState_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -158,9 +169,9 @@ class _FakeDetailWallpaperState_11 extends _i1.SmartFake
         );
 }
 
-class _FakeSearchWallpaperState_12 extends _i1.SmartFake
+class _FakeSearchWallpaperState_13 extends _i1.SmartFake
     implements _i9.SearchWallpaperState {
-  _FakeSearchWallpaperState_12(
+  _FakeSearchWallpaperState_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1335,6 +1346,200 @@ class MockDio extends _i1.Mock implements _i4.Dio {
       ) as _i10.Future<_i4.Response<T>>);
 }
 
+/// A class which mocks [GetDetailWallpaper].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetDetailWallpaper extends _i1.Mock
+    implements _i5.GetDetailWallpaper {
+  @override
+  _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>> execute(int? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [id],
+        ),
+        returnValue: _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>.value(
+            _FakeEither_1<_i11.Failure, _i2.Wallpaper>(
+          this,
+          Invocation.method(
+            #execute,
+            [id],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>.value(
+                _FakeEither_1<_i11.Failure, _i2.Wallpaper>(
+          this,
+          Invocation.method(
+            #execute,
+            [id],
+          ),
+        )),
+      ) as _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>);
+}
+
+/// A class which mocks [GetListWallpaper].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetListWallpaper extends _i1.Mock implements _i5.GetListWallpaper {
+  @override
+  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> call() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+        ),
+        returnValue:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+          ),
+        )),
+      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+}
+
+/// A class which mocks [GetSearchWallpaper].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetSearchWallpaper extends _i1.Mock
+    implements _i5.GetSearchWallpaper {
+  @override
+  _i5.WallpaperRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeWallpaperRepository_7(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeWallpaperRepository_7(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i5.WallpaperRepository);
+  @override
+  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> call(
+          String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [query],
+        ),
+        returnValue:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #call,
+            [query],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #call,
+            [query],
+          ),
+        )),
+      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+  @override
+  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> loadMore(
+    String? query,
+    int? page,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadMore,
+          [
+            query,
+            page,
+          ],
+        ),
+        returnValue:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #loadMore,
+            [
+              query,
+              page,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #loadMore,
+            [
+              query,
+              page,
+            ],
+          ),
+        )),
+      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+}
+
+/// A class which mocks [GetCategorizedWallpaper].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetCategorizedWallpaper extends _i1.Mock
+    implements _i5.GetCategorizedWallpaper {
+  @override
+  _i5.WallpaperRepository get categorizedRepo => (super.noSuchMethod(
+        Invocation.getter(#categorizedRepo),
+        returnValue: _FakeWallpaperRepository_7(
+          this,
+          Invocation.getter(#categorizedRepo),
+        ),
+        returnValueForMissingStub: _FakeWallpaperRepository_7(
+          this,
+          Invocation.getter(#categorizedRepo),
+        ),
+      ) as _i5.WallpaperRepository);
+  @override
+  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> call(
+          String? category) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [category],
+        ),
+        returnValue:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #call,
+            [category],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+          this,
+          Invocation.method(
+            #call,
+            [category],
+          ),
+        )),
+      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+}
+
 /// A class which mocks [ListWallpaperCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1343,11 +1548,11 @@ class MockListWallpaperCubit extends _i1.Mock
   @override
   _i5.GetListWallpaper get listWallpaperRepo => (super.noSuchMethod(
         Invocation.getter(#listWallpaperRepo),
-        returnValue: _FakeGetListWallpaper_7(
+        returnValue: _FakeGetListWallpaper_8(
           this,
           Invocation.getter(#listWallpaperRepo),
         ),
-        returnValueForMissingStub: _FakeGetListWallpaper_7(
+        returnValueForMissingStub: _FakeGetListWallpaper_8(
           this,
           Invocation.getter(#listWallpaperRepo),
         ),
@@ -1355,11 +1560,11 @@ class MockListWallpaperCubit extends _i1.Mock
   @override
   _i6.ListWallpaperState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeListWallpaperState_8(
+        returnValue: _FakeListWallpaperState_9(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeListWallpaperState_8(
+        returnValueForMissingStub: _FakeListWallpaperState_9(
           this,
           Invocation.getter(#state),
         ),
@@ -1450,11 +1655,11 @@ class MockCategorizedWallpaperCubit extends _i1.Mock
   @override
   _i5.GetCategorizedWallpaper get categorizedRepo => (super.noSuchMethod(
         Invocation.getter(#categorizedRepo),
-        returnValue: _FakeGetCategorizedWallpaper_9(
+        returnValue: _FakeGetCategorizedWallpaper_10(
           this,
           Invocation.getter(#categorizedRepo),
         ),
-        returnValueForMissingStub: _FakeGetCategorizedWallpaper_9(
+        returnValueForMissingStub: _FakeGetCategorizedWallpaper_10(
           this,
           Invocation.getter(#categorizedRepo),
         ),
@@ -1462,11 +1667,11 @@ class MockCategorizedWallpaperCubit extends _i1.Mock
   @override
   _i7.CategorizedWallpaperState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeCategorizedWallpaperState_10(
+        returnValue: _FakeCategorizedWallpaperState_11(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeCategorizedWallpaperState_10(
+        returnValueForMissingStub: _FakeCategorizedWallpaperState_11(
           this,
           Invocation.getter(#state),
         ),
@@ -1558,11 +1763,11 @@ class MockDetailWallpaperCubit extends _i1.Mock
   @override
   _i8.DetailWallpaperState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeDetailWallpaperState_11(
+        returnValue: _FakeDetailWallpaperState_12(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeDetailWallpaperState_11(
+        returnValueForMissingStub: _FakeDetailWallpaperState_12(
           this,
           Invocation.getter(#state),
         ),
@@ -1668,11 +1873,11 @@ class MockSearchWallpaperCubit extends _i1.Mock
   @override
   _i9.SearchWallpaperState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeSearchWallpaperState_12(
+        returnValue: _FakeSearchWallpaperState_13(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeSearchWallpaperState_12(
+        returnValueForMissingStub: _FakeSearchWallpaperState_13(
           this,
           Invocation.getter(#state),
         ),

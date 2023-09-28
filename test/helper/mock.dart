@@ -12,6 +12,12 @@ export 'mock.mocks.dart';
   MockSpec<WallpaperRepository>(),
   MockSpec<Dio>(),
 
+  // Domain/usecase
+  MockSpec<GetDetailWallpaper>(),
+  MockSpec<GetListWallpaper>(),
+  MockSpec<GetSearchWallpaper>(),
+  MockSpec<GetCategorizedWallpaper>(),
+
   // Cubit
   MockSpec<ListWallpaperCubit>(),
   MockSpec<CategorizedWallpaperCubit>(),
