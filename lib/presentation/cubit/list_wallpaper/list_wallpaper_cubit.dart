@@ -11,9 +11,7 @@ class ListWallpaperCubit extends Cubit<ListWallpaperState> {
   final GetListWallpaper listWallpaperRepo;
 
   ListWallpaperCubit(this.listWallpaperRepo)
-      : super(const ListWallpaperState.initial()) {
-    getWallpaper();
-  }
+      : super(const ListWallpaperState.initial());
 
   void getWallpaper() async {
     emit(const ListWallpaperState.loading());

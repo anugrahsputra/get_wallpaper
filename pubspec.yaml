@@ -49,13 +49,14 @@ dependencies:
   shimmer: ^3.0.0
 
 dev_dependencies:
+  bloc_test: ^9.1.4
   build_runner: ^2.4.6
-  mockito: ^5.4.2
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
   freezed: ^2.4.1
   json_serializable: ^6.7.1
+  mockito: ^5.4.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
