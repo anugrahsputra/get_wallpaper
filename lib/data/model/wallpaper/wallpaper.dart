@@ -7,6 +7,7 @@ part 'wallpaper.g.dart';
 
 @freezed
 class Wallpaper with _$Wallpaper {
+  @JsonSerializable(explicitToJson: true)
   const factory Wallpaper({
     required int id,
     required int width,
@@ -16,7 +17,7 @@ class Wallpaper with _$Wallpaper {
     @JsonKey(name: 'photographer_url') required String photographerUrl,
     @JsonKey(name: 'photographer_id') required int photographerId,
     @JsonKey(name: 'avg_color') required String avgColor,
-    required ImageSource src,
+    @JsonKey(name: 'src') required ImageSource src,
     required bool liked,
     required String alt,
   }) = _Wallpaper;
