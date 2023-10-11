@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,16 +42,6 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
     });
   }
 
-  void searchQuery(String query) {
-    if (_searchCtrl.text.isNotEmpty) {
-      Future.delayed(const Duration(milliseconds: 500), () {
-        context.read<SearchWallpaperCubit>().searchWallpaper(query);
-      });
-    } else {
-      clearSearch();
-    }
-  }
-
   void clearSearch() {
     setState(() {
       _searchCtrl.clear();
@@ -71,62 +62,24 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    clearSearch();
-                    context.pop();
-                  },
-                  icon: const Icon(Icons.arrow_back),
-                ),
-                _BuildSearchBar(
-                  controller: _searchCtrl,
-                  focusNode: _searchFocus,
-                  onChanged: (value) {
-                    setState(() {
-                      currentQuery = value;
-                    });
-                    onSearchQuery(value);
-                  },
-                ),
-                if (_searchCtrl.text.isNotEmpty)
-                  IconButton(
-                    onPressed: () => clearSearch(),
-                    icon: const Icon(Icons.clear),
-                  ),
-              ],
-            ),
+          SearchBarView(
+            onChanged: (value) {
+              setState(() {
+                currentQuery = value;
+              });
+              onSearchQuery(value);
+            },
           ),
           SizedBox(height: 20.h),
-          Expanded(
-            child: BlocBuilder<SearchWallpaperCubit, SearchWallpaperState>(
-                builder: (context, state) {
-              return state.when(
-                initial: () => Lottie.asset(
-                  'assets/search_initials.json',
-                  repeat: false,
-                ),
-                loading: () => const DefaultShimmerSearch(),
-                loaded: (result) => _BuildGridView(
-                    onPressed: () {
-                      setState(() {
-                        isLoadMore = true;
-                      });
-                      context
-                          .read<SearchWallpaperCubit>()
-                          .loadMore(currentQuery);
-                    },
-                    result: result),
-                error: (message) => Center(
-                  child: Text(message),
-                ),
-              );
-            }),
-          )
+          ResultView(
+            onPressed: () {
+              setState(() {
+                isLoadMore = true;
+              });
+              context.read<SearchWallpaperCubit>().loadMore(currentQuery);
+              log('resultview: $currentQuery');
+            },
+          ),
         ],
       ),
     );

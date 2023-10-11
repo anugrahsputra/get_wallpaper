@@ -51,7 +51,7 @@ app.*.map.json
 /lib/utils/env.dart
 
 # lcov
-/coverage
+/coverage/
 
 # keystore
 upload-keystore.jks

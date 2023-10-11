@@ -35,6 +35,12 @@ class _HomepageState extends State<Homepage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(

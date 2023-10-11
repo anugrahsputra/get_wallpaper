@@ -14,14 +14,10 @@ class DetailWallpaperCubit extends Cubit<DetailWallpaperState> {
       : super(const DetailWallpaperState.initial());
 
   void getWallpaperDetail(int id) async {
-    try {
-      emit(const DetailWallpaperState.loading());
-      final wallpaper = await _repository.execute(id);
-      wallpaper.fold(
-          (failure) => emit(DetailWallpaperState.error(failure.message)),
-          (success) => emit(DetailWallpaperState.loaded(success)));
-    } catch (e) {
-      emit(DetailWallpaperState.error(e.toString()));
-    }
+    emit(const DetailWallpaperState.loading());
+    final wallpaper = await _repository.execute(id);
+    wallpaper.fold(
+        (failure) => emit(DetailWallpaperState.error(failure.message)),
+        (success) => emit(DetailWallpaperState.loaded(success)));
   }
 }

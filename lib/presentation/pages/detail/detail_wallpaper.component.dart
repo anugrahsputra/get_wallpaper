@@ -16,17 +16,128 @@ class _WallpaperImage extends StatelessWidget {
   }
 }
 
-class _WallpaperDetails extends StatelessWidget {
-  const _WallpaperDetails(
-      {Key? key,
-      required this.alt,
-      required this.photographerName,
-      required this.onPressed})
-      : super(key: key);
+class _WallpaperDetails extends StatefulWidget {
+  const _WallpaperDetails({
+    Key? key,
+    required this.wallpaper,
+  }) : super(key: key);
 
-  final String? alt;
-  final String? photographerName;
-  final VoidCallback onPressed;
+  final Wallpaper wallpaper;
+
+  @override
+  State<_WallpaperDetails> createState() => _WallpaperDetailsState();
+}
+
+class _WallpaperDetailsState extends State<_WallpaperDetails> {
+  late bool goToHome;
+  String _platformVersion = 'Unknown';
+  String _wallpaperUrlHome = 'Unknown';
+  String _wallpaperUrlLock = 'Unknown';
+  String _wallpaperUrlBoth = 'Unknown';
+
+  @override
+  void initState() {
+    super.initState();
+    goToHome = false;
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    String platformVersion;
+
+    try {
+      platformVersion =
+          await AsyncWallpaper.platformVersion ?? 'Unknown platform version';
+    } on PlatformException {
+      platformVersion = 'Failed to get platform version.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _platformVersion = platformVersion;
+    });
+  }
+
+  Future<void> setWallpaperHome(String url) async {
+    setState(() {
+      _wallpaperUrlHome = 'Loading';
+    });
+    String result;
+
+    try {
+      result = await AsyncWallpaper.setWallpaper(
+        url: url,
+        wallpaperLocation: AsyncWallpaper.HOME_SCREEN,
+        goToHome: goToHome,
+        toastDetails: ToastDetails.success(),
+        errorToastDetails: ToastDetails.error(),
+      )
+          ? 'Wallpaper set'
+          : 'Failed to get wallpaper.';
+    } on PlatformException {
+      result = 'Failed to get wallpaper.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _wallpaperUrlHome = result;
+    });
+  }
+
+  Future<void> setWallpaperLock(String url) async {
+    setState(() {
+      _wallpaperUrlLock = 'Loading';
+    });
+    String result;
+
+    try {
+      result = await AsyncWallpaper.setWallpaper(
+        url: url,
+        wallpaperLocation: AsyncWallpaper.LOCK_SCREEN,
+        goToHome: goToHome,
+        toastDetails: ToastDetails.success(),
+        errorToastDetails: ToastDetails.error(),
+      )
+          ? 'Wallpaper set'
+          : 'Failed to get wallpaper.';
+    } on PlatformException {
+      result = 'Failed to get wallpaper.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _wallpaperUrlLock = result;
+    });
+  }
+
+  Future<void> setWallpaperBoth(String url) async {
+    setState(() {
+      _wallpaperUrlBoth = 'Loading';
+    });
+    String result;
+
+    try {
+      result = await AsyncWallpaper.setWallpaper(
+        url: url,
+        wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
+        goToHome: goToHome,
+        toastDetails: ToastDetails.success(),
+        errorToastDetails: ToastDetails.error(),
+      )
+          ? 'Wallpaper set'
+          : 'Failed to get wallpaper.';
+    } on PlatformException {
+      result = 'Failed to get wallpaper.';
+    }
+    if (!mounted) return;
+
+    setState(() {
+      _wallpaperUrlBoth = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +153,7 @@ class _WallpaperDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            alt!,
+            widget.wallpaper.alt,
             style: GoogleFonts.inter(
               color: Colors.white,
               fontSize: 25,
@@ -51,7 +162,7 @@ class _WallpaperDetails extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Photo by ${photographerName!}',
+            'Photo by ${widget.wallpaper.photographer}',
             style: GoogleFonts.inter(
               color: Colors.white,
               fontSize: 20,
@@ -67,7 +178,65 @@ class _WallpaperDetails extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              onPressed: onPressed,
+              onPressed: () {
+                DefaultDialog(context).dialog(
+                  context,
+                  wallpaper: widget.wallpaper,
+                  text: 'Set Wallpaper for $_platformVersion',
+                  children: [
+                    SetAsButtonWidget(
+                      child: _wallpaperUrlHome == 'Loading'
+                          ? const CircularProgressIndicator.adaptive()
+                          : Text(
+                              'Home Screen',
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                      onPressed: () {
+                        setWallpaperHome(widget.wallpaper.src.portrait);
+                        context.pop();
+                      },
+                    ),
+                    SizedBox(height: 5.h),
+                    SetAsButtonWidget(
+                      child: _wallpaperUrlLock == 'Loading'
+                          ? const CircularProgressIndicator.adaptive()
+                          : Text(
+                              'Lock Screen',
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                      onPressed: () {
+                        setWallpaperLock(widget.wallpaper.src.portrait);
+                        context.pop();
+                      },
+                    ),
+                    SizedBox(height: 5.h),
+                    SetAsButtonWidget(
+                      child: _wallpaperUrlBoth == 'Loading'
+                          ? const CircularProgressIndicator.adaptive()
+                          : Text(
+                              'Both',
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                      onPressed: () {
+                        setWallpaperBoth(widget.wallpaper.src.portrait);
+                        context.pop();
+                      },
+                    ),
+                  ],
+                );
+              },
               child: Text(
                 'Set As Wallpaper',
                 style: GoogleFonts.inter(
