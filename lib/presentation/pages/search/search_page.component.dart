@@ -65,7 +65,7 @@ class _BuildGridView extends StatelessWidget {
           final wallpaper = result[index];
           return GestureDetector(
             onTap: () {
-              context.push('/detail/${wallpaper.id}');
+              context.go('/detail/${wallpaper.id}');
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),

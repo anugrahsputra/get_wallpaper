@@ -1,12 +1,13 @@
 import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/core.dart';
 import '../../../data/data.dart';
+import '../../../injection.dart';
 import '../../presentation.dart';
 
 part 'detail_wallpaper.component.dart';

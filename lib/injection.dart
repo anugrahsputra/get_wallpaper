@@ -20,6 +20,9 @@ Future<void> init() async {
     ),
   );
 
+  locator.registerLazySingleton<WallpaperHandler>(
+      () => WallpaperHandlerImpl(false));
+
   locator.registerLazySingleton<ApiService>(() => ApiServiceImpl(locator()));
 
   /* =============> Cubit <============= */

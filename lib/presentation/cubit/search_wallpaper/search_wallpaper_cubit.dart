@@ -25,7 +25,6 @@ class SearchWallpaperCubit extends Cubit<SearchWallpaperState> {
   void loadMore(String query) async {
     emit(const SearchWallpaperState.loading());
     final wallpaper = await _repository.loadMore(query, currentPage);
-    currentPage++;
     final nextWallpaper = state.maybeWhen(
       loaded: (wallpapers) => wallpapers,
       orElse: () => [],
@@ -33,6 +32,7 @@ class SearchWallpaperCubit extends Cubit<SearchWallpaperState> {
     wallpaper.fold(
       (failure) => emit(SearchWallpaperState.error(failure.message)),
       (wallpaperList) {
+        currentPage++;
         emit(SearchWallpaperState.loaded([...nextWallpaper, ...wallpaperList]));
       },
     );

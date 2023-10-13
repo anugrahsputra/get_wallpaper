@@ -158,7 +158,7 @@ class _ListCategorizedWallpaper extends StatelessWidget {
         final wallpapers = wallpaper[index];
         return GestureDetector(
           onTap: () {
-            context.push('/detail/${wallpapers.id}');
+            context.go('/detail/${wallpapers.id}');
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -194,7 +194,7 @@ class _ListCuratedWallpaper extends StatelessWidget {
         final wallpapers = wallpaper[index];
         return GestureDetector(
           onTap: () {
-            context.push('/detail/${wallpapers.id}');
+            context.go('/detail/${wallpapers.id}');
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),

@@ -30,6 +30,7 @@ class _WallpaperDetails extends StatefulWidget {
 
 class _WallpaperDetailsState extends State<_WallpaperDetails> {
   late bool goToHome;
+  late WallpaperHandler _wallpaperHandler;
   String _platformVersion = 'Unknown';
   String _wallpaperUrlHome = 'Unknown';
   String _wallpaperUrlLock = 'Unknown';
@@ -38,19 +39,12 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
   @override
   void initState() {
     super.initState();
-    goToHome = false;
+    _wallpaperHandler = locator<WallpaperHandler>();
     initPlatformState();
   }
 
   Future<void> initPlatformState() async {
-    String platformVersion;
-
-    try {
-      platformVersion =
-          await AsyncWallpaper.platformVersion ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
+    String platformVersion = await _wallpaperHandler.getPlatformVersion();
 
     if (!mounted) return;
 
@@ -63,21 +57,9 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
     setState(() {
       _wallpaperUrlHome = 'Loading';
     });
-    String result;
 
-    try {
-      result = await AsyncWallpaper.setWallpaper(
-        url: url,
-        wallpaperLocation: AsyncWallpaper.HOME_SCREEN,
-        goToHome: goToHome,
-        toastDetails: ToastDetails.success(),
-        errorToastDetails: ToastDetails.error(),
-      )
-          ? 'Wallpaper set'
-          : 'Failed to get wallpaper.';
-    } on PlatformException {
-      result = 'Failed to get wallpaper.';
-    }
+    String result =
+        await _wallpaperHandler.setAsWallpaper(url, AsyncWallpaper.HOME_SCREEN);
 
     if (!mounted) return;
 
@@ -90,21 +72,8 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
     setState(() {
       _wallpaperUrlLock = 'Loading';
     });
-    String result;
-
-    try {
-      result = await AsyncWallpaper.setWallpaper(
-        url: url,
-        wallpaperLocation: AsyncWallpaper.LOCK_SCREEN,
-        goToHome: goToHome,
-        toastDetails: ToastDetails.success(),
-        errorToastDetails: ToastDetails.error(),
-      )
-          ? 'Wallpaper set'
-          : 'Failed to get wallpaper.';
-    } on PlatformException {
-      result = 'Failed to get wallpaper.';
-    }
+    String result =
+        await _wallpaperHandler.setAsWallpaper(url, AsyncWallpaper.LOCK_SCREEN);
 
     if (!mounted) return;
 
@@ -117,21 +86,9 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
     setState(() {
       _wallpaperUrlBoth = 'Loading';
     });
-    String result;
+    String result = await _wallpaperHandler.setAsWallpaper(
+        url, AsyncWallpaper.BOTH_SCREENS);
 
-    try {
-      result = await AsyncWallpaper.setWallpaper(
-        url: url,
-        wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
-        goToHome: goToHome,
-        toastDetails: ToastDetails.success(),
-        errorToastDetails: ToastDetails.error(),
-      )
-          ? 'Wallpaper set'
-          : 'Failed to get wallpaper.';
-    } on PlatformException {
-      result = 'Failed to get wallpaper.';
-    }
     if (!mounted) return;
 
     setState(() {

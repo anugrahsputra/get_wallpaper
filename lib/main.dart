@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_wallpaper/bloc_observer.dart';
 import 'package:get_wallpaper/core/utils/routes.dart';
-import 'package:get_wallpaper/injection.dart' as di;
+import 'package:get_wallpaper/injection.dart';
 import 'package:get_wallpaper/presentation/presentation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = const AppBlocObserver();
-  await di.init();
+  await init();
   runApp(const MyApp());
 }
 
@@ -21,16 +21,16 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => di.locator<ListWallpaperCubit>(),
+          create: (context) => locator<ListWallpaperCubit>(),
         ),
         BlocProvider(
-          create: (context) => di.locator<DetailWallpaperCubit>(),
+          create: (context) => locator<DetailWallpaperCubit>(),
         ),
         BlocProvider(
-          create: (context) => di.locator<SearchWallpaperCubit>(),
+          create: (context) => locator<SearchWallpaperCubit>(),
         ),
         BlocProvider(
-          create: (context) => di.locator<CategorizedWallpaperCubit>(),
+          create: (context) => locator<CategorizedWallpaperCubit>(),
         ),
       ],
       child: ScreenUtilInit(
