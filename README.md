@@ -1,6 +1,7 @@
 Get Wallpaper app is a simple app that allows you to download wallpapers from the internet and set them as your wallpaper.
 
 [![Dart](https://github.com/anugrahsputra/get_wallpaper/actions/workflows/dart.yml/badge.svg)](https://github.com/anugrahsputra/get_wallpaper/actions/workflows/dart.yml)
+[![Codemagic build status](https://api.codemagic.io/apps/652973b20b29ad11c55f65b1/652973b20b29ad11c55f65b0/status_badge.svg)](https://codemagic.io/apps/652973b20b29ad11c55f65b1/652973b20b29ad11c55f65b0/latest_build)
 
 # Getting Started
 Get all the dependencies by running:
