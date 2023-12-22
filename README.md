@@ -1,11 +1,8 @@
 # Get Wallpaper
 
-<<<<<<< HEAD
 Get Wallpaper is a mobile application built using Flutter. It allows users to browse, download, and set wallpapers from the internet. The application fetches wallpaper data from an external API and displays it in a user-friendly interface.
-=======
 [![Dart](https://github.com/anugrahsputra/get_wallpaper/actions/workflows/dart.yml/badge.svg)](https://github.com/anugrahsputra/get_wallpaper/actions/workflows/dart.yml)
 [![Codemagic build status](https://api.codemagic.io/apps/652973b20b29ad11c55f65b1/652973b20b29ad11c55f65b0/status_badge.svg)](https://codemagic.io/apps/652973b20b29ad11c55f65b1/652973b20b29ad11c55f65b0/latest_build)
->>>>>>> 3a0a77899a2d6b794f9063ab1b62ab6b1acfafc4
 
 ## Features
 
