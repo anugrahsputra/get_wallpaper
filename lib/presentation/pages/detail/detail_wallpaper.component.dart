@@ -18,9 +18,9 @@ class _WallpaperImage extends StatelessWidget {
 
 class _WallpaperDetails extends StatefulWidget {
   const _WallpaperDetails({
-    Key? key,
+    super.key,
     required this.wallpaper,
-  }) : super(key: key);
+  });
 
   final Wallpaper wallpaper;
 

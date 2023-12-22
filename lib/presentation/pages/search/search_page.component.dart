@@ -45,7 +45,7 @@ class _BuildGridView extends StatelessWidget {
     required this.result,
   });
 
-  final VoidCallback? onPressed;
+  final void Function()? onPressed;
   final List<Wallpaper> result;
 
   @override

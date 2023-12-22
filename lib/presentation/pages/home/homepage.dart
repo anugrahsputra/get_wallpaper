@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/core.dart';
 import '../../../data/categories_data.dart';
 import '../../../data/data.dart';
 import '../../presentation.dart';
@@ -84,37 +85,7 @@ class _HomepageState extends State<Homepage> {
                       fontSize: 20.sp, fontWeight: FontWeight.w600),
                 ),
               ),
-              Flexible(
-                child: userTapped
-                    ? BlocBuilder<CategorizedWallpaperCubit,
-                        CategorizedWallpaperState>(
-                        builder: (context, state) {
-                          return state.when(
-                            initial: () => const DefaultShimmerHome(),
-                            loading: () => const DefaultShimmerHome(),
-                            loaded: (wallpapers) =>
-                                _ListCategorizedWallpaper(wallpapers),
-                            error: (message) => Center(
-                              child: Text(message),
-                            ),
-                          );
-                        },
-                      )
-                    : BlocBuilder<ListWallpaperCubit, ListWallpaperState>(
-                        builder: (context, state) {
-                          return state.when(
-                            initial: () => const DefaultShimmerHome(),
-                            loading: () => const DefaultShimmerHome(),
-                            loaded: (wallpapers) => _ListCuratedWallpaper(
-                              wallpapers,
-                            ),
-                            error: (message) => Center(
-                              child: Text(message),
-                            ),
-                          );
-                        },
-                      ),
-              ),
+              _WallpaperView(userTapped: userTapped),
             ],
           ),
         ),

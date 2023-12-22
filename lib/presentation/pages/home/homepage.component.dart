@@ -1,5 +1,46 @@
 part of 'homepage.dart';
 
+class _WallpaperView extends StatelessWidget {
+  const _WallpaperView({
+    required this.userTapped,
+  });
+
+  final bool userTapped;
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: userTapped
+          ? BlocBuilder<CategorizedWallpaperCubit, CategorizedWallpaperState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const DefaultShimmerHome(),
+                  loading: () => const DefaultShimmerHome(),
+                  loaded: (wallpapers) => _ListCategorizedWallpaper(wallpapers),
+                  error: (message) => Center(
+                    child: Text(message),
+                  ),
+                );
+              },
+            )
+          : BlocBuilder<ListWallpaperCubit, ListWallpaperState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const DefaultShimmerHome(),
+                  loading: () => const DefaultShimmerHome(),
+                  loaded: (wallpapers) => _ListCuratedWallpaper(
+                    wallpapers,
+                  ),
+                  error: (message) => Center(
+                    child: Text(message),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}
+
 class _Header extends StatelessWidget {
   const _Header();
 
@@ -196,121 +237,43 @@ class _ListCuratedWallpaper extends StatelessWidget {
           onTap: () {
             context.go('/detail/${wallpapers.id}');
           },
-          child: ClipRRect(
+          child: WallpaperCard(wallpapers: wallpapers),
+        );
+      },
+    );
+  }
+}
+
+class WallpaperCard extends StatelessWidget {
+  WallpaperCard({
+    super.key,
+    required this.wallpapers,
+  });
+
+  final GlobalKey _imageKey = GlobalKey();
+  final Wallpaper wallpapers;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: wallpapers,
+      child: Flow(
+        delegate: ParallaxFlowDelegate(
+          scrollable: Scrollable.of(context),
+          listItemContext: context,
+          backgroundImageKey: _imageKey,
+        ),
+        children: [
+          ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
               wallpapers.src.portrait,
               fit: BoxFit.cover,
+              key: _imageKey,
             ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
-
-/* unused
-class _BuildListWallpaper extends StatelessWidget {
-  const _BuildListWallpaper({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CategorizedWallpaperCubit, CategorizedWallpaperState>(
-      builder: (context, state) {
-        return state.when(
-          initial: () => const DefaultShimmerHome(),
-          loading: () => const DefaultShimmerHome(),
-          loaded: (wallpapers) {
-            return GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 2 / 3,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              itemCount: wallpapers.length,
-              itemBuilder: (context, index) {
-                final wallpaper = wallpapers[index];
-                return GestureDetector(
-                  onTap: () {
-                    context.push('/detail/${wallpaper.id}');
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      wallpaper.src.portrait,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-          error: (message) => Center(
-            child: Text(message),
-          ),
-        );
-      },
-    );
-  }
-}
-*/
-
-
-/* unused
-class _BuildCuratedWallpaper extends StatefulWidget {
-  const _BuildCuratedWallpaper({Key? key}) : super(key: key);
-
-  @override
-  State<_BuildCuratedWallpaper> createState() => __BuildCuratedWallpaperState();
-}
-
-class __BuildCuratedWallpaperState extends State<_BuildCuratedWallpaper> {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ListWallpaperCubit, ListWallpaperState>(
-      builder: (context, state) {
-        return state.when(
-          initial: () => const DefaultShimmerHome(),
-          loading: () => const DefaultShimmerHome(),
-          loaded: (wallpapers) {
-            return GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 2 / 3,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              itemCount: wallpapers.length,
-              itemBuilder: (context, index) {
-                final wallpaper = wallpapers[index];
-                return GestureDetector(
-                  onTap: () {
-                    context.push('/detail/${wallpaper.id}');
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      wallpaper.src.portrait,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-          error: (message) => Center(
-            child: Text(message),
-          ),
-        );
-      },
-    );
-  }
-}
-*/

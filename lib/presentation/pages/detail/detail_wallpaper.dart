@@ -21,9 +21,16 @@ class DetailWallpaper extends StatefulWidget {
 }
 
 class _DetailWallpaperState extends State<DetailWallpaper> {
+  Color dominantColor = Colors.white;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<DetailWallpaperCubit>().getWallpaperDetail(widget.id!);
+  }
+
   @override
   Widget build(BuildContext context) {
-    context.read<DetailWallpaperCubit>().getWallpaperDetail(widget.id!);
     return Scaffold(
       body: BlocBuilder<DetailWallpaperCubit, DetailWallpaperState>(
         builder: (context, state) {
@@ -35,25 +42,28 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
               child: CircularProgressIndicator(),
             ),
             loaded: (wallpaper) {
-              return Stack(
-                children: [
-                  _WallpaperImage(
-                    src: wallpaper.src.portrait,
-                  ),
-                  const Positioned(
-                    top: 40,
-                    left: 20,
-                    child: BackButtonWidget(),
-                  ),
-                  Positioned(
-                    bottom: 10,
-                    left: 20,
-                    right: 20,
-                    child: _WallpaperDetails(
-                      wallpaper: wallpaper,
+              return Hero(
+                tag: wallpaper,
+                child: Stack(
+                  children: [
+                    _WallpaperImage(
+                      src: wallpaper.src.portrait,
                     ),
-                  ),
-                ],
+                    Positioned(
+                      top: 40,
+                      left: 20,
+                      child: BackButtonWidget(color: dominantColor),
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      left: 20,
+                      right: 20,
+                      child: _WallpaperDetails(
+                        wallpaper: wallpaper,
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
             error: (message) => Center(

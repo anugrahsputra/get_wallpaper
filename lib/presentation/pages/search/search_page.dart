@@ -67,7 +67,7 @@ class _SearchWallpaperState extends State<SearchWallpaper> {
               setState(() {
                 currentQuery = value;
               });
-              onSearchQuery(value);
+              onSearchQuery(currentQuery);
             },
           ),
           SizedBox(height: 20.h),
