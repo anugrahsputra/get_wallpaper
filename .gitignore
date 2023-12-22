@@ -54,4 +54,4 @@ app.*.map.json
 /coverage/
 
 # keystore
-upload-keystore.jks
+keystore.jks
