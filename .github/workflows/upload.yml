@@ -25,6 +25,9 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Print length of base64 string
+        run: echo "${{ secrets.KEYSTORE_FILE }}" | wc -c
+
       - name: Decode keystore file
         run: echo -n "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > ./keystore.jks
         working-directory: android
