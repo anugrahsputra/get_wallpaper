@@ -26,7 +26,7 @@ jobs:
           cache: true
 
       - name: Decode keystore file
-        run: echo -n "${{ secrets.KEYSTORE_FILE }}" | base64 -di > ./keystore.jks
+        run: echo -n "${{ secrets.KEYSTORE_FILE }}" | openssl base64 -d -A > ./keystore.jks
         working-directory: android
       
       - name: Create key.properties
