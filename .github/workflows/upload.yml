@@ -25,7 +25,18 @@ jobs:
 
       - run: dart run build_runner build --delete-conflicting-outputs
 
-      - run: flutter build apk --release
+      - name: Decode keystore file
+        run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > ./upload-keystore.jks
+
+      - name: Create key.properties
+        run: |
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> key.properties
+          echo "storeFile=./upload-keystore.jks" >> key.properties
+        working-directory: android
+
+      - run: flutter build apk --release --split-per-abi
 
       - name: Create Release
         id: create_release
