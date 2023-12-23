@@ -27,7 +27,7 @@ jobs:
 
       - name: Decode keystore file
         run: echo -n "${{ secrets.KEYSTORE_FILE }}" | openssl base64 -d -A > ./keystore.jks
-        working-directory: android
+        working-directory: android/app
       
       - name: Create key.properties
         run: |
