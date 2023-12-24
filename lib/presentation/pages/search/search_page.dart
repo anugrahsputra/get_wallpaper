@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_wallpaper/core/core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
@@ -19,68 +18,74 @@ class SearchWallpaper extends StatefulWidget {
   State<SearchWallpaper> createState() => _SearchWallpaperState();
 }
 
-class _SearchWallpaperState extends State<SearchWallpaper> {
-  final TextEditingController _searchCtrl = TextEditingController();
-  final FocusNode _searchFocus = FocusNode();
+class _SearchWallpaperState extends State<SearchWallpaper> with Submitted {
   String currentQuery = '';
-  bool isLoadMore = false;
-  Timer? debounce;
-
-  @override
-  void initState() {
-    super.initState();
-    _searchCtrl.addListener(() {
-      setState(() {});
-    });
-    clearSearch();
-  }
-
-  void onSearchQuery(String query) {
-    if (debounce?.isActive ?? false) debounce!.cancel();
-    debounce = Timer(const Duration(milliseconds: 500), () {
-      context.read<SearchWallpaperCubit>().searchWallpaper(query);
-    });
-  }
-
-  void clearSearch() {
-    setState(() {
-      _searchCtrl.clear();
-      context.read<SearchWallpaperCubit>().clearSearch();
-    });
-  }
-
-  @override
-  void dispose() {
-    debounce?.cancel();
-    _searchFocus.dispose();
-    _searchCtrl.dispose();
-    super.dispose();
-  }
+  int currentPage = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SearchBarView(
-            onChanged: (value) {
-              setState(() {
-                currentQuery = value;
-              });
-              onSearchQuery(currentQuery);
-            },
-          ),
-          SizedBox(height: 20.h),
-          ResultView(
-            onPressed: () {
-              setState(() {
-                isLoadMore = true;
-              });
-              context.read<SearchWallpaperCubit>().loadMore(currentQuery);
-              log('resultview: $currentQuery');
-            },
-          ),
-        ],
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              floating: true,
+              snap: true,
+              leading: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      currentQuery = '';
+                    });
+                    context.pop();
+                    clear(context);
+                  },
+                  icon: const Icon(Icons.arrow_back)),
+              title: SearchBar(
+                onSubmitted: (value) {
+                  setState(() {
+                    currentQuery = value;
+                  });
+                  submit(context, currentQuery, currentPage);
+                },
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: SearchResults(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    super.key,
+    this.onSubmitted,
+  });
+
+  final void Function(String)? onSubmitted;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      onSubmitted: onSubmitted,
+      decoration: InputDecoration(
+        hintText: 'Search wallpaper',
+        hintStyle: const TextStyle(
+          color: Colors.grey,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none,
+        ),
+        filled: true,
+        fillColor: Colors.grey[200],
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 0,
+        ),
       ),
     );
   }

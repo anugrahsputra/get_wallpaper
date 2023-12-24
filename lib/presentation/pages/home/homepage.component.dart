@@ -11,30 +11,32 @@ class _WallpaperView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: userTapped
-          ? BlocBuilder<CategorizedWallpaperCubit, CategorizedWallpaperState>(
+          ? BlocBuilder<WallpapersBloc, WallpapersState>(
               builder: (context, state) {
-                return state.when(
-                  initial: () => const DefaultShimmerHome(),
-                  loading: () => const DefaultShimmerHome(),
-                  loaded: (wallpapers) => _ListCategorizedWallpaper(wallpapers),
-                  error: (message) => Center(
-                    child: Text(message),
-                  ),
-                );
+                if (state is Loading) {
+                  return const DefaultShimmerHome();
+                } else if (state is CategoryLoaded) {
+                  final result = state.wallpaper;
+                  return _ListCategorizedWallpaper(result);
+                } else {
+                  return const Center(
+                    child: Text("Something went wrong"),
+                  );
+                }
               },
             )
-          : BlocBuilder<ListWallpaperCubit, ListWallpaperState>(
+          : BlocBuilder<WallpapersBloc, WallpapersState>(
               builder: (context, state) {
-                return state.when(
-                  initial: () => const DefaultShimmerHome(),
-                  loading: () => const DefaultShimmerHome(),
-                  loaded: (wallpapers) => _ListCuratedWallpaper(
-                    wallpapers,
-                  ),
-                  error: (message) => Center(
-                    child: Text(message),
-                  ),
-                );
+                if (state is Loading) {
+                  return const DefaultShimmerHome();
+                } else if (state is CuratedLoaded) {
+                  final result = state.wallpaper;
+                  return _ListCuratedWallpaper(result);
+                } else {
+                  return const Center(
+                    child: Text('Sometthing went wrong'),
+                  );
+                }
               },
             ),
     );

@@ -39,6 +39,64 @@ class _BuildSearchBar extends StatelessWidget {
   }
 }
 
+class SearchResults extends StatelessWidget {
+  const SearchResults({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () {
+            return Lottie.asset(
+              'assets/search_initials.json',
+              repeat: false,
+            );
+          },
+          loading: () {
+            return const DefaultShimmerSearch();
+          },
+          loaded: (wallpaper) {
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: const EdgeInsets.all(8),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 2 / 3,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemCount: wallpaper.length - 1,
+              itemBuilder: (context, index) {
+                final wallpapers = wallpaper[index];
+                return GestureDetector(
+                  onTap: () {
+                    context.go('/detail/${wallpapers.id}');
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      wallpapers.src.portrait,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          error: (message) {
+            return Center(
+              child: Text(message),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
 class _BuildGridView extends StatelessWidget {
   const _BuildGridView({
     required this.onPressed,

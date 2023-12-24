@@ -18,7 +18,7 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomepageState extends State<Homepage> with Wallpapers {
   bool userTapped = false;
   String selectedCategory = 'All';
   List<Map<String, String>> category = categoryData;
@@ -26,19 +26,17 @@ class _HomepageState extends State<Homepage> {
   Future<void> _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
-      _getData();
+      getCuratedWallpaper(context);
       setState(() {});
     }
-  }
-
-  _getData() {
-    context.read<ListWallpaperCubit>().getWallpaper();
   }
 
   @override
   void initState() {
     super.initState();
-    _getData();
+    Future.microtask(() {
+      getCuratedWallpaper(context);
+    });
   }
 
   @override
@@ -64,9 +62,7 @@ class _HomepageState extends State<Homepage> {
                           selectedCategory = cate['name']!;
                         });
                         final categoryName = cate['name']!;
-                        context
-                            .read<CategorizedWallpaperCubit>()
-                            .categoryWallpaper(categoryName);
+                        getCategoryWallpaper(context, categoryName);
                       },
                       child: _Category(
                         imageUrl: '${cate['image']}',
