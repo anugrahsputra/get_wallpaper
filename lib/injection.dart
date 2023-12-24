@@ -25,6 +25,12 @@ Future<void> init() async {
 
   locator.registerLazySingleton<ApiService>(() => ApiServiceImpl(locator()));
 
+  /* =============> Bloc <============= */
+  locator.registerFactory(() => SearchBloc(repository: locator()));
+  locator.registerFactory(() => WallpapersBloc(
+        getListRepo: locator<GetListWallpaper>(),
+        categorizedRepo: locator<GetCategorizedWallpaper>(),
+      ));
   /* =============> Cubit <============= */
   locator.registerFactory(() => CategorizedWallpaperCubit(locator()));
   locator.registerFactory(() => ListWallpaperCubit(locator()));

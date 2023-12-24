@@ -32,6 +32,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => locator<CategorizedWallpaperCubit>(),
         ),
+        BlocProvider(
+          create: (context) => locator<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => locator<WallpapersBloc>(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 640),

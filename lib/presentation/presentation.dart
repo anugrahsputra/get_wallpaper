@@ -1,3 +1,4 @@
+export 'bloc/blocs.dart';
 export 'cubit/categorized_wallpaper/categorized_wallpaper_cubit.dart';
 export 'cubit/detail_wallpaper/detail_wallpaper_cubit.dart';
 export 'cubit/list_wallpaper/list_wallpaper_cubit.dart';

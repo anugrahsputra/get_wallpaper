@@ -15,7 +15,7 @@ class SearchWallpaperCubit extends Cubit<SearchWallpaperState> {
 
   void searchWallpaper(String query) async {
     emit(const SearchWallpaperState.loading());
-    final wallpaper = await _repository.call(query);
+    final wallpaper = await _repository.call(query, currentPage);
     wallpaper.fold(
       (failure) => emit(SearchWallpaperState.error(failure.message)),
       (wallpaperList) => emit(SearchWallpaperState.loaded(wallpaperList)),
