@@ -6,7 +6,7 @@ import '../data.dart';
 abstract class ApiService {
   Future<List<Wallpaper>> listWallpaper();
   Future<Wallpaper> detailWallpaper(int id);
-  Future<List<Wallpaper>> searchWallpaper(String query, {int page = 1});
+  Future<List<Wallpaper>> searchWallpaper(String query, int page);
   Future<List<Wallpaper>> categorizedWallpaper(String category);
 }
 
@@ -62,7 +62,7 @@ class ApiServiceImpl implements ApiService {
   }
 
   @override
-  Future<List<Wallpaper>> searchWallpaper(String query, {int page = 1}) async {
+  Future<List<Wallpaper>> searchWallpaper(String query, int page) async {
     final response = await _dio.get(
       '$_baseUrl$_search$query&page=$page',
       options: Options(

@@ -49,9 +49,10 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
   }
 
   @override
-  Future<Either<Failure, List<Wallpaper>>> searchWallpaper(String query) async {
+  Future<Either<Failure, List<Wallpaper>>> searchWallpaper(
+      String query, int page) async {
     try {
-      final result = await apiService.searchWallpaper(query);
+      final result = await apiService.searchWallpaper(query, page);
       return Right(result.map((model) => model.copyWith()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
@@ -64,7 +65,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
   Future<Either<Failure, List<Wallpaper>>> searchWallpaperLoad(
       String query, int page) async {
     try {
-      final result = await apiService.searchWallpaper(query, page: page);
+      final result = await apiService.searchWallpaper(query, page);
       return Right(result.map((model) => model.copyWith()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
