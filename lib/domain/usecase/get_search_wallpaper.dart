@@ -9,8 +9,8 @@ class GetSearchWallpaper {
 
   GetSearchWallpaper(this.repository);
 
-  Future<Either<Failure, List<Wallpaper>>> call(String query) async {
-    return await repository.searchWallpaper(query);
+  Future<Either<Failure, List<Wallpaper>>> call(String query, int page) async {
+    return await repository.searchWallpaper(query, page);
   }
 
   Future<Either<Failure, List<Wallpaper>>> loadMore(
