@@ -26,7 +26,10 @@ class _HomepageState extends State<Homepage> with Wallpapers {
   Future<void> _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
-      getCuratedWallpaper(context);
+      Future.microtask(() {
+        getCuratedWallpaper(context);
+        getCategoryWallpaper(context, selectedCategory);
+      });
       setState(() {});
     }
   }
@@ -52,6 +55,9 @@ class _HomepageState extends State<Homepage> with Wallpapers {
             children: [
               const _Header(),
               SingleChildScrollView(
+                physics: const ClampingScrollPhysics(
+                  parent: BouncingScrollPhysics(),
+                ),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: category.map((cate) {

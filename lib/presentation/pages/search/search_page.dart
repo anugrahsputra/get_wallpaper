@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_wallpaper/core/core.dart';
@@ -29,6 +27,7 @@ class _SearchWallpaperState extends State<SearchWallpaper> with Submitted {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              titleSpacing: 0,
               floating: true,
               snap: true,
               leading: IconButton(
@@ -69,22 +68,24 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onSubmitted: onSubmitted,
-      decoration: InputDecoration(
-        hintText: 'Search wallpaper',
-        hintStyle: const TextStyle(
-          color: Colors.grey,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
-        ),
-        filled: true,
-        fillColor: Colors.grey[200],
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 0,
+    return Padding(
+      padding: const EdgeInsets.only(right: 10),
+      child: TextField(
+        onSubmitted: onSubmitted,
+        decoration: InputDecoration(
+          hintText: 'Search wallpaper',
+          hintStyle: const TextStyle(
+            color: Colors.grey,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 0,
+          ),
         ),
       ),
     );

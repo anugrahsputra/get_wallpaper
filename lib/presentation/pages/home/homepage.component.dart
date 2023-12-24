@@ -108,7 +108,9 @@ class _Header extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
+                    enabled: false,
                     decoration: const InputDecoration(
+                      filled: false,
                       hintText: 'Search wallpaper',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.only(left: 20),

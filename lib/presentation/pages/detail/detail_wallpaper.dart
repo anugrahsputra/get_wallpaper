@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
@@ -20,27 +21,40 @@ class DetailWallpaper extends StatefulWidget {
   State<DetailWallpaper> createState() => _DetailWallpaperState();
 }
 
-class _DetailWallpaperState extends State<DetailWallpaper> {
+class _DetailWallpaperState extends State<DetailWallpaper> with GetDetails {
   Color dominantColor = Colors.white;
 
   @override
   void initState() {
     super.initState();
-    context.read<DetailWallpaperCubit>().getWallpaperDetail(widget.id!);
+    getDetailWallpaper(context, widget.id!);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<DetailWallpaperCubit, DetailWallpaperState>(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        titleSpacing: 0,
+        title: Text(
+          'Back',
+          style: GoogleFonts.inter(fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: BlocBuilder<DetailBloc, DetailState>(
         builder: (context, state) {
-          return state.when(
-            initial: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
+          return state.maybeWhen(
+            initial: () => Center(
+                child: LoadingAnimationWidget.bouncingBall(
+              color: Colors.deepPurple,
+              size: 100,
+            )),
+            loading: () => Center(
+                child: LoadingAnimationWidget.bouncingBall(
+              color: Colors.deepPurple,
+              size: 100,
+            )),
             loaded: (wallpaper) {
               return Hero(
                 tag: wallpaper,
@@ -48,11 +62,6 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
                   children: [
                     _WallpaperImage(
                       src: wallpaper.src.portrait,
-                    ),
-                    Positioned(
-                      top: 40,
-                      left: 20,
-                      child: BackButtonWidget(color: dominantColor),
                     ),
                     Positioned(
                       bottom: 10,
@@ -66,8 +75,8 @@ class _DetailWallpaperState extends State<DetailWallpaper> {
                 ),
               );
             },
-            error: (message) => Center(
-              child: Text(message),
+            orElse: () => const Center(
+              child: Text('Something went wrong'),
             ),
           );
         },

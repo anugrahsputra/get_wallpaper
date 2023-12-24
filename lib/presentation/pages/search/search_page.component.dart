@@ -27,8 +27,6 @@ class _BuildSearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,
           ),
-          filled: true,
-          fillColor: Colors.grey[200],
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 0,
@@ -147,127 +145,6 @@ class _BuildGridView extends StatelessWidget {
           );
         }
       },
-    );
-  }
-}
-
-class SearchBarView extends StatefulWidget {
-  const SearchBarView({super.key, required this.onChanged});
-
-  final dynamic Function(String) onChanged;
-
-  @override
-  State<SearchBarView> createState() => _SearchBarViewState();
-}
-
-class _SearchBarViewState extends State<SearchBarView> {
-  final TextEditingController _searchCtrl = TextEditingController();
-  final FocusNode _searchFocus = FocusNode();
-
-  Timer? debounce;
-
-  @override
-  void initState() {
-    super.initState();
-    _searchCtrl.addListener(() {
-      setState(() {});
-    });
-    clearSearch();
-  }
-
-  void onSearchQuery(String query) {
-    if (debounce?.isActive ?? false) debounce!.cancel();
-    debounce = Timer(const Duration(milliseconds: 500), () {
-      context.read<SearchWallpaperCubit>().searchWallpaper(query);
-    });
-  }
-
-  void searchQuery(String query) {
-    if (_searchCtrl.text.isNotEmpty) {
-      Future.delayed(const Duration(milliseconds: 500), () {
-        context.read<SearchWallpaperCubit>().searchWallpaper(query);
-      });
-    } else {
-      clearSearch();
-    }
-  }
-
-  void clearSearch() {
-    setState(() {
-      _searchCtrl.clear();
-      context.read<SearchWallpaperCubit>().clearSearch();
-    });
-  }
-
-  @override
-  void dispose() {
-    debounce?.cancel();
-    _searchFocus.dispose();
-    _searchCtrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            onPressed: () {
-              clearSearch();
-              context.pop();
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-          _BuildSearchBar(
-            controller: _searchCtrl,
-            focusNode: _searchFocus,
-            onChanged: widget.onChanged,
-          ),
-          if (_searchCtrl.text.isNotEmpty)
-            IconButton(
-              onPressed: () => clearSearch(),
-              icon: const Icon(Icons.clear),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class ResultView extends StatefulWidget {
-  const ResultView({super.key, required this.onPressed});
-
-  final VoidCallback onPressed;
-
-  @override
-  State<ResultView> createState() => _ResultViewState();
-}
-
-class _ResultViewState extends State<ResultView> {
-  bool isLoadMore = false;
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocBuilder<SearchWallpaperCubit, SearchWallpaperState>(
-          builder: (context, state) {
-        return state.when(
-          initial: () => Lottie.asset(
-            'assets/search_initials.json',
-            repeat: false,
-          ),
-          loading: () => const DefaultShimmerSearch(),
-          loaded: (result) => _BuildGridView(
-            onPressed: widget.onPressed,
-            result: result,
-          ),
-          error: (message) => Center(
-            child: Text(message),
-          ),
-        );
-      }),
     );
   }
 }
