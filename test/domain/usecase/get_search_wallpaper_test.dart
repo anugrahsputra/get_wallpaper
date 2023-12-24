@@ -14,10 +14,10 @@ void main() {
 
   group('search wallpaper usecase', () {
     test('should get search wallpaper list from repository', () async {
-      when(mockRepository.searchWallpaper(any))
+      when(mockRepository.searchWallpaper(any, any))
           .thenAnswer((_) async => Right(tWallpapers));
 
-      final result = await searchWallpaper.call('query');
+      final result = await searchWallpaper.call('query', 1);
 
       expect(result, Right(tWallpapers));
     });

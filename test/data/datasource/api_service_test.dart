@@ -147,7 +147,7 @@ void main() {
         (_) => Future.value(response),
       );
 
-      await api.searchWallpaper(query, page: page);
+      await api.searchWallpaper(query, page);
 
       verify(
         dio.get(
@@ -166,7 +166,7 @@ void main() {
         queryParameters: anyNamed('queryParameters'),
       )).thenThrow(exception);
 
-      expect(() => api.searchWallpaper(query, page: page), throwsA(exception));
+      expect(() => api.searchWallpaper(query, page), throwsA(exception));
     });
   });
 

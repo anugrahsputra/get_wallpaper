@@ -165,33 +165,34 @@ void main() {
   group('.searchWallpaper()', () {
     test('should return search wallpaper when call to api is successfull',
         () async {
-      when(api.searchWallpaper(any)).thenAnswer((_) async => tWallpaperList);
+      when(api.searchWallpaper(any, any))
+          .thenAnswer((_) async => tWallpaperList);
 
-      final result = await repository.searchWallpaper('query');
+      final result = await repository.searchWallpaper('query', 1);
       final resultList = result.getOrElse(() => []);
 
-      verify(api.searchWallpaper(any));
+      verify(api.searchWallpaper(any, any));
       expect(resultList, tWallpaperList);
     });
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any)).thenThrow(ServerException());
+      when(api.searchWallpaper(any, any)).thenThrow(ServerException());
 
-      final result = await repository.searchWallpaper('query');
+      final result = await repository.searchWallpaper('query', 1);
 
-      verify(api.searchWallpaper(any));
+      verify(api.searchWallpaper(any, any));
       expect(result, equals(const Left(ServerFailure('Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any))
+      when(api.searchWallpaper(any, any))
           .thenThrow(const SocketException('Failed to connect to the network'));
 
-      final result = await repository.searchWallpaper('query');
+      final result = await repository.searchWallpaper('query', 1);
 
-      verify(api.searchWallpaper(any));
+      verify(api.searchWallpaper(any, any));
       expect(
           result,
           equals(const Left(
@@ -202,33 +203,34 @@ void main() {
   group('.searchWallpaperLoad()', () {
     test('should return search wallpaper when call to api is successfull',
         () async {
-      when(api.searchWallpaper(any)).thenAnswer((_) async => tWallpaperList);
+      when(api.searchWallpaper(any, any))
+          .thenAnswer((_) async => tWallpaperList);
 
       final result = await repository.searchWallpaperLoad('query', 1);
       final resultList = result.getOrElse(() => []);
 
-      verify(api.searchWallpaper(any));
+      verify(api.searchWallpaper(any, any));
       expect(resultList, tWallpaperList);
     });
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any)).thenThrow(ServerException());
+      when(api.searchWallpaper(any, any)).thenThrow(ServerException());
 
       final result = await repository.searchWallpaperLoad('query', 1);
 
-      verify(api.searchWallpaper(any));
+      verify(api.searchWallpaper(any, any));
       expect(result, equals(const Left(ServerFailure('Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any))
+      when(api.searchWallpaper(any, any))
           .thenThrow(const SocketException('Failed to connect to the network'));
 
       final result = await repository.searchWallpaperLoad('query', 1);
 
-      verify(api.searchWallpaper(any));
+      verify(api.searchWallpaper(any, any));
       expect(
           result,
           equals(const Left(
