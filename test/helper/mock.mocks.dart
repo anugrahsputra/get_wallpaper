@@ -3,22 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
+import 'dart:async' as _i6;
 
-import 'package:bloc/bloc.dart' as _i12;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:dio/dio.dart' as _i4;
-import 'package:get_wallpaper/core/core.dart' as _i11;
+import 'package:get_wallpaper/core/core.dart' as _i7;
 import 'package:get_wallpaper/data/data.dart' as _i2;
 import 'package:get_wallpaper/domain/domain.dart' as _i5;
-import 'package:get_wallpaper/presentation/cubit/categorized_wallpaper/categorized_wallpaper_cubit.dart'
-    as _i7;
-import 'package:get_wallpaper/presentation/cubit/detail_wallpaper/detail_wallpaper_cubit.dart'
-    as _i8;
-import 'package:get_wallpaper/presentation/cubit/list_wallpaper/list_wallpaper_cubit.dart'
-    as _i6;
-import 'package:get_wallpaper/presentation/cubit/search_wallpaper/search_wallpaper_cubit.dart'
-    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -116,94 +107,28 @@ class _FakeWallpaperRepository_7 extends _i1.SmartFake
         );
 }
 
-class _FakeGetListWallpaper_8 extends _i1.SmartFake
-    implements _i5.GetListWallpaper {
-  _FakeGetListWallpaper_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeListWallpaperState_9 extends _i1.SmartFake
-    implements _i6.ListWallpaperState {
-  _FakeListWallpaperState_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeGetCategorizedWallpaper_10 extends _i1.SmartFake
-    implements _i5.GetCategorizedWallpaper {
-  _FakeGetCategorizedWallpaper_10(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeCategorizedWallpaperState_11 extends _i1.SmartFake
-    implements _i7.CategorizedWallpaperState {
-  _FakeCategorizedWallpaperState_11(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDetailWallpaperState_12 extends _i1.SmartFake
-    implements _i8.DetailWallpaperState {
-  _FakeDetailWallpaperState_12(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeSearchWallpaperState_13 extends _i1.SmartFake
-    implements _i9.SearchWallpaperState {
-  _FakeSearchWallpaperState_13(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [ApiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockApiService extends _i1.Mock implements _i2.ApiService {
   @override
-  _i10.Future<List<_i2.Wallpaper>> listWallpaper() => (super.noSuchMethod(
+  _i6.Future<List<_i2.Wallpaper>> listWallpaper() => (super.noSuchMethod(
         Invocation.method(
           #listWallpaper,
           [],
         ),
-        returnValue: _i10.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
+        returnValue: _i6.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
         returnValueForMissingStub:
-            _i10.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
-      ) as _i10.Future<List<_i2.Wallpaper>>);
+            _i6.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
+      ) as _i6.Future<List<_i2.Wallpaper>>);
 
   @override
-  _i10.Future<_i2.Wallpaper> detailWallpaper(int? id) => (super.noSuchMethod(
+  _i6.Future<_i2.Wallpaper> detailWallpaper(int? id) => (super.noSuchMethod(
         Invocation.method(
           #detailWallpaper,
           [id],
         ),
-        returnValue: _i10.Future<_i2.Wallpaper>.value(_FakeWallpaper_0(
+        returnValue: _i6.Future<_i2.Wallpaper>.value(_FakeWallpaper_0(
           this,
           Invocation.method(
             #detailWallpaper,
@@ -211,17 +136,17 @@ class MockApiService extends _i1.Mock implements _i2.ApiService {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i2.Wallpaper>.value(_FakeWallpaper_0(
+            _i6.Future<_i2.Wallpaper>.value(_FakeWallpaper_0(
           this,
           Invocation.method(
             #detailWallpaper,
             [id],
           ),
         )),
-      ) as _i10.Future<_i2.Wallpaper>);
+      ) as _i6.Future<_i2.Wallpaper>);
 
   @override
-  _i10.Future<List<_i2.Wallpaper>> searchWallpaper(
+  _i6.Future<List<_i2.Wallpaper>> searchWallpaper(
     String? query,
     int? page,
   ) =>
@@ -233,22 +158,22 @@ class MockApiService extends _i1.Mock implements _i2.ApiService {
             page,
           ],
         ),
-        returnValue: _i10.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
+        returnValue: _i6.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
         returnValueForMissingStub:
-            _i10.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
-      ) as _i10.Future<List<_i2.Wallpaper>>);
+            _i6.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
+      ) as _i6.Future<List<_i2.Wallpaper>>);
 
   @override
-  _i10.Future<List<_i2.Wallpaper>> categorizedWallpaper(String? category) =>
+  _i6.Future<List<_i2.Wallpaper>> categorizedWallpaper(String? category) =>
       (super.noSuchMethod(
         Invocation.method(
           #categorizedWallpaper,
           [category],
         ),
-        returnValue: _i10.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
+        returnValue: _i6.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
         returnValueForMissingStub:
-            _i10.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
-      ) as _i10.Future<List<_i2.Wallpaper>>);
+            _i6.Future<List<_i2.Wallpaper>>.value(<_i2.Wallpaper>[]),
+      ) as _i6.Future<List<_i2.Wallpaper>>);
 }
 
 /// A class which mocks [WallpaperRepository].
@@ -257,8 +182,7 @@ class MockApiService extends _i1.Mock implements _i2.ApiService {
 class MockWallpaperRepository extends _i1.Mock
     implements _i5.WallpaperRepository {
   @override
-  _i10.Future<
-      _i3.Either<_i11.Failure, List<_i2.Wallpaper>>> categorizedWallpaper(
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> categorizedWallpaper(
           String? category) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -266,8 +190,8 @@ class MockWallpaperRepository extends _i1.Mock
           [category],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #categorizedWallpaper,
@@ -275,26 +199,25 @@ class MockWallpaperRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #categorizedWallpaper,
             [category],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 
   @override
-  _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>> detailWallpaper(
-          int? id) =>
+  _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>> detailWallpaper(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #detailWallpaper,
           [id],
         ),
-        returnValue: _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>.value(
-            _FakeEither_1<_i11.Failure, _i2.Wallpaper>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>>.value(
+            _FakeEither_1<_i7.Failure, _i2.Wallpaper>(
           this,
           Invocation.method(
             #detailWallpaper,
@@ -302,26 +225,26 @@ class MockWallpaperRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>.value(
-                _FakeEither_1<_i11.Failure, _i2.Wallpaper>(
+            _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>>.value(
+                _FakeEither_1<_i7.Failure, _i2.Wallpaper>(
           this,
           Invocation.method(
             #detailWallpaper,
             [id],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>>);
 
   @override
-  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> listWallpaper() =>
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> listWallpaper() =>
       (super.noSuchMethod(
         Invocation.method(
           #listWallpaper,
           [],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #listWallpaper,
@@ -329,18 +252,18 @@ class MockWallpaperRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #listWallpaper,
             [],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 
   @override
-  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> searchWallpaper(
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> searchWallpaper(
     String? query,
     int? page,
   ) =>
@@ -353,8 +276,8 @@ class MockWallpaperRepository extends _i1.Mock
           ],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #searchWallpaper,
@@ -365,8 +288,8 @@ class MockWallpaperRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #searchWallpaper,
@@ -376,11 +299,10 @@ class MockWallpaperRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 
   @override
-  _i10.Future<
-      _i3.Either<_i11.Failure, List<_i2.Wallpaper>>> searchWallpaperLoad(
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> searchWallpaperLoad(
     String? query,
     int? page,
   ) =>
@@ -393,8 +315,8 @@ class MockWallpaperRepository extends _i1.Mock
           ],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #searchWallpaperLoad,
@@ -405,8 +327,8 @@ class MockWallpaperRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #searchWallpaperLoad,
@@ -416,7 +338,7 @@ class MockWallpaperRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 }
 
 /// A class which mocks [Dio].
@@ -514,7 +436,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
       );
 
   @override
-  _i10.Future<_i4.Response<T>> head<T>(
+  _i6.Future<_i4.Response<T>> head<T>(
     String? path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -532,7 +454,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #head,
@@ -546,7 +468,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #head,
@@ -559,10 +481,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> headUri<T>(
+  _i6.Future<_i4.Response<T>> headUri<T>(
     Uri? uri, {
     Object? data,
     _i4.Options? options,
@@ -578,7 +500,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #headUri,
@@ -591,7 +513,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #headUri,
@@ -603,10 +525,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> get<T>(
+  _i6.Future<_i4.Response<T>> get<T>(
     String? path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -626,7 +548,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #get,
@@ -641,7 +563,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #get,
@@ -655,10 +577,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> getUri<T>(
+  _i6.Future<_i4.Response<T>> getUri<T>(
     Uri? uri, {
     Object? data,
     _i4.Options? options,
@@ -676,7 +598,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #getUri,
@@ -690,7 +612,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #getUri,
@@ -703,10 +625,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> post<T>(
+  _i6.Future<_i4.Response<T>> post<T>(
     String? path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -728,7 +650,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #post,
@@ -744,7 +666,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #post,
@@ -759,10 +681,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> postUri<T>(
+  _i6.Future<_i4.Response<T>> postUri<T>(
     Uri? uri, {
     Object? data,
     _i4.Options? options,
@@ -782,7 +704,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #postUri,
@@ -797,7 +719,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #postUri,
@@ -811,10 +733,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> put<T>(
+  _i6.Future<_i4.Response<T>> put<T>(
     String? path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -836,7 +758,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #put,
@@ -852,7 +774,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #put,
@@ -867,10 +789,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> putUri<T>(
+  _i6.Future<_i4.Response<T>> putUri<T>(
     Uri? uri, {
     Object? data,
     _i4.Options? options,
@@ -890,7 +812,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #putUri,
@@ -905,7 +827,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #putUri,
@@ -919,10 +841,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> patch<T>(
+  _i6.Future<_i4.Response<T>> patch<T>(
     String? path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -944,7 +866,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #patch,
@@ -960,7 +882,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #patch,
@@ -975,10 +897,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> patchUri<T>(
+  _i6.Future<_i4.Response<T>> patchUri<T>(
     Uri? uri, {
     Object? data,
     _i4.Options? options,
@@ -998,7 +920,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #patchUri,
@@ -1013,7 +935,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #patchUri,
@@ -1027,10 +949,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> delete<T>(
+  _i6.Future<_i4.Response<T>> delete<T>(
     String? path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -1048,7 +970,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #delete,
@@ -1062,7 +984,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #delete,
@@ -1075,10 +997,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> deleteUri<T>(
+  _i6.Future<_i4.Response<T>> deleteUri<T>(
     Uri? uri, {
     Object? data,
     _i4.Options? options,
@@ -1094,7 +1016,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #cancelToken: cancelToken,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #deleteUri,
@@ -1107,7 +1029,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #deleteUri,
@@ -1119,10 +1041,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<dynamic>> download(
+  _i6.Future<_i4.Response<dynamic>> download(
     String? urlPath,
     dynamic savePath, {
     _i4.ProgressCallback? onReceiveProgress,
@@ -1151,7 +1073,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           },
         ),
         returnValue:
-            _i10.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #download,
@@ -1171,7 +1093,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #download,
@@ -1190,10 +1112,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<dynamic>>);
+      ) as _i6.Future<_i4.Response<dynamic>>);
 
   @override
-  _i10.Future<_i4.Response<dynamic>> downloadUri(
+  _i6.Future<_i4.Response<dynamic>> downloadUri(
     Uri? uri,
     dynamic savePath, {
     _i4.ProgressCallback? onReceiveProgress,
@@ -1220,7 +1142,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           },
         ),
         returnValue:
-            _i10.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #downloadUri,
@@ -1239,7 +1161,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #downloadUri,
@@ -1257,10 +1179,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<dynamic>>);
+      ) as _i6.Future<_i4.Response<dynamic>>);
 
   @override
-  _i10.Future<_i4.Response<T>> request<T>(
+  _i6.Future<_i4.Response<T>> request<T>(
     String? url, {
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -1282,7 +1204,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #request,
@@ -1298,7 +1220,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #request,
@@ -1313,10 +1235,10 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> requestUri<T>(
+  _i6.Future<_i4.Response<T>> requestUri<T>(
     Uri? uri, {
     Object? data,
     _i4.CancelToken? cancelToken,
@@ -1336,7 +1258,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             #onReceiveProgress: onReceiveProgress,
           },
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #requestUri,
@@ -1351,7 +1273,7 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #requestUri,
@@ -1365,16 +1287,16 @@ class MockDio extends _i1.Mock implements _i4.Dio {
             },
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 
   @override
-  _i10.Future<_i4.Response<T>> fetch<T>(_i4.RequestOptions? requestOptions) =>
+  _i6.Future<_i4.Response<T>> fetch<T>(_i4.RequestOptions? requestOptions) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetch,
           [requestOptions],
         ),
-        returnValue: _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+        returnValue: _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #fetch,
@@ -1382,14 +1304,14 @@ class MockDio extends _i1.Mock implements _i4.Dio {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
+            _i6.Future<_i4.Response<T>>.value(_FakeResponse_6<T>(
           this,
           Invocation.method(
             #fetch,
             [requestOptions],
           ),
         )),
-      ) as _i10.Future<_i4.Response<T>>);
+      ) as _i6.Future<_i4.Response<T>>);
 }
 
 /// A class which mocks [GetDetailWallpaper].
@@ -1398,14 +1320,14 @@ class MockDio extends _i1.Mock implements _i4.Dio {
 class MockGetDetailWallpaper extends _i1.Mock
     implements _i5.GetDetailWallpaper {
   @override
-  _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>> execute(int? id) =>
+  _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>> execute(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [id],
         ),
-        returnValue: _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>.value(
-            _FakeEither_1<_i11.Failure, _i2.Wallpaper>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>>.value(
+            _FakeEither_1<_i7.Failure, _i2.Wallpaper>(
           this,
           Invocation.method(
             #execute,
@@ -1413,15 +1335,15 @@ class MockGetDetailWallpaper extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>.value(
-                _FakeEither_1<_i11.Failure, _i2.Wallpaper>(
+            _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>>.value(
+                _FakeEither_1<_i7.Failure, _i2.Wallpaper>(
           this,
           Invocation.method(
             #execute,
             [id],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, _i2.Wallpaper>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i2.Wallpaper>>);
 }
 
 /// A class which mocks [GetListWallpaper].
@@ -1429,15 +1351,15 @@ class MockGetDetailWallpaper extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockGetListWallpaper extends _i1.Mock implements _i5.GetListWallpaper {
   @override
-  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> call() =>
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> call() =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #call,
@@ -1445,15 +1367,15 @@ class MockGetListWallpaper extends _i1.Mock implements _i5.GetListWallpaper {
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #call,
             [],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 }
 
 /// A class which mocks [GetSearchWallpaper].
@@ -1475,7 +1397,7 @@ class MockGetSearchWallpaper extends _i1.Mock
       ) as _i5.WallpaperRepository);
 
   @override
-  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> call(
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> call(
     String? query,
     int? page,
   ) =>
@@ -1488,8 +1410,8 @@ class MockGetSearchWallpaper extends _i1.Mock
           ],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #call,
@@ -1500,8 +1422,8 @@ class MockGetSearchWallpaper extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #call,
@@ -1511,10 +1433,10 @@ class MockGetSearchWallpaper extends _i1.Mock
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 
   @override
-  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> loadMore(
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> loadMore(
     String? query,
     int? page,
   ) =>
@@ -1527,8 +1449,8 @@ class MockGetSearchWallpaper extends _i1.Mock
           ],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #loadMore,
@@ -1539,8 +1461,8 @@ class MockGetSearchWallpaper extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #loadMore,
@@ -1550,7 +1472,7 @@ class MockGetSearchWallpaper extends _i1.Mock
             ],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 }
 
 /// A class which mocks [GetCategorizedWallpaper].
@@ -1572,7 +1494,7 @@ class MockGetCategorizedWallpaper extends _i1.Mock
       ) as _i5.WallpaperRepository);
 
   @override
-  _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>> call(
+  _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>> call(
           String? category) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1580,8 +1502,8 @@ class MockGetCategorizedWallpaper extends _i1.Mock
           [category],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #call,
@@ -1589,488 +1511,13 @@ class MockGetCategorizedWallpaper extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>.value(
-                _FakeEither_1<_i11.Failure, List<_i2.Wallpaper>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i2.Wallpaper>>(
           this,
           Invocation.method(
             #call,
             [category],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i11.Failure, List<_i2.Wallpaper>>>);
-}
-
-/// A class which mocks [ListWallpaperCubit].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockListWallpaperCubit extends _i1.Mock
-    implements _i6.ListWallpaperCubit {
-  @override
-  _i5.GetListWallpaper get listWallpaperRepo => (super.noSuchMethod(
-        Invocation.getter(#listWallpaperRepo),
-        returnValue: _FakeGetListWallpaper_8(
-          this,
-          Invocation.getter(#listWallpaperRepo),
-        ),
-        returnValueForMissingStub: _FakeGetListWallpaper_8(
-          this,
-          Invocation.getter(#listWallpaperRepo),
-        ),
-      ) as _i5.GetListWallpaper);
-
-  @override
-  _i6.ListWallpaperState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _FakeListWallpaperState_9(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _FakeListWallpaperState_9(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i6.ListWallpaperState);
-
-  @override
-  _i10.Stream<_i6.ListWallpaperState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i10.Stream<_i6.ListWallpaperState>.empty(),
-        returnValueForMissingStub: _i10.Stream<_i6.ListWallpaperState>.empty(),
-      ) as _i10.Stream<_i6.ListWallpaperState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void getWallpaper() => super.noSuchMethod(
-        Invocation.method(
-          #getWallpaper,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i6.ListWallpaperState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(_i12.Change<_i6.ListWallpaperState>? change) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i10.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-}
-
-/// A class which mocks [CategorizedWallpaperCubit].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockCategorizedWallpaperCubit extends _i1.Mock
-    implements _i7.CategorizedWallpaperCubit {
-  @override
-  _i5.GetCategorizedWallpaper get categorizedRepo => (super.noSuchMethod(
-        Invocation.getter(#categorizedRepo),
-        returnValue: _FakeGetCategorizedWallpaper_10(
-          this,
-          Invocation.getter(#categorizedRepo),
-        ),
-        returnValueForMissingStub: _FakeGetCategorizedWallpaper_10(
-          this,
-          Invocation.getter(#categorizedRepo),
-        ),
-      ) as _i5.GetCategorizedWallpaper);
-
-  @override
-  _i7.CategorizedWallpaperState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _FakeCategorizedWallpaperState_11(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _FakeCategorizedWallpaperState_11(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i7.CategorizedWallpaperState);
-
-  @override
-  _i10.Stream<_i7.CategorizedWallpaperState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i10.Stream<_i7.CategorizedWallpaperState>.empty(),
-        returnValueForMissingStub:
-            _i10.Stream<_i7.CategorizedWallpaperState>.empty(),
-      ) as _i10.Stream<_i7.CategorizedWallpaperState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void categoryWallpaper(String? category) => super.noSuchMethod(
-        Invocation.method(
-          #categoryWallpaper,
-          [category],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i7.CategorizedWallpaperState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(_i12.Change<_i7.CategorizedWallpaperState>? change) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i10.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-}
-
-/// A class which mocks [DetailWallpaperCubit].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockDetailWallpaperCubit extends _i1.Mock
-    implements _i8.DetailWallpaperCubit {
-  @override
-  _i8.DetailWallpaperState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _FakeDetailWallpaperState_12(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _FakeDetailWallpaperState_12(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i8.DetailWallpaperState);
-
-  @override
-  _i10.Stream<_i8.DetailWallpaperState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i10.Stream<_i8.DetailWallpaperState>.empty(),
-        returnValueForMissingStub:
-            _i10.Stream<_i8.DetailWallpaperState>.empty(),
-      ) as _i10.Stream<_i8.DetailWallpaperState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void getWallpaperDetail(int? id) => super.noSuchMethod(
-        Invocation.method(
-          #getWallpaperDetail,
-          [id],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i8.DetailWallpaperState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(_i12.Change<_i8.DetailWallpaperState>? change) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i10.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-}
-
-/// A class which mocks [SearchWallpaperCubit].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSearchWallpaperCubit extends _i1.Mock
-    implements _i9.SearchWallpaperCubit {
-  @override
-  int get currentPage => (super.noSuchMethod(
-        Invocation.getter(#currentPage),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
-
-  @override
-  set currentPage(int? _currentPage) => super.noSuchMethod(
-        Invocation.setter(
-          #currentPage,
-          _currentPage,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i9.SearchWallpaperState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _FakeSearchWallpaperState_13(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _FakeSearchWallpaperState_13(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i9.SearchWallpaperState);
-
-  @override
-  _i10.Stream<_i9.SearchWallpaperState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i10.Stream<_i9.SearchWallpaperState>.empty(),
-        returnValueForMissingStub:
-            _i10.Stream<_i9.SearchWallpaperState>.empty(),
-      ) as _i10.Stream<_i9.SearchWallpaperState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void searchWallpaper(String? query) => super.noSuchMethod(
-        Invocation.method(
-          #searchWallpaper,
-          [query],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void loadMore(String? query) => super.noSuchMethod(
-        Invocation.method(
-          #loadMore,
-          [query],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void clearSearch() => super.noSuchMethod(
-        Invocation.method(
-          #clearSearch,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i9.SearchWallpaperState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(_i12.Change<_i9.SearchWallpaperState>? change) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i10.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i2.Wallpaper>>>);
 }

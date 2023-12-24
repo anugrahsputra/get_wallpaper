@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_wallpaper/data/data.dart';
 import 'package:get_wallpaper/domain/domain.dart';
-import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:mockito/annotations.dart';
 
 export 'mock.mocks.dart';
@@ -17,11 +16,5 @@ export 'mock.mocks.dart';
   MockSpec<GetListWallpaper>(),
   MockSpec<GetSearchWallpaper>(),
   MockSpec<GetCategorizedWallpaper>(),
-
-  // Cubit
-  MockSpec<ListWallpaperCubit>(),
-  MockSpec<CategorizedWallpaperCubit>(),
-  MockSpec<DetailWallpaperCubit>(),
-  MockSpec<SearchWallpaperCubit>(),
 ])
 void main(List<String> args) {}
