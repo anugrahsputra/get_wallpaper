@@ -27,15 +27,14 @@ Future<void> init() async {
 
   /* =============> Bloc <============= */
   locator.registerFactory(() => SearchBloc(repository: locator()));
-  locator.registerFactory(() => WallpapersBloc(
+  locator.registerFactory(
+    () => WallpapersBloc(
         getListRepo: locator<GetListWallpaper>(),
-        categorizedRepo: locator<GetCategorizedWallpaper>(),
-      ));
-  /* =============> Cubit <============= */
-  locator.registerFactory(() => CategorizedWallpaperCubit(locator()));
-  locator.registerFactory(() => ListWallpaperCubit(locator()));
-  locator.registerFactory(() => DetailWallpaperCubit(locator()));
-  locator.registerFactory(() => SearchWallpaperCubit(locator()));
+        categorizedRepo: locator<GetCategorizedWallpaper>()),
+  );
+  locator.registerFactory(
+    () => DetailBloc(repository: locator<GetDetailWallpaper>()),
+  );
 
   /* =============> Usecase <============= */
   locator.registerLazySingleton(() => GetCategorizedWallpaper(locator()));
