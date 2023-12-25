@@ -4,9 +4,31 @@ import '../../core/core.dart';
 import '../data.dart';
 
 abstract class ApiService {
+  /// Retrieves a list of wallpapers.
+  ///
+  /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
   Future<List<Wallpaper>> listWallpaper();
+
+  /// Retrieves the details of a specific wallpaper.
+  ///
+  /// [id] - The ID of the wallpaper to retrieve.
+  ///
+  /// Returns a [Future] that resolves to a [Wallpaper] object.
   Future<Wallpaper> detailWallpaper(int id);
+
+  /// Searches for wallpapers based on a query and page number.
+  ///
+  /// [query] - The search query.
+  /// [page] - The page number of the search results.
+  ///
+  /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
   Future<List<Wallpaper>> searchWallpaper(String query, int page);
+
+  /// Retrieves a list of wallpapers based on a specific category.
+  ///
+  /// [category] - The category of the wallpapers to retrieve.
+  ///
+  /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
   Future<List<Wallpaper>> categorizedWallpaper(String category);
 }
 
