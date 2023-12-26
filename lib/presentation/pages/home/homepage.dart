@@ -70,10 +70,16 @@ class _HomepageState extends State<Homepage> with Wallpapers {
               child: Text(
                 selectedCategory,
                 style: GoogleFonts.inter(
-                    fontSize: 20.sp, fontWeight: FontWeight.w600),
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-            _WallpaperView(userTapped: userTapped),
+            Flexible(
+              child: userTapped
+                  ? const _ListCategorizedWallpaper()
+                  : const _ListCuratedWallpaper(),
+            ),
           ],
         ),
       ),

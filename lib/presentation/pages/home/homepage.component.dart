@@ -1,48 +1,5 @@
 part of 'homepage.dart';
 
-class _WallpaperView extends StatelessWidget with GridViewMixin {
-  const _WallpaperView({
-    required this.userTapped,
-  });
-
-  final bool userTapped;
-
-  @override
-  Widget build(BuildContext context) {
-    return Flexible(
-      child: userTapped
-          ? BlocBuilder<WallpapersBloc, WallpapersState>(
-              builder: (context, state) {
-                if (state is Loading) {
-                  return const DefaultShimmerHome();
-                } else if (state is CategoryLoaded) {
-                  final result = state.wallpaper;
-                  return buildGridView(result);
-                } else {
-                  return const Center(
-                    child: Text("Something went wrong"),
-                  );
-                }
-              },
-            )
-          : BlocBuilder<WallpapersBloc, WallpapersState>(
-              builder: (context, state) {
-                if (state is Loading) {
-                  return const DefaultShimmerHome();
-                } else if (state is CuratedLoaded) {
-                  final result = state.wallpaper;
-                  return buildGridView(result);
-                } else {
-                  return const Center(
-                    child: Text('Sometthing went wrong'),
-                  );
-                }
-              },
-            ),
-    );
-  }
-}
-
 class _Header extends StatelessWidget {
   const _Header();
 
@@ -90,42 +47,44 @@ class _Header extends StatelessWidget {
           top: 90.h,
           left: 20.w,
           right: 20.w,
-          child: Container(
-            height: 50.h,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    enabled: false,
-                    decoration: const InputDecoration(
-                      filled: false,
-                      hintText: 'Search wallpaper',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 20),
-                    ),
-                    onTap: () {
-                      context.push('/search');
-                    },
-                    readOnly: true,
+          child: InkWell(
+            onTap: () {
+              context.push('/search');
+            },
+            child: Container(
+              height: 50.h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search),
-                ),
-              ],
+                ],
+              ),
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: TextField(
+                      enabled: false,
+                      decoration: InputDecoration(
+                        filled: false,
+                        hintText: 'Search wallpaper',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 20),
+                      ),
+                      readOnly: true,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.search),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -182,39 +141,44 @@ class _Category extends StatelessWidget {
 }
 
 class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
-  const _ListCategorizedWallpaper(this.wallpaper);
-
-  final List<Wallpaper> wallpaper;
-
-  @override
-  Widget build(BuildContext context) => buildGridView(wallpaper);
-}
-
-class _ListCuratedWallpaper extends StatelessWidget {
-  final List<Wallpaper> wallpaper;
-  const _ListCuratedWallpaper(this.wallpaper);
+  const _ListCategorizedWallpaper();
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(10),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 2 / 3,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-      ),
-      itemCount: wallpaper.length,
-      itemBuilder: (context, index) {
-        final wallpapers = wallpaper[index];
-        return GestureDetector(
-          onTap: () {
-            context.go('/detail/${wallpapers.id}');
-          },
-          child: WallpaperCard(wallpapers: wallpapers),
-        );
+    return BlocBuilder<WallpapersBloc, WallpapersState>(
+      builder: (context, state) {
+        if (state is Loading) {
+          return const DefaultShimmerHome();
+        } else if (state is CategoryLoaded) {
+          final result = state.wallpaper;
+          return buildGridView(result);
+        } else {
+          return const Center(
+            child: Text("Something went wrong"),
+          );
+        }
+      },
+    );
+  }
+}
+
+class _ListCuratedWallpaper extends StatelessWidget with GridViewMixin {
+  const _ListCuratedWallpaper();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<WallpapersBloc, WallpapersState>(
+      builder: (context, state) {
+        if (state is Loading) {
+          return const DefaultShimmerHome();
+        } else if (state is CuratedLoaded) {
+          final result = state.wallpaper;
+          return buildGridView(result);
+        } else {
+          return const Center(
+            child: Text('Sometthing went wrong'),
+          );
+        }
       },
     );
   }
