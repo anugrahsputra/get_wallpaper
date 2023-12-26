@@ -1,6 +1,6 @@
 part of 'homepage.dart';
 
-class _WallpaperView extends StatelessWidget {
+class _WallpaperView extends StatelessWidget with GridViewMixin {
   const _WallpaperView({
     required this.userTapped,
   });
@@ -17,7 +17,7 @@ class _WallpaperView extends StatelessWidget {
                   return const DefaultShimmerHome();
                 } else if (state is CategoryLoaded) {
                   final result = state.wallpaper;
-                  return _ListCategorizedWallpaper(result);
+                  return buildGridView(result);
                 } else {
                   return const Center(
                     child: Text("Something went wrong"),
@@ -31,7 +31,7 @@ class _WallpaperView extends StatelessWidget {
                   return const DefaultShimmerHome();
                 } else if (state is CuratedLoaded) {
                   final result = state.wallpaper;
-                  return _ListCuratedWallpaper(result);
+                  return buildGridView(result);
                 } else {
                   return const Center(
                     child: Text('Sometthing went wrong'),
@@ -181,41 +181,13 @@ class _Category extends StatelessWidget {
   }
 }
 
-class _ListCategorizedWallpaper extends StatelessWidget {
+class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
   const _ListCategorizedWallpaper(this.wallpaper);
 
   final List<Wallpaper> wallpaper;
 
   @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(10),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 2 / 3,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-      ),
-      itemCount: wallpaper.length,
-      itemBuilder: (context, index) {
-        final wallpapers = wallpaper[index];
-        return GestureDetector(
-          onTap: () {
-            context.go('/detail/${wallpapers.id}');
-          },
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              wallpapers.src.portrait,
-              fit: BoxFit.cover,
-            ),
-          ),
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => buildGridView(wallpaper);
 }
 
 class _ListCuratedWallpaper extends StatelessWidget {

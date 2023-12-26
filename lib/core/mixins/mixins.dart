@@ -1,3 +1,2 @@
-export 'get_details.dart';
-export 'submitted.dart';
+export 'grid_view.dart';
 export 'wallpapers.dart';

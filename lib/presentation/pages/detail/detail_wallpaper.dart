@@ -21,7 +21,7 @@ class DetailWallpaper extends StatefulWidget {
   State<DetailWallpaper> createState() => _DetailWallpaperState();
 }
 
-class _DetailWallpaperState extends State<DetailWallpaper> with GetDetails {
+class _DetailWallpaperState extends State<DetailWallpaper> with Wallpapers {
   Color dominantColor = Colors.white;
 
   @override

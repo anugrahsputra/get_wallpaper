@@ -10,4 +10,16 @@ mixin Wallpapers {
   void getCategoryWallpaper(BuildContext context, String category) {
     context.read<WallpapersBloc>().add(Category(category));
   }
+
+  void submit(BuildContext context, String query, int page) {
+    context.read<SearchBloc>().add(SearchQuery(query, page));
+  }
+
+  void clear(BuildContext context) {
+    context.read<SearchBloc>().add(Started());
+  }
+
+  void getDetailWallpaper(BuildContext context, int id) {
+    context.read<DetailBloc>().add(Details(id));
+  }
 }
