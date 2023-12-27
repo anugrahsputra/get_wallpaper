@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/data.dart';
 
 mixin GridViewMixin {
   Widget buildGridView(List<Wallpaper> wallpaper) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      padding: const EdgeInsets.all(8),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 2 / 3,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-      ),
+    return DefaultGridView(
       itemCount: wallpaper.length,
       itemBuilder: (context, index) {
         final wallpapers = wallpaper[index];

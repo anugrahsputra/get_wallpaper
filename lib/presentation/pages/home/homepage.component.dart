@@ -8,43 +8,38 @@ class _Header extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 150.h,
+          height: 100.h,
           width: double.infinity,
           decoration: const BoxDecoration(
             color: Colors.transparent,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(14),
+              bottomRight: Radius.circular(14),
             ),
           ),
         ),
         Container(
-          height: 120.h,
+          alignment: Alignment.center,
+          height: 100.h,
           width: double.infinity,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
             borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(14),
+              bottomRight: Radius.circular(14),
             ),
           ),
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: EdgeInsets.only(top: 50.h),
-            child: Text(
-              'Get Wallpaper',
-              style: GoogleFonts.poppins(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
+          child: Text(
+            'Get Wallpaper',
+            style: GoogleFonts.poppins(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
         ),
         Positioned(
-          top: 90.h,
+          top: 75.h,
           left: 20.w,
           right: 20.w,
           child: InkWell(

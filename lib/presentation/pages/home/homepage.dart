@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,8 +35,83 @@ class _HomepageState extends State<Homepage> with Wallpapers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            const SliverAppBar(
+              expandedHeight: 150.0,
+              floating: false,
+              pinned: false,
+              flexibleSpace: FlexibleSpaceBar(
+                background: _Header(),
+              ),
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              floating: false,
+              delegate: _SliverAppBarDelegate(
+                minHeight: 50,
+                maxHeight: 80,
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(
+                    parent: BouncingScrollPhysics(),
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    color: AppColor.backgroundDark,
+                    child: Row(
+                      children: category.map((cate) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              userTapped = true;
+                              selectedCategory = cate['name']!;
+                            });
+                            final categoryName = cate['name']!;
+                            getCategoryWallpaper(context, categoryName);
+                          },
+                          child: _Category(
+                            imageUrl: '${cate['image']}',
+                            name: '${cate['name']}',
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  selectedCategory,
+                  style: GoogleFonts.inter(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: userTapped
+                  ? const _ListCategorizedWallpaper()
+                  : const _ListCuratedWallpaper(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /* @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(
+          
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,5 +161,35 @@ class _HomepageState extends State<Homepage> with Wallpapers {
         ),
       ),
     );
+  } */
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+  @override
+  double get maxExtent => max(maxHeight, minHeight);
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
   }
 }
