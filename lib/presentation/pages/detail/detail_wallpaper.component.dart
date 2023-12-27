@@ -18,7 +18,6 @@ class _WallpaperImage extends StatelessWidget {
 
 class _WallpaperDetails extends StatefulWidget {
   const _WallpaperDetails({
-    super.key,
     required this.wallpaper,
   });
 
@@ -28,74 +27,8 @@ class _WallpaperDetails extends StatefulWidget {
   State<_WallpaperDetails> createState() => _WallpaperDetailsState();
 }
 
-class _WallpaperDetailsState extends State<_WallpaperDetails> {
-  late bool goToHome;
-  late WallpaperHandler _wallpaperHandler;
-  String _platformVersion = 'Unknown';
-  String _wallpaperUrlHome = 'Unknown';
-  String _wallpaperUrlLock = 'Unknown';
-  String _wallpaperUrlBoth = 'Unknown';
-
-  @override
-  void initState() {
-    super.initState();
-    _wallpaperHandler = locator<WallpaperHandler>();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    String platformVersion = await _wallpaperHandler.getPlatformVersion();
-
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
-
-  Future<void> setWallpaperHome(String url) async {
-    setState(() {
-      _wallpaperUrlHome = 'Loading';
-    });
-
-    String result =
-        await _wallpaperHandler.setAsWallpaper(url, AsyncWallpaper.HOME_SCREEN);
-
-    if (!mounted) return;
-
-    setState(() {
-      _wallpaperUrlHome = result;
-    });
-  }
-
-  Future<void> setWallpaperLock(String url) async {
-    setState(() {
-      _wallpaperUrlLock = 'Loading';
-    });
-    String result =
-        await _wallpaperHandler.setAsWallpaper(url, AsyncWallpaper.LOCK_SCREEN);
-
-    if (!mounted) return;
-
-    setState(() {
-      _wallpaperUrlLock = result;
-    });
-  }
-
-  Future<void> setWallpaperBoth(String url) async {
-    setState(() {
-      _wallpaperUrlBoth = 'Loading';
-    });
-    String result = await _wallpaperHandler.setAsWallpaper(
-        url, AsyncWallpaper.BOTH_SCREENS);
-
-    if (!mounted) return;
-
-    setState(() {
-      _wallpaperUrlBoth = result;
-    });
-  }
-
+class _WallpaperDetailsState extends State<_WallpaperDetails>
+    with SetAsWallpaperMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,10 +72,10 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
                 DefaultDialog(context).dialog(
                   context,
                   wallpaper: widget.wallpaper,
-                  text: 'Set Wallpaper for $_platformVersion',
+                  text: 'Set Wallpaper for $platformVersion',
                   children: [
                     SetAsButtonWidget(
-                      child: _wallpaperUrlHome == 'Loading'
+                      child: wallpaperUrlHome == 'Loading'
                           ? const CircularProgressIndicator.adaptive()
                           : Text(
                               'Home Screen',
@@ -159,7 +92,7 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
                     ),
                     SizedBox(height: 5.h),
                     SetAsButtonWidget(
-                      child: _wallpaperUrlLock == 'Loading'
+                      child: wallpaperUrlLock == 'Loading'
                           ? const CircularProgressIndicator.adaptive()
                           : Text(
                               'Lock Screen',
@@ -176,7 +109,7 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
                     ),
                     SizedBox(height: 5.h),
                     SetAsButtonWidget(
-                      child: _wallpaperUrlBoth == 'Loading'
+                      child: wallpaperUrlBoth == 'Loading'
                           ? const CircularProgressIndicator.adaptive()
                           : Text(
                               'Both',
