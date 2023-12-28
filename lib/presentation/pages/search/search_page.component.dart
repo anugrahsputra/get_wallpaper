@@ -44,7 +44,11 @@ class SearchResults extends StatelessWidget with GridViewMixin {
         return state.when(
           initial: () => Lottie.asset('assets/search_initials.json'),
           loading: () => const DefaultShimmerSearch(),
-          loaded: (wallpaper) => buildGridView(wallpaper),
+          loaded: (wallpaper) => wallpaper.isEmpty
+              ? const Center(
+                  child: Text("No Result"),
+                )
+              : buildGridView(wallpaper),
           error: (message) {
             return Center(
               child: Text(message),
