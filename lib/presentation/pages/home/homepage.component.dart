@@ -147,10 +147,13 @@ class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
         } else if (state is CategoryLoaded) {
           final result = state.wallpaper;
           return buildGridView(result);
-        } else {
-          return const Center(
-            child: Text("Something went wrong"),
+        } else if (state is Error) {
+          final errMess = state.message;
+          return Center(
+            child: Text(errMess),
           );
+        } else {
+          return Container();
         }
       },
     );
@@ -169,10 +172,13 @@ class _ListCuratedWallpaper extends StatelessWidget with GridViewMixin {
         } else if (state is CuratedLoaded) {
           final result = state.wallpaper;
           return buildGridView(result);
-        } else {
-          return const Center(
-            child: Text('Sometthing went wrong'),
+        } else if (state is Error) {
+          final errMess = state.message;
+          return Center(
+            child: Text(errMess),
           );
+        } else {
+          return Container();
         }
       },
     );

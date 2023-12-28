@@ -28,7 +28,11 @@ class _HomepageState extends State<Homepage> with Wallpapers {
   void initState() {
     super.initState();
     Future.microtask(() {
-      getCuratedWallpaper(context);
+      try {
+        getCuratedWallpaper(context);
+      } catch (e) {
+        rethrow;
+      }
     });
   }
 
@@ -40,8 +44,7 @@ class _HomepageState extends State<Homepage> with Wallpapers {
           slivers: [
             const SliverAppBar(
               expandedHeight: 150.0,
-              floating: false,
-              pinned: false,
+              primary: false,
               flexibleSpace: FlexibleSpaceBar(
                 background: _Header(),
               ),
@@ -67,9 +70,15 @@ class _HomepageState extends State<Homepage> with Wallpapers {
                             setState(() {
                               userTapped = true;
                               selectedCategory = cate['name']!;
+                              debugPrint('userTapped: $userTapped');
                             });
                             final categoryName = cate['name']!;
-                            getCategoryWallpaper(context, categoryName);
+                            if (categoryName == 'All') {
+                              userTapped = false;
+                              getCuratedWallpaper(context);
+                            } else {
+                              getCategoryWallpaper(context, categoryName);
+                            }
                           },
                           child: _Category(
                             imageUrl: '${cate['image']}',

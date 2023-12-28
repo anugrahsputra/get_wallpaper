@@ -1,5 +1,10 @@
 List<Map<String, String>> categoryData = [
   {
+    'name': 'All',
+    'image':
+        'https://images.pexels.com/photos/2088205/pexels-photo-2088205.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280',
+  },
+  {
     'name': 'Nature',
     'image':
         'https://images.pexels.com/photos/12879014/pexels-photo-12879014.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280'

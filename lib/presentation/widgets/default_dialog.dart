@@ -11,7 +11,7 @@ class DefaultDialog {
     context, {
     required Wallpaper? wallpaper,
     required String text,
-    required List<Widget> children,
+    required Widget content,
   }) async {
     return showDialog<void>(
       context: context,
@@ -24,10 +24,7 @@ class DefaultDialog {
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: children,
-          ),
+          content: content,
         );
       },
     );

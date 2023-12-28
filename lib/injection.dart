@@ -29,11 +29,19 @@ Future<void> init() async {
   locator.registerFactory(() => SearchBloc(repository: locator()));
   locator.registerFactory(
     () => WallpapersBloc(
-        getListRepo: locator<GetListWallpaper>(),
-        categorizedRepo: locator<GetCategorizedWallpaper>()),
+      getListRepo: locator<GetListWallpaper>(),
+      categorizedRepo: locator<GetCategorizedWallpaper>(),
+    ),
   );
   locator.registerFactory(
-    () => DetailBloc(repository: locator<GetDetailWallpaper>()),
+    () => DetailBloc(
+      repository: locator<GetDetailWallpaper>(),
+    ),
+  );
+  locator.registerFactory(
+    () => SetWallpaperBloc(
+      wallpaperHandler: locator<WallpaperHandler>(),
+    ),
   );
 
   /* =============> Usecase <============= */

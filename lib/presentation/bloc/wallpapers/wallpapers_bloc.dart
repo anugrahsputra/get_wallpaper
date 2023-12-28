@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../data/data.dart';
@@ -17,8 +16,8 @@ class WallpapersBloc extends Bloc<WallpapersEvent, WallpapersState> {
     required this.getListRepo,
     required this.categorizedRepo,
   }) : super(const Initial()) {
-    on<Curated>(_fetchCurated, transformer: sequential());
-    on<Category>(_fetchCategory, transformer: sequential());
+    on<Curated>(_fetchCurated);
+    on<Category>(_fetchCategory);
   }
 
   void _fetchCurated(

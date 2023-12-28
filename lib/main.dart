@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => locator<DetailBloc>(),
         ),
+        BlocProvider(
+          create: (context) => locator<SetWallpaperBloc>(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 640),
