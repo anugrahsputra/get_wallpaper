@@ -28,7 +28,6 @@ class _WallpaperDetails extends StatefulWidget {
 }
 
 class _WallpaperDetailsState extends State<_WallpaperDetails> {
-  late bool goToHome;
   late WallpaperHandler _wallpaperHandler;
   String _platformVersion = 'Unknown';
 
@@ -117,50 +116,11 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
                           : Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                SetAsButtonWidget(
-                                  child: Text(
-                                    'Home Screen',
-                                    style: GoogleFonts.inter(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    context.read<SetWallpaperBloc>().add(
-                                        SetHome(widget.wallpaper.src.portrait));
-                                  },
-                                ),
+                                buildSetAsButton('Home Screen'),
                                 SizedBox(height: 5.h),
-                                SetAsButtonWidget(
-                                  child: Text(
-                                    'Lock Screen',
-                                    style: GoogleFonts.inter(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    context.read<SetWallpaperBloc>().add(
-                                        SetLock(widget.wallpaper.src.portrait));
-                                  },
-                                ),
+                                buildSetAsButton('Lock Screen'),
                                 SizedBox(height: 5.h),
-                                SetAsButtonWidget(
-                                  child: Text(
-                                    'Both',
-                                    style: GoogleFonts.inter(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    context.read<SetWallpaperBloc>().add(
-                                        SetBoth(widget.wallpaper.src.portrait));
-                                  },
-                                ),
+                                buildSetAsButton('Both Screen'),
                               ],
                             ),
                     );
@@ -178,6 +138,26 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
             ],
           ),
         );
+      },
+    );
+  }
+
+  Widget buildSetAsButton(String text) {
+    return SetAsButtonWidget(
+      child: Text(
+        text,
+        style: GoogleFonts.inter(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      onPressed: () {
+        context.read<SetWallpaperBloc>().add(text == 'Home Screen'
+            ? SetHome(widget.wallpaper.src.portrait)
+            : text == 'Lock Screen'
+                ? SetLock(widget.wallpaper.src.portrait)
+                : SetBoth(widget.wallpaper.src.portrait));
       },
     );
   }
