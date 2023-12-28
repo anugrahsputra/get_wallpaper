@@ -161,4 +161,9 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
       },
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }
