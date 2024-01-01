@@ -12,7 +12,8 @@ class GetCategorizedWallpaper {
   /// Retrieves a list of wallpapers for the specified category.
   ///
   /// Returns a [Future] that completes with an [Either] containing a [Failure] or a list of [Wallpaper].
-  Future<Either<Failure, List<Wallpaper>>> call(String category) async {
-    return categorizedRepo.categorizedWallpaper(category);
+  Future<Either<Failure, List<Wallpaper>>> call(
+      String category, int page) async {
+    return categorizedRepo.categorizedWallpaper(category, page);
   }
 }
