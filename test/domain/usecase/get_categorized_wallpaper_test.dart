@@ -14,10 +14,10 @@ void main() {
   final tWallpapers = <Wallpaper>[];
 
   test('should get categorized wallpaper list from repository', () async {
-    when(repository.categorizedWallpaper(any))
+    when(repository.categorizedWallpaper(any, any))
         .thenAnswer((_) async => Right(tWallpapers));
 
-    final result = await categorizedWallpaper.call('category');
+    final result = await categorizedWallpaper.call('category', 1);
 
     expect(result, Right(tWallpapers));
   });

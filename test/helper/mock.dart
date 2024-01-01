@@ -1,4 +1,7 @@
+import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
+import 'package:get_wallpaper/core/core.dart';
 import 'package:get_wallpaper/data/data.dart';
 import 'package:get_wallpaper/domain/domain.dart';
 import 'package:mockito/annotations.dart';
@@ -6,15 +9,30 @@ import 'package:mockito/annotations.dart';
 export 'mock.mocks.dart';
 
 @GenerateNiceMocks([
-  // Data
-  MockSpec<ApiService>(),
-  MockSpec<WallpaperRepository>(),
+  // External
+  MockSpec<AsyncWallpaper>(),
   MockSpec<Dio>(),
+  MockSpec<PlatformException>(),
+
+  // Utils
+  MockSpec<WallpaperHandler>(),
+
+  // Data/datasource
+  MockSpec<ApiService>(),
+
+  // Data/model
+  MockSpec<ImageSource>(),
+  MockSpec<Wallpaper>(),
+
+  // Domain/repository
+  MockSpec<WallpaperRepository>(),
 
   // Domain/usecase
   MockSpec<GetDetailWallpaper>(),
   MockSpec<GetListWallpaper>(),
   MockSpec<GetSearchWallpaper>(),
   MockSpec<GetCategorizedWallpaper>(),
+
+  // Presentation/bloc
 ])
 void main(List<String> args) {}

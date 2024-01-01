@@ -15,6 +15,8 @@ void main() {
   MockDio dio = MockDio();
   ApiService api = ApiServiceImpl(dio);
 
+  int page = 1;
+
   group('listWallpaper()', () {
     test('should load from api by calling dio.get', () async {
       Response response = Response(
@@ -26,18 +28,18 @@ void main() {
 
       when(
         dio.get(
-          '$baseUrl${curated}per_page=20',
+          '$baseUrl${curated}per_page=20&page=$page',
           options: anyNamed('options'),
         ),
       ).thenAnswer(
         (_) => Future.value(response),
       );
 
-      await api.listWallpaper();
+      await api.listWallpaper(1);
 
       verify(
         dio.get(
-          '$baseUrl${curated}per_page=20',
+          '$baseUrl${curated}per_page=20&page=$page',
           options: anyNamed("options"),
         ),
       );
@@ -47,12 +49,12 @@ void main() {
       Exception exception = Exception('unknown');
 
       when(dio.get(
-        '$baseUrl${curated}per_page=20',
+        '$baseUrl${curated}per_page=20&page=$page',
         options: anyNamed('options'),
         queryParameters: anyNamed('queryParameters'),
       )).thenThrow(exception);
 
-      expect(() => api.listWallpaper(), throwsA(exception));
+      expect(() => api.listWallpaper(1), throwsA(exception));
     });
   });
 
@@ -140,7 +142,7 @@ void main() {
 
       when(
         dio.get(
-          '$baseUrl$search$query&page=$page',
+          '$baseUrl$search$query&per_page=20&page=$page',
           options: anyNamed('options'),
         ),
       ).thenAnswer(
@@ -151,7 +153,7 @@ void main() {
 
       verify(
         dio.get(
-          '$baseUrl$search$query&page=$page',
+          '$baseUrl$search$query&per_page=20&page=$page',
           options: anyNamed("options"),
         ),
       );
@@ -161,7 +163,7 @@ void main() {
       Exception exception = Exception('unknown');
 
       when(dio.get(
-        '$baseUrl$search$query&page=$page',
+        '$baseUrl$search$query&per_page=20&page=$page',
         options: anyNamed('options'),
         queryParameters: anyNamed('queryParameters'),
       )).thenThrow(exception);
@@ -182,18 +184,18 @@ void main() {
 
       when(
         dio.get(
-          '$baseUrl$search$category&per_page=20',
+          '$baseUrl$search$category&per_page=20&page=$page',
           options: anyNamed('options'),
         ),
       ).thenAnswer(
         (_) => Future.value(response),
       );
 
-      await api.categorizedWallpaper(category);
+      await api.categorizedWallpaper(category, page);
 
       verify(
         dio.get(
-          '$baseUrl$search$category&per_page=20',
+          '$baseUrl$search$category&per_page=20&page=$page',
           options: anyNamed("options"),
         ),
       );
@@ -204,14 +206,14 @@ void main() {
 
       when(
         dio.get(
-          '$baseUrl$search$category&per_page=20',
+          '$baseUrl$search$category&per_page=20&page=$page',
           options: anyNamed('options'),
           queryParameters: anyNamed('queryParameters'),
         ),
       ).thenThrow(exception);
 
-      expect(
-          () => api.categorizedWallpaper(category), throwsA(isA<Exception>()));
+      expect(() => api.categorizedWallpaper(category, page),
+          throwsA(isA<Exception>()));
     });
   });
 }

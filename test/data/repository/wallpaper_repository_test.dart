@@ -51,11 +51,11 @@ void main() {
   group('.listWallpaper()', () {
     test('should return list wallpaper when call to api is successfull',
         () async {
-      when(api.listWallpaper()).thenAnswer((_) async => tWallpaperList);
+      when(api.listWallpaper(any)).thenAnswer((_) async => tWallpaperList);
 
-      final result = await repository.listWallpaper();
+      final result = await repository.listWallpaper(1);
 
-      verify(api.listWallpaper());
+      verify(api.listWallpaper(1));
 
       final resultList = result.getOrElse(() => []);
       expect(resultList, tWallpaperList);
@@ -63,22 +63,22 @@ void main() {
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.listWallpaper()).thenThrow(ServerException());
+      when(api.listWallpaper(any)).thenThrow(ServerException());
 
-      final result = await repository.listWallpaper();
+      final result = await repository.listWallpaper(1);
 
-      verify(api.listWallpaper());
+      verify(api.listWallpaper(1));
       expect(result, equals(const Left(ServerFailure('Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.listWallpaper())
+      when(api.listWallpaper(any))
           .thenThrow(const SocketException('Failed to connect to the network'));
 
-      final result = await repository.listWallpaper();
+      final result = await repository.listWallpaper(1);
 
-      verify(api.listWallpaper());
+      verify(api.listWallpaper(1));
       expect(
           result,
           equals(const Left(
@@ -90,12 +90,12 @@ void main() {
     test(
         'should return list of categorized wallpaper when call to api is successfull',
         () async {
-      when(api.categorizedWallpaper(any))
+      when(api.categorizedWallpaper(any, any))
           .thenAnswer((_) async => tWallpaperList);
 
-      final result = await repository.categorizedWallpaper('category');
+      final result = await repository.categorizedWallpaper('category', 1);
 
-      verify(api.categorizedWallpaper(any));
+      verify(api.categorizedWallpaper(any, any));
 
       final resultList = result.getOrElse(() => []);
       expect(resultList, tWallpaperList);
@@ -103,22 +103,22 @@ void main() {
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.categorizedWallpaper(any)).thenThrow(ServerException());
+      when(api.categorizedWallpaper(any, any)).thenThrow(ServerException());
 
-      final result = await repository.categorizedWallpaper('category');
+      final result = await repository.categorizedWallpaper('category', 1);
 
-      verify(api.categorizedWallpaper(any));
+      verify(api.categorizedWallpaper(any, any));
       expect(result, equals(const Left(ServerFailure('Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.categorizedWallpaper(any))
+      when(api.categorizedWallpaper(any, any))
           .thenThrow(const SocketException('Failed to connect to the network'));
 
-      final result = await repository.categorizedWallpaper('category');
+      final result = await repository.categorizedWallpaper('category', 1);
 
-      verify(api.categorizedWallpaper(any));
+      verify(api.categorizedWallpaper(any, any));
       expect(
           result,
           equals(const Left(
