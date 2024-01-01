@@ -4,4 +4,5 @@ part of 'search_wallpaper_bloc.dart';
 class SearchEvent with _$SearchEvent {
   factory SearchEvent.started() = Started;
   factory SearchEvent.searchQuery(String query, int page) = SearchQuery;
+  factory SearchEvent.more(String query, int page) = More;
 }

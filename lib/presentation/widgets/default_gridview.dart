@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 
 class DefaultGridView extends StatelessWidget {
   const DefaultGridView(
-      {super.key, required this.itemCount, required this.itemBuilder});
+      {super.key,
+      required this.itemCount,
+      required this.itemBuilder,
+      this.controller});
 
   final int itemCount;
+  final ScrollController? controller;
   final Widget Function(BuildContext, int) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      // controller: controller,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

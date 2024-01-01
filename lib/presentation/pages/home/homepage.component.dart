@@ -135,7 +135,7 @@ class _Category extends StatelessWidget {
   }
 }
 
-class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
+class _ListCategorizedWallpaper extends StatelessWidget {
   const _ListCategorizedWallpaper();
 
   @override
@@ -145,8 +145,26 @@ class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
         if (state is Loading) {
           return const DefaultShimmerHome();
         } else if (state is CategoryLoaded) {
-          final result = state.wallpaper;
-          return buildGridView(result);
+          List<Wallpaper> result = state.wallpaper;
+          return DefaultGridView(
+            itemCount: result.length,
+            itemBuilder: (context, index) {
+              final wallpapers = result[index];
+              return GestureDetector(
+                onTap: () {
+                  context.go('/detail/${wallpapers.id}');
+                },
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: wallpapers.src.portrait,
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    )),
+              );
+            },
+          );
         } else if (state is Error) {
           final errMess = state.message;
           return Center(
@@ -160,7 +178,7 @@ class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
   }
 }
 
-class _ListCuratedWallpaper extends StatelessWidget with GridViewMixin {
+class _ListCuratedWallpaper extends StatelessWidget {
   const _ListCuratedWallpaper();
 
   @override
@@ -170,8 +188,26 @@ class _ListCuratedWallpaper extends StatelessWidget with GridViewMixin {
         if (state is Loading) {
           return const DefaultShimmerHome();
         } else if (state is CuratedLoaded) {
-          final result = state.wallpaper;
-          return buildGridView(result);
+          List<Wallpaper> result = state.wallpaper;
+          return DefaultGridView(
+            itemCount: result.length,
+            itemBuilder: (context, index) {
+              final wallpapers = result[index];
+              return GestureDetector(
+                onTap: () {
+                  context.go('/detail/${wallpapers.id}');
+                },
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: wallpapers.src.portrait,
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    )),
+              );
+            },
+          );
         } else if (state is Error) {
           final errMess = state.message;
           return Center(

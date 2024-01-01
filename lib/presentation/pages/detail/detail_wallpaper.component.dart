@@ -53,9 +53,9 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
     return BlocConsumer<SetWallpaperBloc, SetWallpaperState>(
       listener: (context, state) {
         state.whenOrNull(
-          wallpaperHome: (result) => context.pop(),
-          wallpaperLock: (result) => context.pop(),
-          wallpaperBoth: (result) => context.pop(),
+          wallpaperHome: (result) {},
+          wallpaperLock: (result) {},
+          wallpaperBoth: (result) {},
           wallpaperError: (message) => ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -108,21 +108,16 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
                       context,
                       wallpaper: widget.wallpaper,
                       text: 'Set Wallpaper for $_platformVersion',
-                      content: state is WallpaperLoading
-                          ? LoadingAnimationWidget.bouncingBall(
-                              color: AppColor.onPrimaryContainerDark,
-                              size: 25,
-                            )
-                          : Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                buildSetAsButton('Home Screen'),
-                                SizedBox(height: 5.h),
-                                buildSetAsButton('Lock Screen'),
-                                SizedBox(height: 5.h),
-                                buildSetAsButton('Both Screen'),
-                              ],
-                            ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          buildSetAsButton('Home Screen'),
+                          SizedBox(height: 5.h),
+                          buildSetAsButton('Lock Screen'),
+                          SizedBox(height: 5.h),
+                          buildSetAsButton('Both Screen'),
+                        ],
+                      ),
                     );
                   },
                   child: Text(
@@ -158,12 +153,14 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
             : text == 'Lock Screen'
                 ? SetLock(widget.wallpaper.src.portrait)
                 : SetBoth(widget.wallpaper.src.portrait));
+        context.pop();
+        ElegantNotification.success(
+          title: const Text("Success"),
+          description: const Text("Wallpaper set to Home and Lock screens"),
+          animation: AnimationType.fromTop,
+          notificationPosition: NotificationPosition.topCenter,
+        );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
