@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_wallpaper/bloc_observer.dart';
 import 'package:get_wallpaper/injection.dart';
 import 'package:get_wallpaper/presentation/presentation.dart';
 
@@ -9,7 +8,7 @@ import 'core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = AppBlocObserver();
+  // Bloc.observer = AppBlocObserver();
   await init();
   runApp(const MyApp());
 }

@@ -6,8 +6,10 @@ import 'package:go_router/go_router.dart';
 import '../../data/data.dart';
 
 mixin GridViewMixin {
-  Widget buildGridView(List<Wallpaper> wallpaper) {
+  Widget buildGridView(
+      List<Wallpaper> wallpaper, ScrollController? controller) {
     return DefaultGridView(
+      controller: controller,
       itemCount: wallpaper.length,
       itemBuilder: (context, index) {
         final wallpapers = wallpaper[index];

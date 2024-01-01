@@ -1,6 +1,8 @@
 import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/services.dart';
 
+import '../core.dart';
+
 abstract class WallpaperHandler {
   Future<String> getPlatformVersion();
   Future<String> setAsWallpaper(String url, int location);
@@ -29,7 +31,10 @@ class WallpaperHandlerImpl implements WallpaperHandler {
         url: url,
         wallpaperLocation: location,
         goToHome: goToHome,
-        toastDetails: ToastDetails.success(),
+        toastDetails: ToastDetails(
+          message: 'Wallpaper Set',
+          backgroundColor: AppColor.onBackgroundLight,
+        ),
         errorToastDetails: ToastDetails.error(),
       )
           ? 'Wallpaper set'

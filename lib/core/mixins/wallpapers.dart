@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_wallpaper/presentation/presentation.dart';
 
 mixin Wallpapers {
-  void getCuratedWallpaper(BuildContext context) {
-    context.read<WallpapersBloc>().add(const Curated());
+  void getCuratedWallpaper(BuildContext context, int page) {
+    context.read<WallpapersBloc>().add(Curated(page));
   }
 
-  void getCategoryWallpaper(BuildContext context, String category) {
-    context.read<WallpapersBloc>().add(Category(category));
+  void getCategoryWallpaper(BuildContext context, String category, int page) {
+    context.read<WallpapersBloc>().add(Category(category, page));
   }
 
   void submit(BuildContext context, String query, int page) {
