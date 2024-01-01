@@ -7,7 +7,7 @@ abstract class ApiService {
   /// Retrieves a list of wallpapers.
   ///
   /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
-  Future<List<Wallpaper>> listWallpaper();
+  Future<List<Wallpaper>> listWallpaper(int page);
 
   /// Retrieves the details of a specific wallpaper.
   ///
@@ -29,7 +29,7 @@ abstract class ApiService {
   /// [category] - The category of the wallpapers to retrieve.
   ///
   /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
-  Future<List<Wallpaper>> categorizedWallpaper(String category);
+  Future<List<Wallpaper>> categorizedWallpaper(String category, int page);
 }
 
 class ApiServiceImpl implements ApiService {
@@ -44,9 +44,9 @@ class ApiServiceImpl implements ApiService {
   ApiServiceImpl(this._dio);
 
   @override
-  Future<List<Wallpaper>> listWallpaper() async {
+  Future<List<Wallpaper>> listWallpaper(int page) async {
     final response = await _dio.get(
-      '$_baseUrl${_curated}per_page=20',
+      '$_baseUrl${_curated}per_page=20&page=$page',
       options: Options(
         headers: {
           'Authorization': _apiKey,
@@ -61,7 +61,7 @@ class ApiServiceImpl implements ApiService {
           .reversed
           .toList();
     } else {
-      throw Exception('failed to load wallpapers');
+      throw ServerException();
     }
   }
 
@@ -79,14 +79,14 @@ class ApiServiceImpl implements ApiService {
       final data = response.data;
       return Wallpaper.fromJson(data);
     } else {
-      throw Exception('failed to load wallpaper');
+      throw ServerException();
     }
   }
 
   @override
   Future<List<Wallpaper>> searchWallpaper(String query, int page) async {
     final response = await _dio.get(
-      '$_baseUrl$_search$query&page=$page',
+      '$_baseUrl$_search$query&per_page=20&page=$page',
       options: Options(
         headers: {
           'Authorization': _apiKey,
@@ -97,15 +97,16 @@ class ApiServiceImpl implements ApiService {
       final List<dynamic> data = response.data['photos'];
       return data.map((photo) => Wallpaper.fromJson(photo)).toList();
     } else {
-      throw Exception('failed to load wallpapers');
+      throw ServerException();
     }
   }
 
   @override
-  Future<List<Wallpaper>> categorizedWallpaper(String category) async {
+  Future<List<Wallpaper>> categorizedWallpaper(
+      String category, int page) async {
     try {
       final response = await _dio.get(
-        '$_baseUrl$_search$category&per_page=20',
+        '$_baseUrl$_search$category&per_page=20&page=$page',
         options: Options(
           headers: {
             'Authorization': _apiKey,
@@ -116,10 +117,10 @@ class ApiServiceImpl implements ApiService {
         final List<dynamic> data = response.data['photos'];
         return data.map((photo) => Wallpaper.fromJson(photo)).toList();
       } else {
-        throw Exception('failed to load wallpapers');
+        throw ServerException();
       }
     } catch (e) {
-      throw Exception('failed to load wallpapers');
+      throw ServerException();
     }
   }
 }

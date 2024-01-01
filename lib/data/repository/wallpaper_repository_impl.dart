@@ -13,9 +13,9 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
 
   @override
   Future<Either<Failure, List<Wallpaper>>> categorizedWallpaper(
-      String category) async {
+      String category, int page) async {
     try {
-      final result = await apiService.categorizedWallpaper(category);
+      final result = await apiService.categorizedWallpaper(category, page);
       return Right(result.map((model) => model.copyWith()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
@@ -37,9 +37,9 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
   }
 
   @override
-  Future<Either<Failure, List<Wallpaper>>> listWallpaper() async {
+  Future<Either<Failure, List<Wallpaper>>> listWallpaper(int page) async {
     try {
-      final result = await apiService.listWallpaper();
+      final result = await apiService.listWallpaper(page);
       return Right(result.map((model) => model.copyWith()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
