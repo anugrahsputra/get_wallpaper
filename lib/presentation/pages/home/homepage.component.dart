@@ -32,7 +32,7 @@ class _Header extends StatelessWidget {
           child: Text(
             'Get Wallpaper',
             style: GoogleFonts.poppins(
-              fontSize: 20.sp,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.onPrimary,
             ),
@@ -181,40 +181,6 @@ class _ListCuratedWallpaper extends StatelessWidget with GridViewMixin {
           return Container();
         }
       },
-    );
-  }
-}
-
-class WallpaperCard extends StatelessWidget {
-  WallpaperCard({
-    super.key,
-    required this.wallpapers,
-  });
-
-  final GlobalKey _imageKey = GlobalKey();
-  final Wallpaper wallpapers;
-
-  @override
-  Widget build(BuildContext context) {
-    return Hero(
-      tag: wallpapers,
-      child: Flow(
-        delegate: ParallaxFlowDelegate(
-          scrollable: Scrollable.of(context),
-          listItemContext: context,
-          backgroundImageKey: _imageKey,
-        ),
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              wallpapers.src.portrait,
-              fit: BoxFit.cover,
-              key: _imageKey,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

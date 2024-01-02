@@ -38,6 +38,13 @@ class _DetailWallpaperState extends State<DetailWallpaper> with Wallpapers {
       appBar: AppBar(
         forceMaterialTransparency: true,
         titleSpacing: 0,
+        leading: IconButton(
+          onPressed: () {
+            context.pop();
+            clear(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         title: Text(
           'Back',
           style: GoogleFonts.inter(fontWeight: FontWeight.bold),
@@ -45,41 +52,35 @@ class _DetailWallpaperState extends State<DetailWallpaper> with Wallpapers {
       ),
       body: BlocBuilder<DetailBloc, DetailState>(
         builder: (context, state) {
-          return state.maybeWhen(
-            initial: () => Center(
-                child: LoadingAnimationWidget.bouncingBall(
-              color: Colors.deepPurple,
-              size: 100,
-            )),
-            loading: () => Center(
-                child: LoadingAnimationWidget.bouncingBall(
-              color: Colors.deepPurple,
-              size: 100,
-            )),
-            loaded: (wallpaper) {
-              return Hero(
-                tag: wallpaper,
-                child: Stack(
-                  children: [
-                    _WallpaperImage(
-                      src: wallpaper.src.portrait,
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      left: 20,
-                      right: 20,
-                      child: _WallpaperDetails(
-                        wallpaper: wallpaper,
-                      ),
-                    ),
-                  ],
+          if (state is DetailLoading) {
+            return Center(
+              child: LoadingAnimationWidget.bouncingBall(
+                color: Colors.deepPurple,
+                size: 100,
+              ),
+            );
+          } else if (state is DetailLoaded) {
+            final wallpaper = state.wallpaper;
+            return Stack(
+              children: [
+                _WallpaperImage(
+                  src: wallpaper.src.portrait,
                 ),
-              );
-            },
-            orElse: () => const Center(
-              child: Text('Something went wrong'),
-            ),
-          );
+                Positioned(
+                  bottom: 10,
+                  left: 20,
+                  right: 20,
+                  child: _WallpaperDetails(
+                    wallpaper: wallpaper,
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return const Center(
+              child: Text('Error'),
+            );
+          }
         },
       ),
     );

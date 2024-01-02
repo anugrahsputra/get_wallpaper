@@ -37,21 +37,32 @@ class BuildSearchBar extends StatelessWidget {
 class SearchResults extends StatelessWidget with GridViewMixin {
   SearchResults({
     super.key,
-    required this.scrollController,
+    required this.onPressed,
   });
 
-  final ScrollController scrollController;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, state) {
         return state.when(
-          initial: () => Lottie.asset('assets/search_initials.json'),
+          initial: () => Align(
+            alignment: Alignment.center,
+            child: Lottie.asset('assets/search_initials.json'),
+          ),
           loading: () => const DefaultShimmerSearch(),
           loaded: (wallpaper) {
             if (wallpaper.isNotEmpty) {
-              return buildGridView(wallpaper);
+              return Column(
+                children: [
+                  buildGridView(wallpaper),
+                  const SizedBox(height: 10),
+                  LoadMoreBtn(
+                    onPressed: onPressed,
+                  ),
+                ],
+              );
             } else {
               return const Center(
                 child: Text('No results found'),

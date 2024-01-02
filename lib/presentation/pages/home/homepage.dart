@@ -32,24 +32,7 @@ class _HomepageState extends State<Homepage> with Wallpapers {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
     getCuratedWallpaper(context, currentPage);
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >
-        _scrollController.position.maxScrollExtent - 400) {
-      setState(() {
-        currentPage++;
-      });
-      wallpaperLoadMore(context, selectedCategory, currentPage);
-    }
   }
 
   @override
@@ -59,77 +42,121 @@ class _HomepageState extends State<Homepage> with Wallpapers {
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
-            SliverAppBar(
-              expandedHeight: 18.6.h,
+            const SliverAppBar(
+              expandedHeight: 140,
               primary: false,
-              flexibleSpace: const FlexibleSpaceBar(
+              flexibleSpace: FlexibleSpaceBar(
                 background: _Header(),
               ),
             ),
-            SliverPersistentHeader(
-              pinned: true,
-              floating: false,
-              delegate: _SliverAppBarDelegate(
-                minHeight: 50,
-                maxHeight: 80,
-                child: SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(
-                    parent: BouncingScrollPhysics(),
-                  ),
-                  scrollDirection: Axis.horizontal,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: AppColor.backgroundDark,
-                    child: Row(
-                      children: category.map((cate) {
-                        return GestureDetector(
-                          onTap: () {
-                            DefaultCacheManager().emptyCache();
-                            setState(() {
-                              userTapped = true;
-                              selectedCategory = cate['name']!;
-                              currentPage = 1;
-                              debugPrint('userTapped: $userTapped');
-                            });
-                            final categoryName = cate['name']!;
-                            if (categoryName == 'All') {
-                              userTapped = false;
-                              getCuratedWallpaper(context, currentPage);
-                              debugPrint('back to curated');
-                            } else {
-                              getCategoryWallpaper(
-                                  context, categoryName, currentPage);
-                            }
-                          },
-                          child: _Category(
-                            imageUrl: '${cate['image']}',
-                            name: '${cate['name']}',
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ),
-              ),
+            buildCategoryHeader(context),
+            buildCategoryTitle(),
+            buildListWallpaper(),
+            buildLoadMoreBtn(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildLoadMoreBtn(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: FilledButton(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.refresh,
+              color: AppColor.backgroundDark,
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  selectedCategory,
-                  style: GoogleFonts.inter(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+            const SizedBox(width: 10),
+            Text(
+              'Load More',
+              style: TextStyle(
+                color: AppColor.backgroundDark,
+                fontWeight: FontWeight.w600,
               ),
-            ),
-            SliverToBoxAdapter(
-              child: userTapped
-                  ? const _ListCategorizedWallpaper()
-                  : const _ListCuratedWallpaper(),
             ),
           ],
+        ),
+        onPressed: () {
+          setState(
+            () {
+              currentPage++;
+              wallpaperLoadMore(context, selectedCategory, currentPage);
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildListWallpaper() {
+    return SliverToBoxAdapter(
+      child: userTapped
+          ? const _ListCategorizedWallpaper()
+          : const _ListCuratedWallpaper(),
+    );
+  }
+
+  Widget buildCategoryTitle() {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Text(
+          selectedCategory,
+          style: GoogleFonts.inter(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildCategoryHeader(BuildContext context) {
+    return SliverPersistentHeader(
+      pinned: true,
+      floating: false,
+      delegate: _SliverAppBarDelegate(
+        minHeight: 50,
+        maxHeight: 80,
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            color: AppColor.backgroundDark,
+            child: Row(
+              children: category.map((cate) {
+                return GestureDetector(
+                  onTap: () {
+                    DefaultCacheManager().removeFile('wallpaper');
+                    setState(() {
+                      userTapped = true;
+                      selectedCategory = cate['name']!;
+                      currentPage = 1;
+                      debugPrint('userTapped: $userTapped');
+                    });
+                    final categoryName = cate['name']!;
+                    if (categoryName == 'All') {
+                      userTapped = false;
+                      getCuratedWallpaper(context, currentPage);
+                      debugPrint('back to curated');
+                    } else {
+                      getCategoryWallpaper(context, categoryName, currentPage);
+                    }
+                  },
+                  child: _Category(
+                    imageUrl: '${cate['image']}',
+                    name: '${cate['name']}',
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
         ),
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_wallpaper/core/core.dart';
@@ -20,36 +19,11 @@ class _SearchWallpaperState extends State<SearchWallpaper> with Wallpapers {
   String currentQuery = '';
   int currentPage = 1;
 
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >
-        _scrollController.position.maxScrollExtent - 200) {
-      setState(() {
-        currentPage++;
-      });
-      searchLoadMore(context, currentQuery, currentPage);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
-          controller: _scrollController,
           slivers: [
             SliverAppBar(
               titleSpacing: 0,
@@ -75,7 +49,14 @@ class _SearchWallpaperState extends State<SearchWallpaper> with Wallpapers {
               ),
             ),
             SliverToBoxAdapter(
-              child: SearchResults(scrollController: _scrollController),
+              child: SearchResults(
+                onPressed: () => setState(
+                  () {
+                    currentPage++;
+                    searchLoadMore(context, currentQuery, currentPage);
+                  },
+                ),
+              ),
             ),
           ],
         ),
