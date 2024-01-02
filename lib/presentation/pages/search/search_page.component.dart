@@ -51,25 +51,7 @@ class SearchResults extends StatelessWidget with GridViewMixin {
           loading: () => const DefaultShimmerSearch(),
           loaded: (wallpaper) {
             if (wallpaper.isNotEmpty) {
-              return DefaultGridView(
-                itemCount: wallpaper.length,
-                itemBuilder: (context, index) {
-                  final wallpapers = wallpaper[index];
-                  return GestureDetector(
-                    onTap: () {
-                      context.go('/detail/${wallpapers.id}');
-                    },
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                          imageUrl: wallpapers.src.portrait,
-                          fit: BoxFit.cover,
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        )),
-                  );
-                },
-              );
+              return buildGridView(wallpaper);
             } else {
               return const Center(
                 child: Text('No results found'),

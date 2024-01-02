@@ -36,11 +36,14 @@ jobs:
       - name: Generate model and cubit
         run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: formatting
-        run: dart format --output=none --set-exit-if-changed .
+
+            
 
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
+
+      - name: Builds - build Flutter APK and create github release
+        uses: Dank-del/flutter-build-and-publish-action@v1

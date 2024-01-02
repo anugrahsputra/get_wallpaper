@@ -8,7 +8,7 @@ class _Header extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 100.h,
+          height: 100,
           width: double.infinity,
           decoration: const BoxDecoration(
             color: Colors.transparent,
@@ -20,7 +20,7 @@ class _Header extends StatelessWidget {
         ),
         Container(
           alignment: Alignment.center,
-          height: 100.h,
+          height: 100,
           width: double.infinity,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
@@ -39,15 +39,15 @@ class _Header extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 75.h,
-          left: 20.w,
-          right: 20.w,
+          top: 75,
+          left: 20,
+          right: 20,
           child: InkWell(
             onTap: () {
               context.push('/search');
             },
             child: Container(
-              height: 50.h,
+              height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
@@ -96,10 +96,10 @@ class _Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
-      width: 100.w,
+      height: 50,
+      width: 100,
       margin: EdgeInsets.symmetric(
-        horizontal: ScreenUtil().setWidth(10),
+        horizontal: 2.5.w,
       ),
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -135,7 +135,7 @@ class _Category extends StatelessWidget {
   }
 }
 
-class _ListCategorizedWallpaper extends StatelessWidget {
+class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
   const _ListCategorizedWallpaper();
 
   @override
@@ -146,25 +146,7 @@ class _ListCategorizedWallpaper extends StatelessWidget {
           return const DefaultShimmerHome();
         } else if (state is CategoryLoaded) {
           List<Wallpaper> result = state.wallpaper;
-          return DefaultGridView(
-            itemCount: result.length,
-            itemBuilder: (context, index) {
-              final wallpapers = result[index];
-              return GestureDetector(
-                onTap: () {
-                  context.go('/detail/${wallpapers.id}');
-                },
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl: wallpapers.src.portrait,
-                      fit: BoxFit.cover,
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    )),
-              );
-            },
-          );
+          return buildGridView(result);
         } else if (state is Error) {
           final errMess = state.message;
           return Center(
@@ -178,7 +160,7 @@ class _ListCategorizedWallpaper extends StatelessWidget {
   }
 }
 
-class _ListCuratedWallpaper extends StatelessWidget {
+class _ListCuratedWallpaper extends StatelessWidget with GridViewMixin {
   const _ListCuratedWallpaper();
 
   @override
@@ -189,25 +171,7 @@ class _ListCuratedWallpaper extends StatelessWidget {
           return const DefaultShimmerHome();
         } else if (state is CuratedLoaded) {
           List<Wallpaper> result = state.wallpaper;
-          return DefaultGridView(
-            itemCount: result.length,
-            itemBuilder: (context, index) {
-              final wallpapers = result[index];
-              return GestureDetector(
-                onTap: () {
-                  context.go('/detail/${wallpapers.id}');
-                },
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl: wallpapers.src.portrait,
-                      fit: BoxFit.cover,
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    )),
-              );
-            },
-          );
+          return buildGridView(result);
         } else if (state is Error) {
           final errMess = state.message;
           return Center(

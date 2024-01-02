@@ -5,7 +5,6 @@ import 'package:get_wallpaper/core/core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../data/data.dart';
 import '../../presentation.dart';
 
 part 'search_page.component.dart';
@@ -20,28 +19,29 @@ class SearchWallpaper extends StatefulWidget {
 class _SearchWallpaperState extends State<SearchWallpaper> with Wallpapers {
   String currentQuery = '';
   int currentPage = 1;
-  List<Wallpaper> wallpaperList = [];
 
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels >
-          _scrollController.position.maxScrollExtent - 200) {
-        setState(() {
-          currentPage++;
-        });
-        context.read<SearchBloc>().add(More(currentQuery, currentPage));
-      }
-    });
+    _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >
+        _scrollController.position.maxScrollExtent - 200) {
+      setState(() {
+        currentPage++;
+      });
+      searchLoadMore(context, currentQuery, currentPage);
+    }
   }
 
   @override

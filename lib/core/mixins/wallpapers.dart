@@ -19,6 +19,14 @@ mixin Wallpapers {
     context.read<SearchBloc>().add(Started());
   }
 
+  void searchLoadMore(BuildContext context, String query, int page) {
+    context.read<SearchBloc>().add(More(query, page));
+  }
+
+  void wallpaperLoadMore(BuildContext context, String category, int page) {
+    context.read<WallpapersBloc>().add(LoadMore(category, page));
+  }
+
   void getDetailWallpaper(BuildContext context, int id) {
     context.read<DetailBloc>().add(Details(id));
   }

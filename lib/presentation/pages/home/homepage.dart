@@ -1,12 +1,11 @@
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../core/core.dart';
 import '../../../data/categories_data.dart';
@@ -45,13 +44,11 @@ class _HomepageState extends State<Homepage> with Wallpapers {
 
   void _onScroll() {
     if (_scrollController.position.pixels >
-        _scrollController.position.maxScrollExtent - 200) {
+        _scrollController.position.maxScrollExtent - 400) {
       setState(() {
         currentPage++;
       });
-      context
-          .read<WallpapersBloc>()
-          .add(LoadMore(selectedCategory, currentPage));
+      wallpaperLoadMore(context, selectedCategory, currentPage);
     }
   }
 
@@ -62,10 +59,10 @@ class _HomepageState extends State<Homepage> with Wallpapers {
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
-            const SliverAppBar(
-              expandedHeight: 150.0,
+            SliverAppBar(
+              expandedHeight: 18.6.h,
               primary: false,
-              flexibleSpace: FlexibleSpaceBar(
+              flexibleSpace: const FlexibleSpaceBar(
                 background: _Header(),
               ),
             ),

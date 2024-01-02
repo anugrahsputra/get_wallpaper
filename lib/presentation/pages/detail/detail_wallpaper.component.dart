@@ -68,7 +68,7 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
       },
       builder: (context, state) {
         return Container(
-          padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 15.h),
+          padding: EdgeInsets.fromLTRB(5.w, 5.h, 5.w, 5.h),
           width: MediaQuery.sizeOf(context).width,
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.5),
