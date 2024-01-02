@@ -36,26 +36,7 @@ jobs:
       - name: Generate model and cubit
         run: dart run build_runner build --delete-conflicting-outputs
 
-
-            
-
-      # Your project will need to have tests in test/ and a dependency on
-      # package:test for this step to succeed. Note that Flutter projects will
-      # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
 
-      - name: Build APK
-        run: flutter build apk --release
-
-      # Push the APK to releases
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+      # signing the apk

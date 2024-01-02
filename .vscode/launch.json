@@ -21,5 +21,34 @@
             "type": "dart",
             "flutterMode": "release"
         },
+        {
+            "name": "get_wallpaper (run mode)(all devices)",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "all"
+
+        },
+        {
+            "name": "Redmi S2",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "11fde72",
+        },
+        {
+            "name": "Samsung A50",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "RR8M901MY0R",
+        },
+
+    ],
+    "compounds": [
+        {
+            "name": "All devices (debug mode)",
+            "configurations": [
+                "Redmi S2",
+                "Samsung A50"
+            ],
+        }
     ]
 }
