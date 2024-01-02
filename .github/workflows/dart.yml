@@ -45,5 +45,17 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Builds - build Flutter APK and create github release
-        uses: Dank-del/flutter-build-and-publish-action@v1
+      - name: Build APK
+        run: flutter build apk --release
+
+      # Push the APK to releases
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
