@@ -45,4 +45,6 @@ To run this project:
 2. Run `flutter pub get` to fetch the dependencies.
 3. Run `flutter run` to start the application.
 
+Or simply download the apk on the [Release Page](https://github.com/anugrahsputra/get_wallpaper/releases/tag/v.1.0.0)
+
 Please note that you might need to set up your own Pexel API keys and endpoints to fetch the wallpaper data.

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get_wallpaper/core/core.dart';
 import 'package:get_wallpaper/data/data.dart';
 import 'package:get_wallpaper/domain/domain.dart';
+import 'package:get_wallpaper/presentation/presentation.dart';
 import 'package:mockito/annotations.dart';
 
 export 'mock.mocks.dart';
@@ -34,5 +35,9 @@ export 'mock.mocks.dart';
   MockSpec<GetCategorizedWallpaper>(),
 
   // Presentation/bloc
+  MockSpec<SearchBloc>(),
+  MockSpec<WallpapersBloc>(),
+  MockSpec<DetailBloc>(),
+  MockSpec<SetWallpaperBloc>(),
 ])
 void main(List<String> args) {}
