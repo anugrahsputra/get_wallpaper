@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:get_wallpaper/core/helper/helper.dart';
 
 import 'core/core.dart';
 import 'data/datasource/api.dart';
@@ -20,12 +21,15 @@ Future<void> init() async {
     ),
   );
 
+  locator.registerLazySingleton<NetworkHelper>(() => NetworkHelper());
+
   locator.registerLazySingleton<WallpaperHandler>(
       () => WallpaperHandlerImpl(false));
 
   locator.registerLazySingleton<ApiService>(() => ApiServiceImpl(locator()));
 
   /* =============> Bloc <============= */
+  locator.registerFactory(() => NetworkInfoBloc());
   locator.registerFactory(() => SearchBloc(repository: locator()));
   locator.registerFactory(
     () => WallpapersBloc(
