@@ -19,8 +19,6 @@ void main() {
 
   final tWallpaper = <Wallpaper>[];
 
-  List<Wallpaper> tWallpaperList = [];
-
   const tQuery = 'black';
 
   test('initial state should be empty', () {
