@@ -37,10 +37,12 @@ class BuildSearchBar extends StatelessWidget {
 class SearchResults extends StatelessWidget with GridViewMixin {
   SearchResults({
     super.key,
+    required this.pageController,
     required this.onPressed,
   });
 
   final void Function()? onPressed;
+  final PagingController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class SearchResults extends StatelessWidget with GridViewMixin {
             if (wallpaper.isNotEmpty) {
               return Column(
                 children: [
+                  // pagedGridView(pageController),
                   buildGridView(wallpaper),
                   const SizedBox(height: 10),
                   LoadMoreBtn(
@@ -64,8 +67,12 @@ class SearchResults extends StatelessWidget with GridViewMixin {
                 ],
               );
             } else {
-              return const Center(
-                child: Text('No results found'),
+              return Center(
+                child: Text('No results found',
+                    style: GoogleFonts.inter(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    )),
               );
             }
           },

@@ -8,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/core.dart';
-import '../../../data/categories_data.dart';
 import '../../../data/data.dart';
 import '../../presentation.dart';
 
@@ -39,21 +38,34 @@ class _HomepageState extends State<Homepage> with Wallpapers {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            const SliverAppBar(
-              expandedHeight: 140,
-              primary: false,
-              flexibleSpace: FlexibleSpaceBar(
-                background: _Header(),
-              ),
-            ),
-            buildCategoryHeader(context),
-            buildCategoryTitle(),
-            buildListWallpaper(),
-            buildLoadMoreBtn(context),
-          ],
+        child: BlocBuilder<NetworkInfoBloc, NetworkInfoState>(
+          builder: (context, state) {
+            if (state is Connected) {
+              return CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  const SliverAppBar(
+                    expandedHeight: 140,
+                    primary: false,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: _Header(),
+                    ),
+                  ),
+                  buildCategoryHeader(context),
+                  buildCategoryTitle(),
+                  buildListWallpaper(),
+                ],
+              );
+            } else {
+              return Center(
+                child: Text(
+                  'You are disconnected from the internet',
+                  style: GoogleFonts.inter(),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }
+          },
         ),
       ),
     );
