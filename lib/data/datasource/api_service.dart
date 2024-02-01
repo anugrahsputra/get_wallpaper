@@ -7,14 +7,14 @@ abstract class ApiService {
   /// Retrieves a list of wallpapers.
   ///
   /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
-  Future<List<Wallpaper>> listWallpaper(int page);
+  Future<List<WallpaperModel>> listWallpaper(int page);
 
   /// Retrieves the details of a specific wallpaper.
   ///
   /// [id] - The ID of the wallpaper to retrieve.
   ///
   /// Returns a [Future] that resolves to a [Wallpaper] object.
-  Future<Wallpaper> detailWallpaper(int id);
+  Future<WallpaperModel> detailWallpaper(int id);
 
   /// Searches for wallpapers based on a query and page number.
   ///
@@ -22,14 +22,14 @@ abstract class ApiService {
   /// [page] - The page number of the search results.
   ///
   /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
-  Future<List<Wallpaper>> searchWallpaper(String query, int page);
+  Future<List<WallpaperModel>> searchWallpaper(String query, int page);
 
   /// Retrieves a list of wallpapers based on a specific category.
   ///
   /// [category] - The category of the wallpapers to retrieve.
   ///
   /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
-  Future<List<Wallpaper>> categorizedWallpaper(String category, int page);
+  Future<List<WallpaperModel>> categorizedWallpaper(String category, int page);
 }
 
 class ApiServiceImpl implements ApiService {
@@ -44,7 +44,7 @@ class ApiServiceImpl implements ApiService {
   ApiServiceImpl(this._dio);
 
   @override
-  Future<List<Wallpaper>> listWallpaper(int page) async {
+  Future<List<WallpaperModel>> listWallpaper(int page) async {
     final response = await _dio.get(
       '$_baseUrl${_curated}per_page=20&page=$page',
       options: Options(
@@ -56,7 +56,7 @@ class ApiServiceImpl implements ApiService {
     if (response.statusCode == 200) {
       final List<dynamic> data = response.data['photos'];
       return data
-          .map((photo) => Wallpaper.fromJson(photo))
+          .map((photo) => WallpaperModel.fromJson(photo))
           .toList()
           .reversed
           .toList();
@@ -66,7 +66,7 @@ class ApiServiceImpl implements ApiService {
   }
 
   @override
-  Future<Wallpaper> detailWallpaper(int id) async {
+  Future<WallpaperModel> detailWallpaper(int id) async {
     final response = await _dio.get(
       '$_baseUrl$_detail$id',
       options: Options(
@@ -77,14 +77,14 @@ class ApiServiceImpl implements ApiService {
     );
     if (response.statusCode == 200) {
       final data = response.data;
-      return Wallpaper.fromJson(data);
+      return WallpaperModel.fromJson(data);
     } else {
       throw ServerException();
     }
   }
 
   @override
-  Future<List<Wallpaper>> searchWallpaper(String query, int page) async {
+  Future<List<WallpaperModel>> searchWallpaper(String query, int page) async {
     final response = await _dio.get(
       '$_baseUrl$_search$query&per_page=20&page=$page',
       options: Options(
@@ -95,14 +95,14 @@ class ApiServiceImpl implements ApiService {
     );
     if (response.statusCode == 200) {
       final List<dynamic> data = response.data['photos'];
-      return data.map((photo) => Wallpaper.fromJson(photo)).toList();
+      return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
     } else {
       throw ServerException();
     }
   }
 
   @override
-  Future<List<Wallpaper>> categorizedWallpaper(
+  Future<List<WallpaperModel>> categorizedWallpaper(
       String category, int page) async {
     try {
       final response = await _dio.get(
@@ -115,7 +115,7 @@ class ApiServiceImpl implements ApiService {
       );
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data['photos'];
-        return data.map((photo) => Wallpaper.fromJson(photo)).toList();
+        return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
       } else {
         throw ServerException();
       }

@@ -16,7 +16,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       String category, int page) async {
     try {
       final result = await apiService.categorizedWallpaper(category, page);
-      return Right(result.map((model) => model.copyWith()).toList());
+      return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
     } on SocketException {
@@ -28,7 +28,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
   Future<Either<Failure, Wallpaper>> detailWallpaper(int id) async {
     try {
       final result = await apiService.detailWallpaper(id);
-      return Right(result.copyWith());
+      return Right(result.toEntity());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
     } on SocketException {
@@ -40,7 +40,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
   Future<Either<Failure, List<Wallpaper>>> listWallpaper(int page) async {
     try {
       final result = await apiService.listWallpaper(page);
-      return Right(result.map((model) => model.copyWith()).toList());
+      return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
     } on SocketException {
@@ -53,7 +53,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       String query, int page) async {
     try {
       final result = await apiService.searchWallpaper(query, page);
-      return Right(result.map((model) => model.copyWith()).toList());
+      return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
     } on SocketException {
@@ -66,7 +66,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       String query, int page) async {
     try {
       final result = await apiService.searchWallpaper(query, page);
-      return Right(result.map((model) => model.copyWith()).toList());
+      return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return const Left(ServerFailure('Server Failure'));
     } on SocketException {
