@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../core/core.dart';
-import '../../data/data.dart';
+import '../entities/entities.dart';
 
 abstract class WallpaperRepository {
   /// Retrieves a list of wallpapers based on a specified category.
