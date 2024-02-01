@@ -1,6 +1,6 @@
 import 'package:get_wallpaper/data/data.dart';
 
-const tImageSource = ImageSource(
+const tImageSource = ImageSourceModel(
   original:
       "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
   large2x:
@@ -19,7 +19,7 @@ const tImageSource = ImageSource(
       "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280",
 );
 
-const tWallpaper = Wallpaper(
+const tWallpaper = WallpaperModel(
   id: 2014422,
   width: 3024,
   height: 3024,

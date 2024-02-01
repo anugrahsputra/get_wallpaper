@@ -4,7 +4,7 @@ import 'package:get_wallpaper/data/data.dart';
 void main() {
   group('.fromJson()', () {
     test('should convert json value to field', () {
-      final actual = Wallpaper.fromJson(
+      final actual = WallpaperModel.fromJson(
         const {
           "id": 2014422,
           "width": 3024,
@@ -38,7 +38,7 @@ void main() {
         },
       );
 
-      const matcher = Wallpaper(
+      const matcher = WallpaperModel(
         id: 2014422,
         width: 3024,
         height: 3024,
@@ -48,7 +48,7 @@ void main() {
         photographerUrl: "https://www.pexels.com/@joey",
         photographerId: 680589,
         avgColor: "#978E82",
-        src: ImageSource(
+        src: ImageSourceModel(
           original:
               "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
           large2x:
@@ -76,7 +76,7 @@ void main() {
 
   group('.toJson()', () {
     test('should conver field to json value', () {
-      const data = Wallpaper(
+      const data = WallpaperModel(
         id: 2014422,
         width: 3024,
         height: 3024,
@@ -86,7 +86,7 @@ void main() {
         photographerUrl: "https://www.pexels.com/@joey",
         photographerId: 680589,
         avgColor: "#978E82",
-        src: ImageSource(
+        src: ImageSourceModel(
           original:
               "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
           large2x:

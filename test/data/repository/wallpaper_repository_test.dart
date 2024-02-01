@@ -13,7 +13,7 @@ void main() {
   MockApiService api = MockApiService();
   WallpaperRepository repository = WallpaperRepositoryImpl(api);
 
-  const tImageSource = ImageSource(
+  const tImageSource = ImageSourceModel(
     original:
         "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
     large2x:
@@ -32,7 +32,7 @@ void main() {
         "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280",
   );
 
-  const tWallpaper = Wallpaper(
+  const tWallpaper = WallpaperModel(
     id: 2014422,
     width: 3024,
     height: 3024,
@@ -46,7 +46,7 @@ void main() {
     alt: "Brown Rocks During Golden Hour",
   );
 
-  final tWallpaperList = <Wallpaper>[];
+  final tWallpaperList = <WallpaperModel>[];
 
   group('.listWallpaper()', () {
     test('should return list wallpaper when call to api is successfull',
@@ -134,7 +134,7 @@ void main() {
       final result = await repository.detailWallpaper(1);
 
       verify(api.detailWallpaper(any));
-      expect(result, equals(const Right(tWallpaper)));
+      expect(result, equals(Right(tWallpaper.toEntity())));
     });
 
     test('should return server failure when call to api is unsuccessfull',
@@ -172,7 +172,7 @@ void main() {
       final resultList = result.getOrElse(() => []);
 
       verify(api.searchWallpaper(any, any));
-      expect(resultList, tWallpaperList);
+      expect(resultList, tWallpaperList.map((e) => e.toEntity()).toList());
     });
 
     test('should return server failure when call to api is unsuccessfull',

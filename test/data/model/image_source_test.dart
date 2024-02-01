@@ -4,7 +4,7 @@ import 'package:get_wallpaper/data/data.dart';
 void main() {
   group('.fromJson()', () {
     test('should convert json value to field', () {
-      final actual = ImageSource.fromJson(
+      final actual = ImageSourceModel.fromJson(
         const {
           "original":
               "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg",
@@ -25,7 +25,7 @@ void main() {
         },
       );
 
-      const expected = ImageSource(
+      const expected = ImageSourceModel(
         original:
             "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg",
         large2x:
@@ -50,7 +50,7 @@ void main() {
 
   group('.toJson()', () {
     test('should convert field to json value', () {
-      const data = ImageSource(
+      const data = ImageSourceModel(
         original:
             "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg",
         large2x:
