@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../data/data.dart';
+import '../../domain/domain.dart';
 import '../../presentation/presentation.dart';
 
 mixin GridViewMixin {

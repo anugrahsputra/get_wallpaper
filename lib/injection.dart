@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:get_wallpaper/core/helper/helper.dart';
 
 import 'core/core.dart';
 import 'data/datasource/api.dart';
