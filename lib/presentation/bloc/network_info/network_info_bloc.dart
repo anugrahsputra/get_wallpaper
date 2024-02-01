@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/core.dart';
+import '../../../injection.dart';
 
 part 'network_info_bloc.freezed.dart';
 part 'network_info_event.dart';
@@ -18,7 +19,8 @@ class NetworkInfoBloc extends Bloc<NetworkInfoEvent, NetworkInfoState> {
   factory NetworkInfoBloc() => _instance;
 
   void _onCheckConnection(event, emit) {
-    NetworkHelper.checkConnection();
+    // NetworkHelper.checkConnection();
+    locator<NetworkHelper>().checkConnection();
   }
 
   void _onConnectionChange(

@@ -7,7 +7,7 @@ import '../../domain/domain.dart';
 import '../data.dart';
 
 class WallpaperRepositoryImpl implements WallpaperRepository {
-  final ApiService apiService;
+  final WallpaperRemoteDataSource apiService;
 
   WallpaperRepositoryImpl(this.apiService);
 

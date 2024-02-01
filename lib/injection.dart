@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -11,21 +13,23 @@ final locator = GetIt.instance;
 
 Future<void> init() async {
   locator.registerFactory<Dio>(
-    () => Dio(
-      BaseOptions(
-        baseUrl: Env.baseUrl,
-        connectTimeout: const Duration(seconds: 60),
-        receiveTimeout: const Duration(seconds: 60),
-      ),
-    ),
+    () => Dio()
+      ..interceptors.add(LogInterceptor(
+        logPrint: (object) => log(
+          object.toString(),
+        ),
+      )),
   );
+  locator.registerFactory(() => DioClient(locator<Dio>())..init());
 
-  locator.registerLazySingleton<NetworkHelper>(() => NetworkHelper());
+  locator.registerLazySingleton<NetworkHelper>(() => NetworkHelperImpl());
 
   locator.registerLazySingleton<WallpaperHandler>(
       () => WallpaperHandlerImpl(false));
 
   locator.registerLazySingleton<ApiService>(() => ApiServiceImpl(locator()));
+  locator.registerLazySingleton<WallpaperRemoteDataSource>(
+      () => WallpaperRemoteDataSourceImpl(locator()));
 
   /* =============> Bloc <============= */
   locator.registerFactory(() => NetworkInfoBloc());

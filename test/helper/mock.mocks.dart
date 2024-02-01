@@ -1396,6 +1396,88 @@ class MockApiService extends _i1.Mock implements _i7.ApiService {
       ) as _i17.Future<List<_i7.WallpaperModel>>);
 }
 
+/// A class which mocks [WallpaperRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockWallpaperRemoteDataSource extends _i1.Mock
+    implements _i7.WallpaperRemoteDataSource {
+  @override
+  _i17.Future<List<_i7.WallpaperModel>> listWallpaper(int? page) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #listWallpaper,
+          [page],
+        ),
+        returnValue:
+            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
+        returnValueForMissingStub:
+            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
+      ) as _i17.Future<List<_i7.WallpaperModel>>);
+
+  @override
+  _i17.Future<_i7.WallpaperModel> detailWallpaper(int? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #detailWallpaper,
+          [id],
+        ),
+        returnValue:
+            _i17.Future<_i7.WallpaperModel>.value(_FakeWallpaperModel_5(
+          this,
+          Invocation.method(
+            #detailWallpaper,
+            [id],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i17.Future<_i7.WallpaperModel>.value(_FakeWallpaperModel_5(
+          this,
+          Invocation.method(
+            #detailWallpaper,
+            [id],
+          ),
+        )),
+      ) as _i17.Future<_i7.WallpaperModel>);
+
+  @override
+  _i17.Future<List<_i7.WallpaperModel>> searchWallpaper(
+    String? query,
+    int? page,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchWallpaper,
+          [
+            query,
+            page,
+          ],
+        ),
+        returnValue:
+            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
+        returnValueForMissingStub:
+            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
+      ) as _i17.Future<List<_i7.WallpaperModel>>);
+
+  @override
+  _i17.Future<List<_i7.WallpaperModel>> categorizedWallpaper(
+    String? category,
+    int? page,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #categorizedWallpaper,
+          [
+            category,
+            page,
+          ],
+        ),
+        returnValue:
+            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
+        returnValueForMissingStub:
+            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
+      ) as _i17.Future<List<_i7.WallpaperModel>>);
+}
+
 /// A class which mocks [ImageSource].
 ///
 /// See the documentation for Mockito's code generation for more information.

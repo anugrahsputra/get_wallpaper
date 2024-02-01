@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 import '../../helper/mock.dart';
 
 void main() {
-  MockApiService api = MockApiService();
+  MockWallpaperRemoteDataSource api = MockWallpaperRemoteDataSource();
   WallpaperRepository repository = WallpaperRepositoryImpl(api);
 
   const tImageSource = ImageSourceModel(

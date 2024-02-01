@@ -1,7 +1,7 @@
 import '../../core/core.dart';
 import '../data.dart';
 
-sealed class WallpaperRemoteDataSource {
+abstract class WallpaperRemoteDataSource {
   /// Retrieves a list of wallpapers.
   ///
   /// Returns a [Future] that resolves to a list of [Wallpaper] objects.
@@ -31,7 +31,6 @@ sealed class WallpaperRemoteDataSource {
 }
 
 class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
-  static const String _baseUrl = Env.baseUrl;
   static const String _curated = Env.curatedWallpaper;
   static const String _detail = Env.detailWallpaper;
   static const String _search = Env.searchWallpaper;
@@ -43,7 +42,7 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
   Future<List<WallpaperModel>> categorizedWallpaper(
       String category, int page) async {
     final response = await dioClient.get(
-      '$_baseUrl${_curated}per_page=20&page=$page',
+      '${_curated}per_page=20&page=$page',
       requireToken: true,
     );
 
@@ -54,7 +53,7 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
   @override
   Future<WallpaperModel> detailWallpaper(int id) async {
     final response = await dioClient.get(
-      '$_baseUrl${_detail}id=$id',
+      '$_detail$id',
       requireToken: true,
     );
 
@@ -64,7 +63,7 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
   @override
   Future<List<WallpaperModel>> listWallpaper(int page) async {
     final respoonse = await dioClient.get(
-      '$_baseUrl${_curated}per_page=20&page=$page',
+      '${_curated}per_page=20&page=$page',
       requireToken: true,
     );
 
@@ -79,7 +78,7 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
   @override
   Future<List<WallpaperModel>> searchWallpaper(String query, int page) async {
     final response = await dioClient.get(
-      '$_baseUrl$_search$query&per_page=20&page=$page',
+      '$_search$query&per_page=20&page=$page',
       requireToken: true,
     );
 

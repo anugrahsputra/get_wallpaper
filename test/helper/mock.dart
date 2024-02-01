@@ -20,6 +20,7 @@ export 'mock.mocks.dart';
 
   // Data/datasource
   MockSpec<ApiService>(),
+  MockSpec<WallpaperRemoteDataSource>(),
 
   // Data/model
   MockSpec<ImageSource>(),
