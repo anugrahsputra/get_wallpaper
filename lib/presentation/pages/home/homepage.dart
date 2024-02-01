@@ -145,17 +145,18 @@ class _HomepageState extends State<Homepage> with Wallpapers {
             padding: const EdgeInsets.symmetric(vertical: 10),
             color: AppColor.backgroundDark,
             child: Row(
-              children: category.map((cate) {
-                return GestureDetector(
+              children: List.generate(
+                categoryData.length,
+                (i) => GestureDetector(
                   onTap: () {
                     DefaultCacheManager().removeFile('wallpaper');
                     setState(() {
                       userTapped = true;
-                      selectedCategory = cate['name']!;
+                      selectedCategory = categoryData[i]['name']!;
                       currentPage = 1;
                       debugPrint('userTapped: $userTapped');
                     });
-                    final categoryName = cate['name']!;
+                    final categoryName = categoryData[i]['name']!;
                     if (categoryName == 'All') {
                       userTapped = false;
                       getCuratedWallpaper(context, currentPage);
@@ -165,11 +166,11 @@ class _HomepageState extends State<Homepage> with Wallpapers {
                     }
                   },
                   child: _Category(
-                    imageUrl: '${cate['image']}',
-                    name: '${cate['name']}',
+                    imageUrl: '${categoryData[i]['image']}',
+                    name: '${categoryData[i]['name']}',
                   ),
-                );
-              }).toList(),
+                ),
+              ),
             ),
           ),
         ),

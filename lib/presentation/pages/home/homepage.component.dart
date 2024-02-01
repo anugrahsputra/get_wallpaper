@@ -98,8 +98,8 @@ class _Category extends StatelessWidget {
     return Container(
       height: 50,
       width: 100,
-      margin: EdgeInsets.symmetric(
-        horizontal: 2.5.w,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
       ),
       decoration: BoxDecoration(
         image: DecorationImage(
