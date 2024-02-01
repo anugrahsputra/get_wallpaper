@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/data.dart';
 import '../../../domain/domain.dart';
 
 part 'search_wallpaper_bloc.freezed.dart';

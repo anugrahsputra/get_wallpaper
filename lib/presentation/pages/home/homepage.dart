@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart';
+import '../../../domain/domain.dart';
 import '../../presentation.dart';
 
 part 'homepage.component.dart';
@@ -54,9 +55,11 @@ class _HomepageState extends State<Homepage> with Wallpapers {
                   buildCategoryHeader(context),
                   buildCategoryTitle(),
                   buildListWallpaper(),
+                  buildLoadMoreBtn(context)
                 ],
               );
             } else {
+              // TODO: change this with offline widget
               return Center(
                 child: Text(
                   'You are disconnected from the internet',

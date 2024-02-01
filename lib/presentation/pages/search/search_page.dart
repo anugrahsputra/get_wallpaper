@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../data/data.dart';
+import '../../../domain/domain.dart';
 import '../../presentation.dart';
 
 part 'search_page.component.dart';

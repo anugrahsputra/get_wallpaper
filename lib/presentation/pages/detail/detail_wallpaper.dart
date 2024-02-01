@@ -8,7 +8,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/core.dart';
-import '../../../data/data.dart';
+import '../../../domain/domain.dart';
 import '../../../injection.dart';
 import '../../presentation.dart';
 
