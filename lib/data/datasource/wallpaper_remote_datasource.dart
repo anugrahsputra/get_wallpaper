@@ -41,10 +41,7 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
   @override
   Future<List<WallpaperModel>> categorizedWallpaper(
       String category, int page) async {
-    final response = await dioClient.get(
-      '${_curated}per_page=20&page=$page',
-      requireToken: true,
-    );
+    final response = await dioClient.get('${_curated}per_page=20&page=$page');
 
     final List<dynamic> data = response.data['photos'];
     return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
@@ -52,20 +49,14 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
 
   @override
   Future<WallpaperModel> detailWallpaper(int id) async {
-    final response = await dioClient.get(
-      '$_detail$id',
-      requireToken: true,
-    );
+    final response = await dioClient.get('$_detail$id');
 
     return WallpaperModel.fromJson(response.data);
   }
 
   @override
   Future<List<WallpaperModel>> listWallpaper(int page) async {
-    final respoonse = await dioClient.get(
-      '${_curated}per_page=20&page=$page',
-      requireToken: true,
-    );
+    final respoonse = await dioClient.get('${_curated}per_page=20&page=$page');
 
     final List<dynamic> data = respoonse.data['photos'];
     return data
@@ -77,10 +68,8 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
 
   @override
   Future<List<WallpaperModel>> searchWallpaper(String query, int page) async {
-    final response = await dioClient.get(
-      '$_search$query&per_page=20&page=$page',
-      requireToken: true,
-    );
+    final response =
+        await dioClient.get('$_search$query&per_page=20&page=$page');
 
     final List<dynamic> data = response.data['photos'];
     return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
