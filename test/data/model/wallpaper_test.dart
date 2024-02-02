@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_wallpaper/data/data.dart';
 
+import '../../dummy_data/dummy_data.dart';
+
 void main() {
   group('.fromJson()', () {
     test('should convert json value to field', () {
@@ -139,6 +141,13 @@ void main() {
         "liked": false,
         "alt": "Brown Rocks During Golden Hour"
       });
+    });
+  });
+
+  group('toEntity', () {
+    test('should be a subclass of wallpaper entity', () {
+      final result = tWallpaper.toEntity();
+      expect(result, tWallpaperEntity);
     });
   });
 }

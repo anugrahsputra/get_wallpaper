@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_wallpaper/data/data.dart';
 
+import '../../dummy_data/dummy_data.dart';
+
 void main() {
   group('.fromJson()', () {
     test('should convert json value to field', () {
@@ -87,6 +89,13 @@ void main() {
         "tiny":
             "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
       });
+    });
+  });
+
+  group('toEntity', () {
+    test('should be a subclass of imageSource entity', () {
+      final result = tImageSource.toEntity();
+      expect(result, tImageSourceEntity);
     });
   });
 }
