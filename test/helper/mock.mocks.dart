@@ -1251,6 +1251,197 @@ class MockPlatformException extends _i1.Mock implements _i19.PlatformException {
       ) as String);
 }
 
+/// A class which mocks [DioClient].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDioClient extends _i1.Mock implements _i13.DioClient {
+  @override
+  _i17.Future<_i6.Response<dynamic>> get(
+    String? url, {
+    Map<String, dynamic>? queryParameters,
+    _i18.CancelToken? cancelToken,
+    _i2.ProgressCallback? onReceiveProgress,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [url],
+          {
+            #queryParameters: queryParameters,
+            #cancelToken: cancelToken,
+            #onReceiveProgress: onReceiveProgress,
+          },
+        ),
+        returnValue:
+            _i17.Future<_i6.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
+          this,
+          Invocation.method(
+            #get,
+            [url],
+            {
+              #queryParameters: queryParameters,
+              #cancelToken: cancelToken,
+              #onReceiveProgress: onReceiveProgress,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i17.Future<_i6.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
+          this,
+          Invocation.method(
+            #get,
+            [url],
+            {
+              #queryParameters: queryParameters,
+              #cancelToken: cancelToken,
+              #onReceiveProgress: onReceiveProgress,
+            },
+          ),
+        )),
+      ) as _i17.Future<_i6.Response<dynamic>>);
+
+  @override
+  _i17.Future<_i6.Response<dynamic>> post(
+    String? url, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    _i2.Options? options,
+    _i18.CancelToken? cancelToken,
+    _i2.ProgressCallback? onSendProgress,
+    _i2.ProgressCallback? onReceiveProgress,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #post,
+          [url],
+          {
+            #data: data,
+            #queryParameters: queryParameters,
+            #options: options,
+            #cancelToken: cancelToken,
+            #onSendProgress: onSendProgress,
+            #onReceiveProgress: onReceiveProgress,
+          },
+        ),
+        returnValue:
+            _i17.Future<_i6.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
+          this,
+          Invocation.method(
+            #post,
+            [url],
+            {
+              #data: data,
+              #queryParameters: queryParameters,
+              #options: options,
+              #cancelToken: cancelToken,
+              #onSendProgress: onSendProgress,
+              #onReceiveProgress: onReceiveProgress,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i17.Future<_i6.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
+          this,
+          Invocation.method(
+            #post,
+            [url],
+            {
+              #data: data,
+              #queryParameters: queryParameters,
+              #options: options,
+              #cancelToken: cancelToken,
+              #onSendProgress: onSendProgress,
+              #onReceiveProgress: onReceiveProgress,
+            },
+          ),
+        )),
+      ) as _i17.Future<_i6.Response<dynamic>>);
+
+  @override
+  _i17.Future<_i6.Response<dynamic>> put(
+    String? url, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    _i2.Options? options,
+    _i18.CancelToken? cancelToken,
+    _i2.ProgressCallback? onSendProgress,
+    _i2.ProgressCallback? onReceiveProgress,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #put,
+          [url],
+          {
+            #data: data,
+            #queryParameters: queryParameters,
+            #options: options,
+            #cancelToken: cancelToken,
+            #onSendProgress: onSendProgress,
+            #onReceiveProgress: onReceiveProgress,
+          },
+        ),
+        returnValue:
+            _i17.Future<_i6.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
+          this,
+          Invocation.method(
+            #put,
+            [url],
+            {
+              #data: data,
+              #queryParameters: queryParameters,
+              #options: options,
+              #cancelToken: cancelToken,
+              #onSendProgress: onSendProgress,
+              #onReceiveProgress: onReceiveProgress,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i17.Future<_i6.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
+          this,
+          Invocation.method(
+            #put,
+            [url],
+            {
+              #data: data,
+              #queryParameters: queryParameters,
+              #options: options,
+              #cancelToken: cancelToken,
+              #onSendProgress: onSendProgress,
+              #onReceiveProgress: onReceiveProgress,
+            },
+          ),
+        )),
+      ) as _i17.Future<_i6.Response<dynamic>>);
+
+  @override
+  _i17.Future<dynamic> delete(
+    String? url, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    _i2.Options? options,
+    _i18.CancelToken? cancelToken,
+    _i2.ProgressCallback? onSendProgress,
+    _i2.ProgressCallback? onReceiveProgress,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [url],
+          {
+            #data: data,
+            #queryParameters: queryParameters,
+            #options: options,
+            #cancelToken: cancelToken,
+            #onSendProgress: onSendProgress,
+            #onReceiveProgress: onReceiveProgress,
+          },
+        ),
+        returnValue: _i17.Future<dynamic>.value(),
+        returnValueForMissingStub: _i17.Future<dynamic>.value(),
+      ) as _i17.Future<dynamic>);
+}
+
 /// A class which mocks [WallpaperHandler].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1313,87 +1504,6 @@ class MockWallpaperHandler extends _i1.Mock implements _i13.WallpaperHandler {
           ),
         )),
       ) as _i17.Future<String>);
-}
-
-/// A class which mocks [ApiService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockApiService extends _i1.Mock implements _i7.ApiService {
-  @override
-  _i17.Future<List<_i7.WallpaperModel>> listWallpaper(int? page) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #listWallpaper,
-          [page],
-        ),
-        returnValue:
-            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
-        returnValueForMissingStub:
-            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
-      ) as _i17.Future<List<_i7.WallpaperModel>>);
-
-  @override
-  _i17.Future<_i7.WallpaperModel> detailWallpaper(int? id) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #detailWallpaper,
-          [id],
-        ),
-        returnValue:
-            _i17.Future<_i7.WallpaperModel>.value(_FakeWallpaperModel_5(
-          this,
-          Invocation.method(
-            #detailWallpaper,
-            [id],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i17.Future<_i7.WallpaperModel>.value(_FakeWallpaperModel_5(
-          this,
-          Invocation.method(
-            #detailWallpaper,
-            [id],
-          ),
-        )),
-      ) as _i17.Future<_i7.WallpaperModel>);
-
-  @override
-  _i17.Future<List<_i7.WallpaperModel>> searchWallpaper(
-    String? query,
-    int? page,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #searchWallpaper,
-          [
-            query,
-            page,
-          ],
-        ),
-        returnValue:
-            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
-        returnValueForMissingStub:
-            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
-      ) as _i17.Future<List<_i7.WallpaperModel>>);
-
-  @override
-  _i17.Future<List<_i7.WallpaperModel>> categorizedWallpaper(
-    String? category,
-    int? page,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #categorizedWallpaper,
-          [
-            category,
-            page,
-          ],
-        ),
-        returnValue:
-            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
-        returnValueForMissingStub:
-            _i17.Future<List<_i7.WallpaperModel>>.value(<_i7.WallpaperModel>[]),
-      ) as _i17.Future<List<_i7.WallpaperModel>>);
 }
 
 /// A class which mocks [WallpaperRemoteDataSource].

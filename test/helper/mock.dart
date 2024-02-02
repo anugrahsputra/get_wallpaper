@@ -14,12 +14,12 @@ export 'mock.mocks.dart';
   MockSpec<AsyncWallpaper>(),
   MockSpec<Dio>(),
   MockSpec<PlatformException>(),
+  MockSpec<DioClient>(),
 
   // Utils
   MockSpec<WallpaperHandler>(),
 
   // Data/datasource
-  MockSpec<ApiService>(),
   MockSpec<WallpaperRemoteDataSource>(),
 
   // Data/model
