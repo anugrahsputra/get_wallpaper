@@ -20,14 +20,13 @@ Future<void> init() async {
         ),
       )),
   );
-  locator.registerFactory(() => DioClient(locator<Dio>())..init());
+  locator.registerFactory(() => DioClient(locator<Dio>()));
 
   locator.registerLazySingleton<NetworkHelper>(() => NetworkHelperImpl());
 
   locator.registerLazySingleton<WallpaperHandler>(
       () => WallpaperHandlerImpl(false));
 
-  locator.registerLazySingleton<ApiService>(() => ApiServiceImpl(locator()));
   locator.registerLazySingleton<WallpaperRemoteDataSource>(
       () => WallpaperRemoteDataSourceImpl(locator()));
 
