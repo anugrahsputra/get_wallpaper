@@ -34,7 +34,7 @@ jobs:
       - name: Run Tests
         run: flutter test
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk
       - name: Push to Release
         uses: ncipollo/release-action@v1
         with:
