@@ -52,19 +52,16 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
   Widget build(BuildContext context) {
     return BlocConsumer<SetWallpaperBloc, SetWallpaperState>(
       listener: (context, state) {
-        state.whenOrNull(
-          wallpaperHome: (result) {},
-          wallpaperLock: (result) {},
-          wallpaperBoth: (result) {},
-          wallpaperError: (message) => ScaffoldMessenger.of(context)
+        if (state is WallpaperError) {
+          ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text(message),
+                content: Text(state.message),
                 backgroundColor: Colors.red,
               ),
-            ),
-        );
+            );
+        }
       },
       builder: (context, state) {
         return Container(
@@ -158,7 +155,6 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
           title: const Text("Success"),
           description: const Text("Wallpaper set to Home and Lock screens"),
           animation: AnimationType.fromTop,
-          notificationPosition: NotificationPosition.topCenter,
         );
       },
     );

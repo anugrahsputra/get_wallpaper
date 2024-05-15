@@ -33,56 +33,92 @@ class _DetailWallpaperState extends State<DetailWallpaper> with Wallpapers {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        titleSpacing: 0,
-        leading: IconButton(
-          onPressed: () {
-            context.pop();
-            clear(context);
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-        title: Text(
-          'Back',
-          style: GoogleFonts.inter(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: BlocBuilder<DetailBloc, DetailState>(
-        builder: (context, state) {
-          if (state is DetailLoading) {
-            return Center(
-              child: LoadingAnimationWidget.bouncingBall(
-                color: Colors.deepPurple,
-                size: 100,
+    TextStyle textStyle = GoogleFonts.inter();
+
+    return BlocListener<NetworkInfoBloc, NetworkInfoState>(
+      listener: (context, state) {
+        if (state is Offline) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text('You are offline', style: textStyle),
+                backgroundColor: Colors.red,
               ),
             );
-          } else if (state is DetailLoaded) {
-            final wallpaper = state.wallpaper;
-            return Stack(
-              children: [
-                _WallpaperImage(
-                  src: wallpaper.src.portrait,
-                ),
-                Positioned(
-                  bottom: 10,
-                  left: 20,
-                  right: 20,
-                  child: _WallpaperDetails(
-                    wallpaper: wallpaper,
-                  ),
-                ),
-              ],
+        }
+        if (state is Connected) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text('You are online', style: textStyle),
+                backgroundColor: Colors.green,
+              ),
             );
-          } else {
-            return const Center(
-              child: Text('Error'),
-            );
-          }
-        },
-      ),
+        }
+      },
+      child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            forceMaterialTransparency: true,
+            titleSpacing: 0,
+            leading: IconButton(
+              onPressed: () {
+                context.pop();
+                clear(context);
+              },
+              icon: const Icon(Icons.arrow_back),
+            ),
+            title: Text(
+              'Back',
+              style: GoogleFonts.inter(fontWeight: FontWeight.bold),
+            ),
+          ),
+          body: const WallpaperView()),
+    );
+  }
+}
+
+class WallpaperView extends StatelessWidget {
+  const WallpaperView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DetailBloc, DetailState>(
+      builder: (context, state) {
+        if (state is DetailLoading) {
+          return Center(
+            child: LoadingAnimationWidget.bouncingBall(
+              color: Colors.deepPurple,
+              size: 100,
+            ),
+          );
+        } else if (state is DetailLoaded) {
+          final wallpaper = state.wallpaper;
+          return Stack(
+            children: [
+              _WallpaperImage(
+                src: wallpaper.src.portrait,
+              ),
+              Positioned(
+                bottom: 10,
+                left: 20,
+                right: 20,
+                child: _WallpaperDetails(
+                  wallpaper: wallpaper,
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const Center(
+            child: Text('Error'),
+          );
+        }
+      },
     );
   }
 }

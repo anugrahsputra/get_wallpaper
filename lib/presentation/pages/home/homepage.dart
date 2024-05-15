@@ -37,38 +37,63 @@ class _HomepageState extends State<Homepage> with Wallpapers {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder<NetworkInfoBloc, NetworkInfoState>(
-          builder: (context, state) {
-            if (state is Connected) {
-              return CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  const SliverAppBar(
-                    expandedHeight: 140,
-                    primary: false,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: _Header(),
+    TextStyle textStyle = GoogleFonts.inter(
+      color: Colors.white,
+    );
+
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<NetworkInfoBloc, NetworkInfoState>(
+          listener: (context, state) {
+            if (state is Offline) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'It seems that you\'re disconnected.',
+                      style: textStyle,
                     ),
+                    backgroundColor: Colors.red,
+                    duration: const Duration(seconds: 10),
                   ),
-                  buildCategoryHeader(context),
-                  buildCategoryTitle(),
-                  buildListWallpaper(),
-                  buildLoadMoreBtn(context)
-                ],
-              );
-            } else {
-              // TODO: change this with offline widget
-              return Center(
-                child: Text(
-                  'You are disconnected from the internet',
-                  style: GoogleFonts.inter(),
-                  textAlign: TextAlign.center,
-                ),
-              );
+                );
+            }
+            if (state is Connected) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'You\'re back online!',
+                      style: textStyle,
+                    ),
+                    backgroundColor: Colors.green,
+                    duration: const Duration(seconds: 3),
+                  ),
+                );
             }
           },
+        ),
+      ],
+      child: Scaffold(
+        body: SafeArea(
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              const SliverAppBar(
+                expandedHeight: 130,
+                primary: false,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: _Header(),
+                ),
+              ),
+              buildCategoryHeader(context),
+              buildCategoryTitle(),
+              buildListWallpaper(),
+              buildLoadMoreBtn(context)
+            ],
+          ),
         ),
       ),
     );
