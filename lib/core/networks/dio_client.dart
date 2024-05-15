@@ -1,42 +1,38 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-
-import '../core.dart';
 
 const String contentType = 'application/json';
 
 class DioClient {
   final Dio _dio;
+  DioClient(this._dio);
+  // DioClient(this._dio) {
+  //   _dio.options = BaseOptions(
+  //     baseUrl: Env.baseUrl,
+  //     connectTimeout: const Duration(seconds: 15),
+  //     receiveTimeout: const Duration(seconds: 15),
+  //     sendTimeout: const Duration(seconds: 15),
+  //     contentType: contentType,
+  //   );
 
-  DioClient(this._dio) {
-    _dio.options = BaseOptions(
-      baseUrl: Env.baseUrl,
-      connectTimeout: const Duration(seconds: 15),
-      receiveTimeout: const Duration(seconds: 15),
-      sendTimeout: const Duration(seconds: 15),
-      contentType: contentType,
-    );
-
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        if (Env.apiKey.isNotEmpty) {
-          options.headers['Authorization'] = Env.apiKey;
-        }
-        return handler.next(options);
-      },
-      onResponse: (response, handler) async {
-        if (response.statusCode != 200) {
-          throw ServerException();
-        }
-        return handler.next(response);
-      },
-      onError: (e, handler) async {
-        log(e.message.toString());
-        return handler.next(e);
-      },
-    ));
-  }
+  //   _dio.interceptors.add(InterceptorsWrapper(
+  //     onRequest: (options, handler) async {
+  //       if (Env.apiKey.isNotEmpty) {
+  //         options.headers['Authorization'] = Env.apiKey;
+  //       }
+  //       return handler.next(options);
+  //     },
+  //     onResponse: (response, handler) async {
+  //       if (response.statusCode != 200) {
+  //         throw ServerException();
+  //       }
+  //       return handler.next(response);
+  //     },
+  //     onError: (e, handler) async {
+  //       log(e.message.toString());
+  //       return handler.next(e);
+  //     },
+  //   ));
+  // }
 
   Future<Response> get(
     String url, {
