@@ -12,10 +12,10 @@ class NetworkHelperImpl implements NetworkHelper {
   void checkConnection() {
     Connectivity().onConnectivityChanged.listen((result) {
       final NetworkInfoBloc networkInfo = locator<NetworkInfoBloc>();
-      if (result == ConnectivityResult.none) {
-        networkInfo.add(const ConnectionChanged(false));
+      if (result.contains(ConnectivityResult.none)) {
+        networkInfo.add(const ConnectionChanged());
       } else {
-        networkInfo.add(const ConnectionChanged(true));
+        networkInfo.add(const ConnectionChanged(isConnected: true));
       }
     });
   }
