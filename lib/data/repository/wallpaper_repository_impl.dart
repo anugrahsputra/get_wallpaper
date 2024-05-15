@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 
 import '../../core/core.dart';
@@ -18,9 +16,13 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       final result = await apiService.categorizedWallpaper(category, page);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure('Server Failure'));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return const Left(ServerFailure(message: 'Server Failure'));
+    } on NetworkException {
+      return const Left(NetworkFailure(message: "No Internet Connection"));
+    } on NotFoundException {
+      return const Left(RequestFailure(message: "Not Found"));
+    } on UnknownException {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 
@@ -30,9 +32,13 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       final result = await apiService.detailWallpaper(id);
       return Right(result.toEntity());
     } on ServerException {
-      return const Left(ServerFailure('Server Failure'));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return const Left(ServerFailure(message: 'Server Failure'));
+    } on NetworkException {
+      return const Left(NetworkFailure(message: "No Internet Connection"));
+    } on NotFoundException {
+      return const Left(RequestFailure(message: "Not Found"));
+    } on UnknownException {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 
@@ -42,9 +48,13 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       final result = await apiService.listWallpaper(page);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure('Server Failure'));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return const Left(ServerFailure(message: 'Server Failure'));
+    } on NetworkException {
+      return const Left(NetworkFailure(message: "No Internet Connection"));
+    } on NotFoundException {
+      return const Left(RequestFailure(message: "Not Found"));
+    } on UnknownException {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 
@@ -55,9 +65,13 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       final result = await apiService.searchWallpaper(query, page);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure('Server Failure'));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return const Left(ServerFailure(message: 'Server Failure'));
+    } on NetworkException {
+      return const Left(NetworkFailure(message: "No Internet Connection"));
+    } on NotFoundException {
+      return const Left(RequestFailure(message: "Not Found"));
+    } on UnknownException {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 
@@ -68,9 +82,13 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
       final result = await apiService.searchWallpaper(query, page);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure('Server Failure'));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return const Left(ServerFailure(message: 'Server Failure'));
+    } on NetworkException {
+      return const Left(NetworkFailure(message: "No Internet Connection"));
+    } on NotFoundException {
+      return const Left(RequestFailure(message: "Not Found"));
+    } on UnknownException {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 }
