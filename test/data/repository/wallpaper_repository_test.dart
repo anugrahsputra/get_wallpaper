@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_wallpaper/core/core.dart';
@@ -68,21 +66,21 @@ void main() {
       final result = await repository.listWallpaper(1);
 
       verify(api.listWallpaper(1));
-      expect(result, equals(const Left(ServerFailure('Server Failure'))));
+      expect(
+          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.listWallpaper(any))
-          .thenThrow(const SocketException('Failed to connect to the network'));
+      when(api.listWallpaper(any)).thenThrow(NetworkException());
 
       final result = await repository.listWallpaper(1);
 
       verify(api.listWallpaper(1));
       expect(
           result,
-          equals(const Left(
-              ConnectionFailure('Failed to connect to the network'))));
+          equals(
+              const Left(NetworkFailure(message: 'No Internet Connection'))));
     });
   });
 
@@ -108,21 +106,21 @@ void main() {
       final result = await repository.categorizedWallpaper('category', 1);
 
       verify(api.categorizedWallpaper(any, any));
-      expect(result, equals(const Left(ServerFailure('Server Failure'))));
+      expect(
+          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.categorizedWallpaper(any, any))
-          .thenThrow(const SocketException('Failed to connect to the network'));
+      when(api.categorizedWallpaper(any, any)).thenThrow(NetworkException());
 
       final result = await repository.categorizedWallpaper('category', 1);
 
       verify(api.categorizedWallpaper(any, any));
       expect(
           result,
-          equals(const Left(
-              ConnectionFailure('Failed to connect to the network'))));
+          equals(
+              const Left(NetworkFailure(message: 'No Internet Connection'))));
     });
   });
 
@@ -144,21 +142,21 @@ void main() {
       final result = await repository.detailWallpaper(1);
 
       verify(api.detailWallpaper(any));
-      expect(result, equals(const Left(ServerFailure('Server Failure'))));
+      expect(
+          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.detailWallpaper(any))
-          .thenThrow(const SocketException('Failed to connect to the network'));
+      when(api.detailWallpaper(any)).thenThrow(NetworkException());
 
       final result = await repository.detailWallpaper(1);
 
       verify(api.detailWallpaper(any));
       expect(
           result,
-          equals(const Left(
-              ConnectionFailure('Failed to connect to the network'))));
+          equals(
+              const Left(NetworkFailure(message: 'No Internet Connection'))));
     });
   });
 
@@ -182,21 +180,21 @@ void main() {
       final result = await repository.searchWallpaper('query', 1);
 
       verify(api.searchWallpaper(any, any));
-      expect(result, equals(const Left(ServerFailure('Server Failure'))));
+      expect(
+          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any, any))
-          .thenThrow(const SocketException('Failed to connect to the network'));
+      when(api.searchWallpaper(any, any)).thenThrow(NetworkException());
 
       final result = await repository.searchWallpaper('query', 1);
 
       verify(api.searchWallpaper(any, any));
       expect(
           result,
-          equals(const Left(
-              ConnectionFailure('Failed to connect to the network'))));
+          equals(
+              const Left(NetworkFailure(message: 'No Internet Connection'))));
     });
   });
 
@@ -220,21 +218,31 @@ void main() {
       final result = await repository.searchWallpaperLoad('query', 1);
 
       verify(api.searchWallpaper(any, any));
-      expect(result, equals(const Left(ServerFailure('Server Failure'))));
+      expect(
+          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any, any))
-          .thenThrow(const SocketException('Failed to connect to the network'));
+      when(api.searchWallpaper(any, any)).thenThrow(NetworkException());
 
       final result = await repository.searchWallpaperLoad('query', 1);
 
       verify(api.searchWallpaper(any, any));
       expect(
           result,
-          equals(const Left(
-              ConnectionFailure('Failed to connect to the network'))));
+          equals(
+              const Left(NetworkFailure(message: 'No Internet Connection'))));
+    });
+
+    test('should return Request failure when call to api is unsuccessfull',
+        () async {
+      when(api.searchWallpaper(any, any)).thenThrow(NotFoundException());
+
+      final result = await repository.searchWallpaperLoad('query', 1);
+
+      verify(api.searchWallpaper(any, any));
+      expect(result, equals(const Left(RequestFailure(message: 'Not Found'))));
     });
   });
 }

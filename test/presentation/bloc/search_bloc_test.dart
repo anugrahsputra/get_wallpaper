@@ -47,7 +47,7 @@ void main() {
       'should emit [Loading, Error] when data is gotten unsuccessfully',
       build: () {
         when(getSearchWallpaper.call(any, any)).thenAnswer(
-            (_) async => const Left(ServerFailure('Server Failure')));
+            (_) async => const Left(ServerFailure(message: 'Server Failure')));
         return searchBloc;
       },
       act: (bloc) => bloc.add(SearchQuery(tQuery, 1)),
@@ -83,7 +83,7 @@ void main() {
       'should emit [Error] when unsuccessfull',
       build: () {
         when(getSearchWallpaper.call(any, any)).thenAnswer(
-            (_) async => const Left(ServerFailure('Server Failure')));
+            (_) async => const Left(ServerFailure(message: 'Server Failure')));
         return searchBloc;
       },
       act: (bloc) => bloc.add(More(tQuery, 1)),
