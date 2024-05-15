@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:get_wallpaper/bloc_observer.dart';
 import 'package:sizer/sizer.dart';
 
 import '../injection.dart';
@@ -12,7 +11,6 @@ import 'presentation/presentation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   CustomLog.initialize(showLog: !kReleaseMode);
-  Bloc.observer = AppBlocObserver();
   await init();
   runApp(const MyApp());
 }

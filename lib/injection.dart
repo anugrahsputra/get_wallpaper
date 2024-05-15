@@ -39,9 +39,8 @@ Future<void> init() async {
         DioCacheInterceptor(
           options: CacheOptions(
             store: HiveCacheStore(dir.path, hiveBoxName: 'cached_wallpapers'),
-            priority: CachePriority.high,
-            policy: CachePolicy.forceCache,
-            maxStale: const Duration(days: 7),
+            priority: CachePriority.normal,
+            maxStale: const Duration(days: 1),
             hitCacheOnErrorExcept: [],
           ),
         ),
