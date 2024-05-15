@@ -1,7 +1,8 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:get_it/get_it.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'core/core.dart';
 import 'data/datasource/api.dart';
@@ -12,13 +13,39 @@ import 'presentation/presentation.dart';
 final locator = GetIt.instance;
 
 Future<void> init() async {
+  var dir = await getTemporaryDirectory();
+
   locator.registerFactory<Dio>(
-    () => Dio()
-      ..interceptors.add(LogInterceptor(
-        logPrint: (object) => log(
-          object.toString(),
+    () => Dio(
+      BaseOptions(
+        baseUrl: Env.baseUrl,
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 5),
+        sendTimeout: const Duration(seconds: 5),
+      ),
+    ),
+    instanceName: "interceptor",
+  );
+  locator.registerFactory<Dio>(
+    () => Dio(
+      BaseOptions(
+        baseUrl: Env.baseUrl,
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 5),
+        sendTimeout: const Duration(seconds: 5),
+      ),
+    )..interceptors.addAll([
+        CustomInterceptor(),
+        DioCacheInterceptor(
+          options: CacheOptions(
+            store: HiveCacheStore(dir.path, hiveBoxName: 'cached_wallpapers'),
+            priority: CachePriority.high,
+            policy: CachePolicy.forceCache,
+            maxStale: const Duration(days: 7),
+            hitCacheOnErrorExcept: [],
+          ),
         ),
-      )),
+      ]),
   );
   locator.registerFactory(() => DioClient(locator<Dio>()));
 
