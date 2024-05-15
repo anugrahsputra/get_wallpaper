@@ -41,7 +41,7 @@ class WallpaperRemoteDataSourceImpl implements WallpaperRemoteDataSource {
   @override
   Future<List<WallpaperModel>> categorizedWallpaper(
       String category, int page) async {
-    final response = await dioClient.get('${_curated}per_page=20&page=$page');
+    final response = await dioClient.get('$_search$category&per_page=20&page=$page');
 
     final List<dynamic> data = response.data['photos'];
     return data.map((photo) => WallpaperModel.fromJson(photo)).toList();
