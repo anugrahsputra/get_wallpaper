@@ -8,7 +8,7 @@ class _Header extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 100,
+          height: 50,
           width: double.infinity,
           decoration: const BoxDecoration(
             color: Colors.transparent,
@@ -29,14 +29,14 @@ class _Header extends StatelessWidget {
               bottomRight: Radius.circular(14),
             ),
           ),
-          child: Text(
-            'Get Wallpaper',
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-          ),
+          // child: Text(
+          //   'Get Wallpaper',
+          //   style: GoogleFonts.poppins(
+          //     fontSize: 26,
+          //     fontWeight: FontWeight.w600,
+          //     color: Theme.of(context).colorScheme.onPrimary,
+          //   ),
+          // ),
         ),
         Positioned(
           top: 75,
