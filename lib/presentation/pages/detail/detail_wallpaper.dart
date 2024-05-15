@@ -1,5 +1,3 @@
-import 'package:elegant_notification/elegant_notification.dart';
-import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +31,9 @@ class _DetailWallpaperState extends State<DetailWallpaper> with Wallpapers {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = GoogleFonts.inter();
+    TextStyle textStyle = GoogleFonts.inter(
+      color: Colors.white,
+    );
 
     return BlocListener<NetworkInfoBloc, NetworkInfoState>(
       listener: (context, state) {
@@ -44,16 +44,6 @@ class _DetailWallpaperState extends State<DetailWallpaper> with Wallpapers {
               SnackBar(
                 content: Text('You are offline', style: textStyle),
                 backgroundColor: Colors.red,
-              ),
-            );
-        }
-        if (state is Connected) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text('You are online', style: textStyle),
-                backgroundColor: Colors.green,
               ),
             );
         }

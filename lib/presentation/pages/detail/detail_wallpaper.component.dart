@@ -151,11 +151,6 @@ class _WallpaperDetailsState extends State<_WallpaperDetails> {
                 ? SetLock(widget.wallpaper.src.portrait)
                 : SetBoth(widget.wallpaper.src.portrait));
         context.pop();
-        ElegantNotification.success(
-          title: const Text("Success"),
-          description: const Text("Wallpaper set to Home and Lock screens"),
-          animation: AnimationType.fromTop,
-        );
       },
     );
   }
