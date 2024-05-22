@@ -46,14 +46,14 @@ void main() {
     blocTest(
       'should emit [Loading, Error] when data is gotten unsuccessfully',
       build: () {
-        when(getSearchWallpaper.call(any, any)).thenAnswer(
-            (_) async => const Left(ServerFailure(message: 'Server Failure')));
+        when(getSearchWallpaper.call(any, any)).thenAnswer((_) async =>
+            const Left(ServerFailure(message: ErrorMessage.serverFailure)));
         return searchBloc;
       },
       act: (bloc) => bloc.add(SearchQuery(tQuery, 1)),
       expect: () => [
         Loading(),
-        Error('Server Failure'),
+        Error(ErrorMessage.serverFailure),
       ],
       verify: (_) {
         verify(getSearchWallpaper.call(any, any));
@@ -82,13 +82,13 @@ void main() {
     blocTest(
       'should emit [Error] when unsuccessfull',
       build: () {
-        when(getSearchWallpaper.call(any, any)).thenAnswer(
-            (_) async => const Left(ServerFailure(message: 'Server Failure')));
+        when(getSearchWallpaper.call(any, any)).thenAnswer((_) async =>
+            const Left(ServerFailure(message: ErrorMessage.serverFailure)));
         return searchBloc;
       },
       act: (bloc) => bloc.add(More(tQuery, 1)),
       expect: () => [
-        Error('Server Failure'),
+        Error(ErrorMessage.serverFailure),
       ],
       verify: (_) {
         verify(getSearchWallpaper.call(any, any));

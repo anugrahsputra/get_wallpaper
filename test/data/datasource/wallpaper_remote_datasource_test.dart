@@ -115,7 +115,7 @@ void main() {
 
       await dataSource.categorizedWallpaper(category, page);
 
-      verify(mockDioClient.get('${curated}per_page=20&page=$page'));
+      verify(mockDioClient.get('$search$category&per_page=20&page=$page'));
     });
   });
 }

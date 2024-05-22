@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_wallpaper/core/core.dart';
 import 'package:get_wallpaper/data/data.dart';
@@ -10,6 +11,8 @@ import '../../helper/mock.dart';
 void main() {
   MockWallpaperRemoteDataSource api = MockWallpaperRemoteDataSource();
   WallpaperRepository repository = WallpaperRepositoryImpl(api);
+
+  final requestOptions = RequestOptions(path: '');
 
   const tImageSource = ImageSourceModel(
     original:
@@ -61,26 +64,34 @@ void main() {
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.listWallpaper(any)).thenThrow(ServerException());
+      when(api.listWallpaper(any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnauthorizedException(),
+      ));
 
       final result = await repository.listWallpaper(1);
 
       verify(api.listWallpaper(1));
-      expect(
-          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
+      expect(result,
+          equals(const Left(AuthFailure(message: ErrorMessage.authFailure))));
     });
 
-    test('should return connection failure when call to api is unsuccessfull',
+    test('should return network failure when call to api is unsuccessfull',
         () async {
-      when(api.listWallpaper(any)).thenThrow(NetworkException());
+      when(api.listWallpaper(any)).thenThrow(
+        DioException(
+          requestOptions: requestOptions,
+          error: NetworkException(),
+        ),
+      );
 
       final result = await repository.listWallpaper(1);
 
       verify(api.listWallpaper(1));
       expect(
           result,
-          equals(
-              const Left(NetworkFailure(message: 'No Internet Connection'))));
+          equals(const Left(
+              NetworkFailure(message: ErrorMessage.networkFailure))));
     });
   });
 
@@ -101,26 +112,34 @@ void main() {
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.categorizedWallpaper(any, any)).thenThrow(ServerException());
+      when(api.categorizedWallpaper(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnauthorizedException(),
+      ));
 
       final result = await repository.categorizedWallpaper('category', 1);
 
       verify(api.categorizedWallpaper(any, any));
-      expect(
-          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
+      expect(result,
+          equals(const Left(AuthFailure(message: ErrorMessage.authFailure))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.categorizedWallpaper(any, any)).thenThrow(NetworkException());
+      when(api.categorizedWallpaper(any, any)).thenThrow(
+        DioException(
+          requestOptions: requestOptions,
+          error: NetworkException(),
+        ),
+      );
 
       final result = await repository.categorizedWallpaper('category', 1);
 
       verify(api.categorizedWallpaper(any, any));
       expect(
           result,
-          equals(
-              const Left(NetworkFailure(message: 'No Internet Connection'))));
+          equals(const Left(
+              NetworkFailure(message: ErrorMessage.networkFailure))));
     });
   });
 
@@ -137,26 +156,32 @@ void main() {
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.detailWallpaper(any)).thenThrow(ServerException());
+      when(api.detailWallpaper(any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnauthorizedException(),
+      ));
 
       final result = await repository.detailWallpaper(1);
 
       verify(api.detailWallpaper(any));
-      expect(
-          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
+      expect(result,
+          equals(const Left(AuthFailure(message: ErrorMessage.authFailure))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.detailWallpaper(any)).thenThrow(NetworkException());
+      when(api.detailWallpaper(any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NetworkException(),
+      ));
 
       final result = await repository.detailWallpaper(1);
 
       verify(api.detailWallpaper(any));
       expect(
           result,
-          equals(
-              const Left(NetworkFailure(message: 'No Internet Connection'))));
+          equals(const Left(
+              NetworkFailure(message: ErrorMessage.networkFailure))));
     });
   });
 
@@ -175,26 +200,32 @@ void main() {
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any, any)).thenThrow(ServerException());
+      when(api.searchWallpaper(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnauthorizedException(),
+      ));
 
       final result = await repository.searchWallpaper('query', 1);
 
       verify(api.searchWallpaper(any, any));
-      expect(
-          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
+      expect(result,
+          equals(const Left(AuthFailure(message: ErrorMessage.authFailure))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any, any)).thenThrow(NetworkException());
+      when(api.searchWallpaper(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NetworkException(),
+      ));
 
       final result = await repository.searchWallpaper('query', 1);
 
       verify(api.searchWallpaper(any, any));
       expect(
           result,
-          equals(
-              const Left(NetworkFailure(message: 'No Internet Connection'))));
+          equals(const Left(
+              NetworkFailure(message: ErrorMessage.networkFailure))));
     });
   });
 
@@ -213,36 +244,48 @@ void main() {
 
     test('should return server failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any, any)).thenThrow(ServerException());
+      when(api.searchWallpaper(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnauthorizedException(),
+      ));
 
       final result = await repository.searchWallpaperLoad('query', 1);
 
       verify(api.searchWallpaper(any, any));
-      expect(
-          result, equals(const Left(ServerFailure(message: 'Server Failure'))));
+      expect(result,
+          equals(const Left(AuthFailure(message: ErrorMessage.authFailure))));
     });
 
     test('should return connection failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any, any)).thenThrow(NetworkException());
+      when(api.searchWallpaper(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NetworkException(),
+      ));
 
       final result = await repository.searchWallpaperLoad('query', 1);
 
       verify(api.searchWallpaper(any, any));
       expect(
           result,
-          equals(
-              const Left(NetworkFailure(message: 'No Internet Connection'))));
+          equals(const Left(
+              NetworkFailure(message: ErrorMessage.networkFailure))));
     });
 
     test('should return Request failure when call to api is unsuccessfull',
         () async {
-      when(api.searchWallpaper(any, any)).thenThrow(NotFoundException());
+      when(api.searchWallpaper(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NotFoundException(),
+      ));
 
       final result = await repository.searchWallpaperLoad('query', 1);
 
       verify(api.searchWallpaper(any, any));
-      expect(result, equals(const Left(RequestFailure(message: 'Not Found'))));
+      expect(
+          result,
+          equals(const Left(
+              RequestFailure(message: ErrorMessage.requestFailure))));
     });
   });
 }

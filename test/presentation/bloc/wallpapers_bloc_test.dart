@@ -47,14 +47,14 @@ void main() {
     blocTest<WallpapersBloc, WallpapersState>(
       'should emit [Loading, Error] when failed',
       build: () {
-        when(mockGetListWallpaper.call(any)).thenAnswer(
-            (_) async => const Left(ServerFailure(message: 'Server Failure')));
+        when(mockGetListWallpaper.call(any)).thenAnswer((_) async =>
+            const Left(ServerFailure(message: ErrorMessage.serverFailure)));
         return wallpapersBloc;
       },
       act: (bloc) => bloc.add(const Curated(1)),
       expect: () => [
         const Loading(),
-        const Error('Server Failure'),
+        const Error(ErrorMessage.serverFailure),
       ],
     );
   });
@@ -77,14 +77,14 @@ void main() {
     blocTest<WallpapersBloc, WallpapersState>(
       'should emit [Loading, Error] when failed',
       build: () {
-        when(mockGetCategorizedWallpaper.call(any, any)).thenAnswer(
-            (_) async => const Left(ServerFailure(message: "Server Failure")));
+        when(mockGetCategorizedWallpaper.call(any, any)).thenAnswer((_) async =>
+            const Left(ServerFailure(message: ErrorMessage.serverFailure)));
         return wallpapersBloc;
       },
       act: (bloc) => bloc.add(const Category('', 1)),
       expect: () => [
         const Loading(),
-        const Error('Server Failure'),
+        const Error(ErrorMessage.serverFailure),
       ],
     );
   });
