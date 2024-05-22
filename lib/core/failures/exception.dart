@@ -1,17 +1,71 @@
-class ServerException implements Exception {}
+class ServerException implements Exception {
+  final String message;
+  ServerException({this.message = 'Server Exception'});
 
-class NetworkException implements Exception {}
+  @override
+  String toString() => message;
+}
 
-class UnauthorizedException implements Exception {}
+class NetworkException implements Exception {
+  final String message;
+  NetworkException({this.message = 'NetworkException'});
 
-class BadRequestException implements Exception {}
+  @override
+  String toString() => message;
+}
 
-class ForbiddenException implements Exception {}
+class UnauthorizedException implements Exception {
+  final String message;
+  UnauthorizedException({this.message = 'UnauthorizedException'});
 
-class NotFoundException implements Exception {}
+  @override
+  String toString() => message;
+}
 
-class CacheException implements Exception {}
+class BadRequestException implements Exception {
+  final String message;
+  BadRequestException({this.message = 'BadRequestException'});
 
-class DatabaseException implements Exception {}
+  @override
+  String toString() => message;
+}
 
-class UnknownException implements Exception {}
+class ForbiddenException implements Exception {
+  final String message;
+  ForbiddenException({this.message = 'ForbiddenException'});
+
+  @override
+  String toString() => message;
+}
+
+class NotFoundException implements Exception {
+  final String message;
+  NotFoundException({this.message = 'ForbiddenException'});
+
+  @override
+  String toString() => message;
+}
+
+class CacheException implements Exception {
+  final String message;
+  CacheException({this.message = 'CacheException'});
+
+  @override
+  String toString() => message;
+}
+
+class DatabaseException implements Exception {
+  final String message;
+  DatabaseException({this.message = 'DatabaseException'});
+
+  @override
+  String toString() => message;
+}
+
+class UnknownException implements Exception {
+  final String message;
+  UnknownException({this.message = 'UnknownException'});
+
+  @override
+  String toString() => message;
+}

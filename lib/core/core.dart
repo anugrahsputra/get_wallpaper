@@ -1,3 +1,4 @@
+export 'enums/enums.dart';
 export 'env/environment.dart';
 export 'failures/failure.dart';
 export 'helper/helper.dart';

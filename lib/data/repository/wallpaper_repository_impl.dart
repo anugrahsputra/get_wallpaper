@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../core/core.dart';
 import '../../domain/domain.dart';
@@ -15,14 +16,20 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
     try {
       final result = await apiService.categorizedWallpaper(category, page);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return const Left(ServerFailure(message: 'Server Failure'));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: "No Internet Connection"));
-    } on NotFoundException {
-      return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: "Unknown Error"));
+    } on DioException catch (e) {
+      if (e.error is UnauthorizedException) {
+        return const Left(AuthFailure(message: ErrorMessage.authFailure));
+      } else if (e.error is ServerException) {
+        return const Left(ServerFailure(message: ErrorMessage.serverFailure));
+      } else if (e.error is NetworkException) {
+        return const Left(NetworkFailure(message: ErrorMessage.networkFailure));
+      } else if (e.error is NotFoundException) {
+        return const Left(RequestFailure(message: ErrorMessage.requestFailure));
+      } else {
+        return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
+      }
+    } catch (e) {
+      return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
     }
   }
 
@@ -31,14 +38,20 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
     try {
       final result = await apiService.detailWallpaper(id);
       return Right(result.toEntity());
-    } on ServerException {
-      return const Left(ServerFailure(message: 'Server Failure'));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: "No Internet Connection"));
-    } on NotFoundException {
-      return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: "Unknown Error"));
+    } on DioException catch (e) {
+      if (e.error is UnauthorizedException) {
+        return const Left(AuthFailure(message: ErrorMessage.authFailure));
+      } else if (e.error is ServerException) {
+        return const Left(ServerFailure(message: ErrorMessage.serverFailure));
+      } else if (e.error is NetworkException) {
+        return const Left(NetworkFailure(message: ErrorMessage.networkFailure));
+      } else if (e.error is NotFoundException) {
+        return const Left(RequestFailure(message: ErrorMessage.requestFailure));
+      } else {
+        return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
+      }
+    } catch (e) {
+      return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
     }
   }
 
@@ -47,14 +60,20 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
     try {
       final result = await apiService.listWallpaper(page);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return const Left(ServerFailure(message: 'Server Failure'));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: "No Internet Connection"));
-    } on NotFoundException {
-      return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: "Unknown Error"));
+    } on DioException catch (e) {
+      if (e.error is UnauthorizedException) {
+        return const Left(AuthFailure(message: ErrorMessage.authFailure));
+      } else if (e.error is ServerException) {
+        return const Left(ServerFailure(message: ErrorMessage.serverFailure));
+      } else if (e.error is NetworkException) {
+        return const Left(NetworkFailure(message: ErrorMessage.networkFailure));
+      } else if (e.error is NotFoundException) {
+        return const Left(RequestFailure(message: ErrorMessage.requestFailure));
+      } else {
+        return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
+      }
+    } catch (e) {
+      return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
     }
   }
 
@@ -64,14 +83,20 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
     try {
       final result = await apiService.searchWallpaper(query, page);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return const Left(ServerFailure(message: 'Server Failure'));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: "No Internet Connection"));
-    } on NotFoundException {
-      return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: "Unknown Error"));
+    } on DioException catch (e) {
+      if (e.error is UnauthorizedException) {
+        return const Left(AuthFailure(message: ErrorMessage.authFailure));
+      } else if (e.error is ServerException) {
+        return const Left(ServerFailure(message: ErrorMessage.serverFailure));
+      } else if (e.error is NetworkException) {
+        return const Left(NetworkFailure(message: ErrorMessage.networkFailure));
+      } else if (e.error is NotFoundException) {
+        return const Left(RequestFailure(message: ErrorMessage.requestFailure));
+      } else {
+        return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
+      }
+    } catch (e) {
+      return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
     }
   }
 
@@ -81,14 +106,20 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
     try {
       final result = await apiService.searchWallpaper(query, page);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return const Left(ServerFailure(message: 'Server Failure'));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: "No Internet Connection"));
-    } on NotFoundException {
-      return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: "Unknown Error"));
+    } on DioException catch (e) {
+      if (e.error is UnauthorizedException) {
+        return const Left(AuthFailure(message: ErrorMessage.authFailure));
+      } else if (e.error is ServerException) {
+        return const Left(ServerFailure(message: ErrorMessage.serverFailure));
+      } else if (e.error is NetworkException) {
+        return const Left(NetworkFailure(message: ErrorMessage.networkFailure));
+      } else if (e.error is NotFoundException) {
+        return const Left(RequestFailure(message: ErrorMessage.requestFailure));
+      } else {
+        return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
+      }
+    } catch (e) {
+      return const Left(UnknownFailure(message: ErrorMessage.unknownFailure));
     }
   }
 }

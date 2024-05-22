@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 
+import '../core.dart';
+
 abstract class Failure extends Equatable {
-  final String message;
+  final ErrorMessage message;
 
   const Failure({required this.message});
 

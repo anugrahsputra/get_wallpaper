@@ -47,13 +47,33 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   void onError(err, handler) async {
     log.severe("Error: ${err.requestOptions.uri}");
     if (isBadRequest(err)) {
-      throw BadRequestException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: BadRequestException(message: err.message!),
+        ),
+      );
     } else if (isUnauthorized(err)) {
-      throw UnauthorizedException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: UnauthorizedException(),
+        ),
+      );
     } else if (isForbidden(err)) {
-      throw ForbiddenException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: ForbiddenException(),
+        ),
+      );
     } else if (isNotFound(err)) {
-      throw NotFoundException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: NotFoundException(),
+        ),
+      );
     } else if (isConnectionError(err)) {
       try {
         log.warning("Connection Error: ${err.requestOptions.uri}");
@@ -61,10 +81,20 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
         return handler.resolve(response);
       } catch (e) {
         log.severe("Connection Error: ${err.requestOptions.uri}");
-        handler.reject(err);
-        throw NetworkException();
+        return handler.reject(
+          DioException(
+            requestOptions: err.requestOptions,
+            error: NetworkException(),
+          ),
+        );
       }
+    } else {
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: UnknownException(),
+        ),
+      );
     }
-    super.onError(err, handler);
   }
 }
