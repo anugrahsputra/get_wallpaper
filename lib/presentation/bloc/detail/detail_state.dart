@@ -5,5 +5,5 @@ class DetailState with _$DetailState {
   const factory DetailState.initial() = DetailInitial;
   const factory DetailState.loading() = DetailLoading;
   const factory DetailState.loaded(Wallpaper wallpaper) = DetailLoaded;
-  const factory DetailState.error(String message) = DetailError;
+  const factory DetailState.error(ErrorMessage message) = DetailError;
 }

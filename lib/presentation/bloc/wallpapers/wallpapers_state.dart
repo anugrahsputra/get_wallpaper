@@ -8,5 +8,5 @@ class WallpapersState with _$WallpapersState {
       CuratedLoaded;
   const factory WallpapersState.categoryLoaded(List<Wallpaper> wallpaper) =
       CategoryLoaded;
-  const factory WallpapersState.error(String message) = Error;
+  const factory WallpapersState.error(ErrorMessage message) = Error;
 }
