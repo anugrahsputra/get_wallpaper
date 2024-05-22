@@ -82,7 +82,7 @@ class WallpaperView extends StatelessWidget {
         if (state is DetailLoading) {
           return Center(
             child: LoadingAnimationWidget.bouncingBall(
-              color: Colors.deepPurple,
+              color: AppColor.primaryLight,
               size: 100,
             ),
           );
@@ -103,10 +103,10 @@ class WallpaperView extends StatelessWidget {
               ),
             ],
           );
+        } else if (state is DetailError) {
+          return Center(child: Text(state.message.errorMessage));
         } else {
-          return const Center(
-            child: Text('Error'),
-          );
+          return const Center(child: Text('Unknown'));
         }
       },
     );

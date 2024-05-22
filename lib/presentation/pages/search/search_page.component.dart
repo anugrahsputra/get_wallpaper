@@ -78,7 +78,7 @@ class SearchResults extends StatelessWidget with GridViewMixin {
           },
           error: (message) {
             return Center(
-              child: Text(message),
+              child: Text(message.errorMessage),
             );
           },
         );

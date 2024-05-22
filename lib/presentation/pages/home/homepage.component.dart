@@ -150,7 +150,7 @@ class _ListCategorizedWallpaper extends StatelessWidget with GridViewMixin {
         } else if (state is Error) {
           final errMess = state.message;
           return Center(
-            child: Text(errMess),
+            child: Text(errMess.errorMessage),
           );
         } else {
           return Container();
@@ -175,7 +175,7 @@ class _ListCuratedWallpaper extends StatelessWidget with GridViewMixin {
         } else if (state is Error) {
           final errMess = state.message;
           return Center(
-            child: Text(errMess),
+            child: Text(errMess.errorMessage),
           );
         } else {
           return Container();
